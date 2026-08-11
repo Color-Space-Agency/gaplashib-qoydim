@@ -75,12 +75,13 @@ svg.ic-fill{fill:currentColor; stroke:none;}
 
 @media (min-width: 900px) {
   .phone {
-    max-width: 1100px;
+    max-width: 1160px;
     padding-bottom: 40px;
     margin: 20px auto;
     border-radius: 28px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.12);
     border: 1px solid var(--line);
+    overflow: visible;
   }
   .bottomnav {
     display: none !important;
@@ -131,34 +132,37 @@ svg.ic-fill{fill:currentColor; stroke:none;}
 a{color:inherit; text-decoration:none;}
 button{font-family:inherit; cursor:pointer;}
 
-/* ---- 2026 ULTRA-MODERN MOBILE APP TOPBAR ---- */
+/* ---- 2026 ULTRA-MODERN MOBILE & DESKTOP APP TOPBAR ---- */
 .topbar{
   position:sticky; top:0; z-index:40;
-  background:rgba(243, 245, 247, 0.92); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
-  padding:10px 14px; display:flex; align-items:center; justify-content:space-between;
+  background:rgba(243, 245, 247, 0.94); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+  padding:12px 18px; display:flex; align-items:center; justify-content:space-between;
   border-bottom: 1px solid var(--line); transition: background 0.3s ease;
-  width: 100%; overflow: hidden; gap: 6px;
+  width: 100%; gap: 10px; box-sizing: border-box;
 }
 html.dark .topbar{
-  background:rgba(14, 29, 48, 0.92);
+  background:rgba(14, 29, 48, 0.94);
 }
-.brand-mini{display:flex; align-items:center; gap:8px; font-weight:800; font-size:0.95rem; cursor:pointer; flex-shrink:1; min-width:0; overflow:hidden;}
+.brand-mini{
+  display:flex; align-items:center; gap:8px; font-weight:800; font-size:0.95rem; cursor:pointer;
+  flex-shrink:0; min-width:max-content;
+}
 .brand-logo-img{
-  height: 34px; width: auto; object-fit: contain; border-radius: 50%;
+  height: 36px; width: 36px; object-fit: contain; border-radius: 50%;
   box-shadow: 0 3px 10px rgba(0,0,0,0.12); flex-shrink: 0;
 }
 .brand-mini .brand-text {
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  white-space: nowrap; font-weight: 800;
 }
 
 .topbar-controls{
-  display: flex; align-items: center; gap: 6px; position: relative; flex-shrink:0;
+  display: flex; align-items: center; gap: 8px; position: relative; flex-shrink:0;
 }
 
 /* Pulsing Green Blinking Install App Button */
 .btn-install-app{
   display: flex; align-items: center; gap: 5px; background: var(--green);
-  color: var(--navy); font-weight: 800; font-size: 0.75rem; padding: 5px 11px;
+  color: var(--navy); font-weight: 800; font-size: 0.76rem; padding: 6px 12px;
   border-radius: 100px; border: none; cursor: pointer; white-space: nowrap;
   animation: pulseGreen 1.8s infinite cubic-bezier(0.66, 0, 0, 1);
   transition: transform 0.2s; flex-shrink: 0;
@@ -182,9 +186,9 @@ html.dark .topbar{
 /* User Greeting Chip / Single Profile Button */
 .user-greeting-chip{
   display: flex; align-items: center; gap: 6px; background: var(--surface);
-  border: 1px solid var(--line); border-radius: 100px; padding: 3px 8px 3px 3px;
-  font-size: 0.76rem; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-  transition: all 0.2s ease; flex-shrink: 0;
+  border: 1px solid var(--line); border-radius: 100px; padding: 3px 10px 3px 3px;
+  font-size: 0.78rem; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  transition: all 0.2s ease; flex-shrink: 0; white-space: nowrap;
 }
 .user-greeting-chip:hover, .user-greeting-chip.active{
   border-color: var(--green); background: rgba(34,224,122,0.1);
@@ -200,7 +204,7 @@ html.dark .topbar{
 }
 .lang-dropdown-pill{
   display: flex; align-items: center; gap: 4px; background: var(--surface);
-  border: 1px solid var(--line); border-radius: 100px; padding: 5px 9px;
+  border: 1px solid var(--line); border-radius: 100px; padding: 6px 10px;
   font-weight: 700; font-size: 0.76rem; color: var(--ink); cursor: pointer;
   transition: all 0.2s ease; box-shadow: 0 2px 6px rgba(0,0,0,0.04); white-space: nowrap;
 }
@@ -234,15 +238,16 @@ html.dark .lang-option.active{ color: var(--green); }
 
 /* Desktop 2026 Navigation Pills */
 .desktop-nav{
-  display: none; align-items: center; gap: 4px; font-weight: 700; font-size: 0.85rem;
-  margin: 0 10px; background: rgba(13,27,42,0.04); padding: 4px; border-radius: 100px;
-  border: 1px solid var(--line);
+  display: none; align-items: center; gap: 2px; font-weight: 700; font-size: 0.82rem;
+  margin: 0 6px; background: rgba(13,27,42,0.04); padding: 4px; border-radius: 100px;
+  border: 1px solid var(--line); flex-shrink: 1; overflow-x: auto; scrollbar-width: none;
 }
 html.dark .desktop-nav{ background: rgba(255,255,255,0.04); }
+.desktop-nav::-webkit-scrollbar{ display:none; }
 
 .desktop-nav-link{
-  color: var(--muted); padding: 6px 14px; border-radius: 100px; transition: all 0.2s ease; cursor: pointer;
-  display: flex; align-items: center; gap: 6px; white-space: nowrap; word-break: keep-all;
+  color: var(--muted); padding: 6px 12px; border-radius: 100px; transition: all 0.2s ease; cursor: pointer;
+  display: flex; align-items: center; gap: 4px; white-space: nowrap; word-break: keep-all; flex-shrink: 0;
 }
 .desktop-nav-link:hover{ color: var(--ink); background: rgba(0,0,0,0.04); }
 html.dark .desktop-nav-link:hover{ background: rgba(255,255,255,0.08); }
@@ -636,7 +641,7 @@ html.dark .btn-home{background:var(--green); color:var(--navy);}
   position:fixed; bottom:0; left:0; right:0; z-index:60;
   max-width:430px; margin:0 auto;
   background:rgba(255, 255, 255, 0.92); border-top:1px solid var(--line);
-  display:flex; justify-content:space-around; align-items:center; padding:8px 4px 12px;
+  display:flex; justify-style:space-around; align-items:center; padding:8px 4px 12px;
   backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
 }
 html.dark .bottomnav{
