@@ -133,35 +133,35 @@ button{font-family:inherit; cursor:pointer;}
 .topbar{
   position:sticky; top:0; z-index:40;
   background:rgba(243, 245, 247, 0.96); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
-  padding: max(14px, env(safe-area-inset-top, 14px)) 14px 10px 14px;
+  padding: max(14px, env(safe-area-inset-top, 14px)) 10px 10px 10px;
   display:flex; align-items:center; justify-content:space-between;
   border-bottom: 1px solid var(--line); transition: background 0.3s ease;
-  width: 100%; gap: 6px; box-sizing: border-box;
+  width: 100%; gap: 4px; box-sizing: border-box;
 }
 html.dark .topbar{
   background:rgba(14, 29, 48, 0.96);
 }
 
 .brand-mini{
-  display:flex; align-items:center; gap:6px; font-weight:800; font-size:0.9rem; cursor:pointer;
+  display:flex; align-items:center; gap:5px; font-weight:800; font-size:0.88rem; cursor:pointer;
   flex-shrink:0; min-width:max-content;
 }
 .brand-logo-img{
-  height: 32px; width: 32px; object-fit: contain; border-radius: 50%;
+  height: 30px; width: 30px; object-fit: contain; border-radius: 50%;
   box-shadow: 0 3px 10px rgba(0,0,0,0.12); flex-shrink: 0;
 }
 .brand-mini .brand-text {
-  white-space: nowrap; font-weight: 800; font-size: 0.88rem;
+  white-space: nowrap; font-weight: 800; font-size: 0.85rem;
 }
 
 .topbar-controls{
-  display: flex; align-items: center; gap: 5px; position: relative; flex-shrink:0;
+  display: flex; align-items: center; gap: 4px; position: relative; flex-shrink:0;
 }
 
 /* Pulsing Green Blinking Install App Button */
 .btn-install-app{
   display: flex; align-items: center; gap: 4px; background: var(--green);
-  color: var(--navy); font-weight: 800; font-size: 0.7rem; padding: 5px 9px;
+  color: var(--navy); font-weight: 800; font-size: 0.68rem; padding: 4px 8px;
   border-radius: 100px; border: none; cursor: pointer; white-space: nowrap;
   animation: pulseGreen 1.8s infinite cubic-bezier(0.66, 0, 0, 1);
   transition: transform 0.2s; flex-shrink: 0;
@@ -185,31 +185,31 @@ html.dark .topbar{
 /* User Greeting Chip / Single Profile Button */
 .user-greeting-chip{
   display: flex; align-items: center; gap: 4px; background: var(--surface);
-  border: 1px solid var(--line); border-radius: 100px; padding: 2px 8px 2px 2px;
-  font-size: 0.74rem; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  border: 1px solid var(--line); border-radius: 100px; padding: 2px 6px 2px 2px;
+  font-size: 0.72rem; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.04);
   transition: all 0.2s ease; flex-shrink: 0; white-space: nowrap;
 }
 .user-greeting-chip:hover, .user-greeting-chip.active{
   border-color: var(--green); background: rgba(34,224,122,0.1);
 }
 .user-greeting-chip .avatar-mini{
-  width: 24px; height: 24px; border-radius: 50%; background: var(--green); color: var(--navy);
-  display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.72rem;
+  width: 22px; height: 22px; border-radius: 50%; background: var(--green); color: var(--navy);
+  display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.7rem;
 }
 
-/* Mobile Screen Clean Fit Adjustments (< 600px) */
-@media (max-width: 600px) {
+/* Mobile Screen Clean Fit Adjustments (< 480px) */
+@media (max-width: 480px) {
   .user-greeting-chip #txtUserGreetingBadge {
     display: none !important;
   }
   .user-greeting-chip {
-    padding: 3px; border-radius: 50%;
+    padding: 2px; border-radius: 50%;
   }
   .brand-mini .brand-text {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
   .btn-install-app {
-    padding: 5px 8px; font-size: 0.68rem;
+    padding: 4px 6px; font-size: 0.65rem;
   }
 }
 
@@ -219,8 +219,8 @@ html.dark .topbar{
 }
 .lang-dropdown-pill{
   display: flex; align-items: center; gap: 3px; background: var(--surface);
-  border: 1px solid var(--line); border-radius: 100px; padding: 5px 7px;
-  font-weight: 700; font-size: 0.72rem; color: var(--ink); cursor: pointer;
+  border: 1px solid var(--line); border-radius: 100px; padding: 4px 6px;
+  font-weight: 700; font-size: 0.7rem; color: var(--ink); cursor: pointer;
   transition: all 0.2s ease; box-shadow: 0 2px 6px rgba(0,0,0,0.04); white-space: nowrap;
 }
 .lang-dropdown-pill:hover{ border-color: var(--green); }
@@ -245,9 +245,9 @@ html.dark .lang-option.active{ color: var(--green); }
 
 /* Theme Toggle Frame Fix */
 .theme-toggle{
-  width:30px; height:30px; border-radius:50%; border:1px solid var(--line);
+  width:28px; height:28px; border-radius:50%; border:1px solid var(--line);
   background:var(--surface); display:flex; align-items:center; justify-content:center;
-  color:var(--ink); transition:transform .2s, background-color .3s; flex-shrink:0;
+  color:var(--ink); transition:transform .2s, background-color .3s; flex-shrink:0; margin-right:2px;
 }
 .theme-toggle:active{transform:scale(0.9);}
 
@@ -952,18 +952,21 @@ html.dark .status-pill{color:var(--green);}
       </div>
 
       <div class="section-title"><h3 style="font-size:1rem; margin:0;" id="txtActivePromosTitle">Mavjud chegirma promokodlari</h3></div>
+      
       <div class="list-item" onclick="applyPromoQuick('GAPLASHIB20')">
-        <div class="ic-box">${I.wallet}</div>
+        <div class="ic-box" id="icPromoWallet"></div>
         <div class="info"><h4>GAPLASHIB20</h4><p>Birinchi bronga −20% chegirma keshbek</p></div>
         <span class="status-pill">FAOL</span>
       </div>
+      
       <div class="list-item" onclick="applyPromoQuick('KOKAND50')">
-        <div class="ic-box">${I.star}</div>
+        <div class="ic-box" id="icPromoStar"></div>
         <div class="info"><h4>KOKAND50</h4><p>50,000 so'm maxsus bayram bonusi</p></div>
         <span class="status-pill">FAOL</span>
       </div>
+      
       <div class="list-item" onclick="applyPromoQuick('GULLAR15')">
-        <div class="ic-box">${I.flower}</div>
+        <div class="ic-box" id="icPromoFlower"></div>
         <div class="info"><h4>GULLAR15</h4><p>Gul va tort buyurtmalariga −15% chegirma</p></div>
         <span class="status-pill">FAOL</span>
       </div>
@@ -1188,25 +1191,25 @@ html.dark .status-pill{color:var(--green);}
 <div class="sheet" id="installSheet">
   <div class="grabber"></div>
   <div style="text-align:center; padding-top:4px;">
-    <img src="logo.jpg" style="width:64px; height:64px; border-radius:50%; box-shadow:0 6px 18px rgba(0,0,0,0.15); margin-bottom:12px;">
-    <h3 style="margin:0 0 6px; font-size:1.25rem;">Gaplashib Qo'ydim Ilovasini O'rnatish</h3>
-    <div class="sub" style="margin-bottom:16px;">Telefonga to'g'ridan-to'g me rasmiy mobil ilova sifatda saqlang!</div>
+    <img src="logo.jpg" style="width:60px; height:60px; border-radius:50%; box-shadow:0 6px 18px rgba(0,0,0,0.15); margin-bottom:10px;">
+    <h3 style="margin:0 0 6px; font-size:1.2rem;" id="txtInstallSheetTitle">Gaplashib Qo'ydim Ilovasini O'rnatish</h3>
+    <div class="sub" style="margin-bottom:16px;" id="txtInstallSheetSub">Telefonga to'g'ridan-to'g'ri rasmiy mobil ilova sifatida saqlang!</div>
   </div>
 
   <div class="install-step-card">
     <div class="install-step-num">1</div>
-    <div class="install-step-text">Brauzeringiz menyusini ( <b>⋮</b> yoki Ulashish <b>⎋</b> ) bosing</div>
+    <div class="install-step-text" id="txtInstallStep1">Brauzeringiz menyusini ( <b>⋮</b> yoki Ulashish <b>⎋</b> ) bosing</div>
   </div>
   <div class="install-step-card">
     <div class="install-step-num">2</div>
-    <div class="install-step-text"><b>"Bosh ekranga qo'shish"</b> (Add to Home Screen) opsiyasini tanlang</div>
+    <div class="install-step-text" id="txtInstallStep2"><b>"Bosh ekranga qo'shish"</b> (Add to Home Screen) opsiyasini tanlang</div>
   </div>
   <div class="install-step-card">
     <div class="install-step-num">3</div>
-    <div class="install-step-text">Ilova smartfoningizda alohida icon bo'lib saqlanadi!</div>
+    <div class="install-step-text" id="txtInstallStep3">Ilova smartfoningizda alohida icon bo'lib saqlanadi!</div>
   </div>
 
-  <button class="btn-confirm" style="background:var(--green); color:var(--navy); font-size:1rem; margin-top:14px;" onclick="triggerDirectPWAInstallPrompt()">
+  <button class="btn-confirm" style="background:var(--green); color:var(--navy); font-size:0.95rem; margin-top:14px;" onclick="triggerDirectPWAInstallPrompt()" id="btnInstallAutoPrompt">
     📲 Ekraningizga avtomatik qo'shish
   </button>
 </div>
@@ -1257,6 +1260,12 @@ const DICT = {
     footerTitle: "Reklama va Hamkorlik uchun",
     footerSub: "O'z biznesingizni va joyingizni joylashtiring va mijozlar oqimini oshiring!",
     installBtn: "Yuklab olish",
+    installSheetTitle: "Gaplashib Qo'ydim Ilovasini O'rnatish",
+    installSheetSub: "Telefonga to'g'ridan-to'g'ri rasmiy mobil ilova sifatida saqlang!",
+    installStep1: "Brauzeringiz menyusini ( <b>⋮</b> yoki Ulashish <b>⎋</b> ) bosing",
+    installStep2: "<b>\"Bosh ekranga qo'shish\"</b> (Add to Home Screen) opsiyasini tanlang",
+    installStep3: "Ilova smartfoningizda alohida icon bo'lib saqlanadi!",
+    installAutoBtn: "📲 Ekraningizga avtomatik qo'shish",
     s1Tag: "YANGI AKSIYA",
     s1Title: "Birinchi bronga −20% chegirma",
     s1Desc: "Qo'qondagi barcha futbol maydoni va sport komplekslarida amal qiladi",
@@ -1325,6 +1334,12 @@ const DICT = {
     footerTitle: "Для рекламы и сотрудничества",
     footerSub: "Разместите ваш бизнес и увеличьте поток клиентов!",
     installBtn: "Скачать",
+    installSheetTitle: "Установка приложения Gaplashib Qo'ydim",
+    installSheetSub: "Сохраните как официальное мобильное приложение на смартфоне!",
+    installStep1: "Нажмите меню браузера ( <b>⋮</b> или Поделиться <b>⎋</b> )",
+    installStep2: "Выберите опцию <b>«На экран «Домой»»</b> (Add to Home Screen)",
+    installStep3: "Приложение появится как отдельная иконка на рабочем столе!",
+    installAutoBtn: "📲 Автоматически добавить на экран",
     s1Tag: "НОВАЯ АКЦИЯ",
     s1Title: "Скидка −20% на 1-е бронирование",
     s1Desc: "Действует во всех спортивных комплексах Коканда",
@@ -1393,6 +1408,12 @@ const DICT = {
     footerTitle: "For Advertising & Partnership",
     footerSub: "List your business and boost your customer flow!",
     installBtn: "Install App",
+    installSheetTitle: "Install Gaplashib Qo'ydim App",
+    installSheetSub: "Save as official mobile app directly on your smartphone!",
+    installStep1: "Tap browser menu ( <b>⋮</b> or Share <b>⎋</b> )",
+    installStep2: "Select <b>\"Add to Home Screen\"</b> option",
+    installStep3: "App icon will appear on your phone home screen!",
+    installAutoBtn: "📲 Add to Home Screen Automatically",
     s1Tag: "SPECIAL OFFER",
     s1Title: "−20% Off First Booking",
     s1Desc: "Valid across all partner sports complexes in Kokand",
@@ -1486,7 +1507,7 @@ const categoriesData = [
   {id:'bakery', ic:I.cake, name:{uz:'Tort va pishiriq', ru:'Торты и выпечка', en:'Bakery & Cakes'}},
   {id:'football', ic:I.football, name:{uz:'Futbol', ru:'Футбол', en:'Football'}},
   {id:'tennis', ic:I.tennis, name:{uz:'Stol tennis', ru:'Наст. теннис', en:'Table tennis'}},
-  {id:'billiard', ic:I.billiard, name:{uz:'Bilyard', ru:'Бильярд', en:'Billiards'}},
+  {id:'billiard', ic:I.billiard, name:{uz:'Бильярд', en:'Billiards'}},
   {id:'computer', ic:I.computer, name:{uz:'Kompyuter', ru:'Компьютеры', en:'PC Gaming'}},
   {id:'ps', ic:I.gamepad, name:{uz:'PlayStation', ru:'PlayStation', en:'PlayStation'}},
   {id:'gym', ic:I.dumbbell, name:{uz:'Sport zal', ru:'Фитнес', en:'Gym & Fitness'}},
@@ -1657,6 +1678,10 @@ function applyTranslations(){
     const el = document.getElementById(id);
     if(el) el.textContent = text;
   };
+  const setHtml = (id, html) => {
+    const el = document.getElementById(id);
+    if(el) el.innerHTML = html;
+  };
   const setPl = (id, text) => {
     const el = document.getElementById(id);
     if(el) el.placeholder = text;
@@ -1699,6 +1724,14 @@ function applyTranslations(){
   setTx('txtFooterTitle', t.footerTitle);
   setTx('txtFooterSub', t.footerSub);
   setTx('txtInstallBtn', t.installBtn);
+
+  // Install Modal Sheet Multilingual Text
+  setTx('txtInstallSheetTitle', t.installSheetTitle);
+  setTx('txtInstallSheetSub', t.installSheetSub);
+  setHtml('txtInstallStep1', t.installStep1);
+  setHtml('txtInstallStep2', t.installStep2);
+  setTx('txtInstallStep3', t.installStep3);
+  setTx('btnInstallAutoPrompt', t.installAutoBtn);
 
   // Promo Slider translations
   setTx('slide1Tag', t.s1Tag);
@@ -2235,6 +2268,14 @@ function renderStaticIcons(){
   
   const langSlot = document.getElementById('langIconSlot');
   if(langSlot) langSlot.innerHTML = I.globe;
+
+  // Render Promo Section SVG Icons
+  const icWallet = document.getElementById('icPromoWallet');
+  if(icWallet) icWallet.innerHTML = I.wallet;
+  const icStar = document.getElementById('icPromoStar');
+  if(icStar) icStar.innerHTML = I.star;
+  const icFlower = document.getElementById('icPromoFlower');
+  if(icFlower) icFlower.innerHTML = I.flower;
 
   const isDark = document.documentElement.classList.contains('dark');
   document.getElementById('themeBtn').innerHTML = isDark ? I.sun : I.moon;
