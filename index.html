@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Gaplashib Qoydim — Sevimli joyingizni oson bron qiling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0D1B2A;
+  --navy-2:#14263B;
+  --navy-3:#1C3350;
+  --green:#22E07A;
+  --green-dim:#1AA85E;
+  --bg:#F3F5F7;
+  --surface:#FFFFFF;
+  --line:rgba(13,27,42,0.09);
+  --ink:#0D1B2A;
+  --muted:#6B7684;
+  --radius:20px;
+  --shadow: 0 14px 32px -18px rgba(13,27,42,0.28);
+}
+html.dark{
+  --bg:#07111F;
+  --surface:#0E1D30;
+  --line:rgba(255,255,255,0.08);
+  --ink:#EAF1F8;
+  --muted:#8CA0B3;
+  --shadow: 0 14px 34px -16px rgba(0,0,0,0.55);
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; font-family:'Manrope',sans-serif; background:var(--bg); color:var(--ink);
+  transition:background .35s ease, color .35s ease;
+  min-height: 100vh;
+}
+svg.ic{width:20px; height:20px; stroke:currentColor; stroke-width:1.8; fill:none; stroke-linecap:round; stroke-linejoin:round; display:block;}
+svg.ic-fill{fill:currentColor; stroke:none;}
+
+/* Container for desktop centering */
+.app-viewport {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: var(--bg);
+}
+
+.phone{
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100vh;
+  position: relative;
+  background: var(--bg);
+  padding-bottom: 92px;
+  box-shadow: 0 0 40px rgba(0,0,0,0.08);
+}
+a{color:inherit; text-decoration:none;}
+button{font-family:inherit; cursor:pointer;}
+
+/* ---- TOPBAR ---- */
+.topbar{
+  position:sticky; top:0; z-index:40;
+  background:var(--bg); padding:18px 20px 10px;
+  display:flex; align-items:center; justify-space-between;
+}
+.brand-mini{display:flex; align-items:center; gap:10px; font-weight:800; font-size:1rem;}
+.brand-mini svg{width:32px;height:32px;}
+.theme-toggle{
+  width:42px;height:42px;border-radius:50%; border:1px solid var(--line);
+  background:var(--surface); display:flex; align-items:center; justify-content:center;
+  color:var(--ink); transition:transform .2s, background-color .3s;
+}
+.theme-toggle:active{transform:scale(0.9);}
+
+/* ---- SCREENS ---- */
+.screen{display:none; padding:0 20px; animation:fadeIn .35s ease;}
+.screen.active{display:block;}
+@keyframes fadeIn{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+
+/* ---- HOME ---- */
+.greeting h1{font-size:1.5rem; margin:6px 0 2px; font-weight:800;}
+.greeting p{color:var(--muted); margin:0 0 18px; font-size:0.92rem;}
+
+.search-bar{
+  display:flex; align-items:center; gap:10px;
+  background:var(--surface); border:1px solid var(--line); border-radius:100px;
+  padding:14px 18px; box-shadow:var(--shadow); margin-bottom:22px;
+  cursor: pointer;
+}
+.search-bar input{
+  border:none; background:transparent; outline:none; flex:1; font-size:0.94rem; color:var(--ink); font-family:inherit;
+}
+.search-bar .icon{color:var(--muted); display:flex;}
+
+.cat-scroll{display:flex; gap:12px; overflow-x:auto; padding-bottom:6px; margin-bottom:26px; scrollbar-width:none;}
+.cat-scroll::-webkit-scrollbar{display:none;}
+.cat-pill{
+  flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:8px;
+  padding:14px 16px; background:var(--surface); border:1px solid var(--line); border-radius:16px;
+  min-width:78px; transition:transform .2s, border-color .2s, box-shadow .2s;
+  cursor: pointer;
+}
+.cat-pill:active{transform:scale(0.94);}
+.cat-pill.active{border-color:var(--green); box-shadow:0 0 0 3px rgba(34,224,122,0.15); background:rgba(34,224,122,0.08);}
+.cat-pill .cicon{color:var(--ink); width:22px; height:22px;}
+.cat-pill.active .cicon{color:var(--green-dim);}
+html.dark .cat-pill.active .cicon{color:var(--green);}
+.cat-pill span{font-size:0.72rem; font-weight:700; color:var(--muted); white-space:nowrap;}
+.cat-pill.active span{color:var(--ink);}
+
+.section-title{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
+.section-title h2{font-size:1.05rem; font-weight:800; margin:0;}
+.section-title .see-all{font-size:0.8rem; color:var(--green-dim); font-weight:700; cursor:pointer;}
+html.dark .section-title .see-all{color:var(--green);}
+
+.venue-row{display:flex; gap:14px; overflow-x:auto; padding-bottom:6px; margin-bottom:30px; scrollbar-width:none;}
+.venue-row::-webkit-scrollbar{display:none;}
+.vcard{
+  flex:0 0 auto; width:210px; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+  overflow:hidden; box-shadow:var(--shadow); transition:transform .25s ease; cursor:pointer;
+}
+.vcard:active{transform:scale(0.97);}
+.vcard .thumb{
+  height:120px; display:flex; align-items:flex-end; justify-content:flex-start; color:#fff;
+  background-size:cover; background-position:center; position:relative; overflow:hidden;
+}
+.vcard .thumb::before{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(13,27,42,0.05) 40%, rgba(13,27,42,0.75) 100%);
+}
+.vcard .thumb .cbadge{
+  position:relative; z-index:1; width:30px; height:30px; border-radius:9px;
+  background:rgba(255,255,255,0.18); backdrop-filter:blur(6px);
+  display:flex; align-items:center; justify-content:center; margin:10px;
+}
+.vcard .thumb .cbadge svg{width:16px; height:16px;}
+.vcard .fav{
+  position:absolute; top:10px; right:10px; width:30px; height:30px; border-radius:50%;
+  background:rgba(255,255,255,0.16); backdrop-filter:blur(6px);
+  display:flex; align-items:center; justify-content:center; color:#fff;
+  transition:transform .2s;
+}
+.vcard .fav svg{width:16px; height:16px;}
+.vcard .fav.active{color:#FF5A6E; transform:scale(1.15);}
+.vcard .fav.active svg{fill:#FF5A6E; stroke:#FF5A6E;}
+.vcard .body{padding:12px 14px 14px;}
+.vcard h3{font-size:0.9rem; margin:0 0 4px; font-weight:700;}
+.vcard .meta{display:flex; align-items:center; justify-content:space-between; font-size:0.76rem; color:var(--muted);}
+.vcard .rating{display:flex; align-items:center; gap:4px; font-weight:700; color:var(--ink);}
+.vcard .rating svg{width:13px; height:13px; fill:#F5A623; stroke:#F5A623;}
+.vcard .price{font-size:0.8rem; font-weight:800; color:var(--green-dim); margin-top:8px;}
+html.dark .vcard .price{color:var(--green);}
+
+.promo{
+  background:linear-gradient(135deg, var(--navy) 0%, var(--navy-3) 100%);
+  border-radius:var(--radius); padding:22px; color:#fff; margin-bottom:30px; position:relative; overflow:hidden;
+}
+.promo::before{content:""; position:absolute; width:180px; height:180px; border-radius:50%;
+  background:radial-gradient(circle, rgba(34,224,122,0.35), transparent 70%); top:-70px; right:-50px;}
+.promo h3{margin:0 0 6px; font-size:1.05rem; position:relative;}
+.promo p{margin:0; font-size:0.82rem; color:rgba(255,255,255,0.7); position:relative;}
+.promo .tag{
+  display:inline-block; background:var(--green); color:var(--navy); font-weight:800; font-size:0.72rem;
+  padding:5px 12px; border-radius:100px; margin-bottom:12px; position:relative;
+}
+
+/* ---- BACK HEADER ---- */
+.subheader{display:flex; align-items:center; gap:14px; padding:18px 20px 4px; position:sticky; top:0; background:var(--bg); z-index:30;}
+.back-btn{
+  width:40px;height:40px;border-radius:50%; background:var(--surface); border:1px solid var(--line);
+  display:flex; align-items:center; justify-content:center; color:var(--ink); flex:0 0 auto;
+  transition:transform .15s;
+}
+.back-btn:active{transform:scale(0.9);}
+.subheader h2{font-size:1.05rem; margin:0; font-weight:800;}
+
+/* ---- VENUE PAGE ---- */
+.venue-hero{
+  height:220px; border-radius:var(--radius); background-size:cover; background-position:center;
+  display:flex; align-items:flex-end; justify-content:flex-start; color:#fff; margin-bottom:16px; position:relative; overflow:hidden;
+}
+.venue-hero::before{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(13,27,42,0.1) 35%, rgba(13,27,42,0.8) 100%);
+}
+.venue-hero .cbadge{
+  position:relative; z-index:1; width:44px; height:44px; border-radius:13px;
+  background:rgba(255,255,255,0.18); backdrop-filter:blur(6px);
+  display:flex; align-items:center; justify-content:center; margin:16px;
+}
+.venue-hero .cbadge svg{width:22px; height:22px;}
+.venue-hero .fav{
+  position:absolute; top:14px; right:14px; width:38px; height:38px; border-radius:50%;
+  background:rgba(255,255,255,0.16); backdrop-filter:blur(8px);
+  display:flex; align-items:center; justify-content:center; color:#fff;
+  transition:transform .2s; cursor:pointer;
+}
+.venue-hero .fav svg{width:18px; height:18px;}
+.venue-hero .fav.active svg{fill:#FF5A6E; stroke:#FF5A6E;}
+.venue-title h1{font-size:1.3rem; margin:0 0 4px; font-weight:800;}
+.venue-title .loc{color:var(--muted); font-size:0.85rem; display:flex; align-items:center; gap:6px; margin-bottom:10px;}
+.venue-title .loc svg{width:14px; height:14px;}
+.badge-row{display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap;}
+.badge{
+  background:var(--surface); border:1px solid var(--line); padding:7px 13px; border-radius:100px;
+  font-size:0.76rem; font-weight:700; color:var(--muted); display:flex; align-items:center; gap:5px;
+}
+.badge svg{width:14px; height:14px;}
+.badge.rating{color:var(--ink);}
+.badge.rating svg{fill:#F5A623; stroke:#F5A623;}
+.desc{font-size:0.88rem; color:var(--muted); line-height:1.6; margin-bottom:22px;}
+
+.amenities{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:24px;}
+.amenity{
+  background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:12px 14px;
+  font-size:0.82rem; font-weight:600; display:flex; align-items:center; gap:8px; color:var(--ink);
+}
+.amenity svg{width:16px; height:16px; color:var(--green-dim); flex:0 0 auto;}
+html.dark .amenity svg{color:var(--green);}
+
+.date-scroll{display:flex; gap:10px; overflow-x:auto; margin-bottom:16px; padding-bottom:4px; scrollbar-width:none;}
+.date-scroll::-webkit-scrollbar{display:none;}
+.date-chip{
+  flex:0 0 auto; width:56px; padding:12px 0; text-align:center; border-radius:14px;
+  background:var(--surface); border:1px solid var(--line); transition:all .2s; cursor:pointer;
+}
+.date-chip .d{font-size:0.68rem; color:var(--muted); font-weight:700;}
+.date-chip .n{font-size:1rem; font-weight:800; margin-top:4px;}
+.date-chip.active{background:var(--navy); border-color:var(--navy);}
+.date-chip.active .d, .date-chip.active .n{color:#fff;}
+html.dark .date-chip.active{background:var(--green); border-color:var(--green);}
+html.dark .date-chip.active .d, html.dark .date-chip.active .n{color:var(--navy);}
+
+.slot-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:100px;}
+.slot{
+  padding:12px 0; text-align:center; border-radius:12px; background:var(--surface); border:1px solid var(--line);
+  font-size:0.85rem; font-weight:700; transition:all .18s; cursor:pointer;
+}
+.slot.taken{opacity:0.35; text-decoration:line-through; pointer-events:none;}
+.slot.active{background:var(--green); border-color:var(--green); color:var(--navy); transform:scale(1.03);}
+.slot:not(.taken):active{transform:scale(0.95);}
+
+.sticky-cta{
+  position:sticky; bottom:16px; left:0; right:0; padding:14px 20px 0;
+  display:flex; gap:10px; align-items:center; background:linear-gradient(to top, var(--bg) 60%, transparent);
+  margin-top:-90px;
+}
+.price-box{flex:0 0 auto;}
+.price-box .lbl{font-size:0.68rem; color:var(--muted);}
+.price-box .val{font-size:1.05rem; font-weight:800;}
+.btn-book{
+  flex:1; background:var(--green); color:var(--navy); border:none; padding:16px; border-radius:100px;
+  font-weight:800; font-size:0.95rem; box-shadow:0 12px 24px -10px rgba(34,224,122,0.55);
+  transition:transform .2s;
+}
+.btn-book:active{transform:scale(0.97);}
+.btn-book:disabled{opacity:0.4; box-shadow:none; cursor:not-allowed;}
+
+/* ---- BOTTOM SHEET ---- */
+.sheet-overlay{
+  position:fixed; inset:0; background:rgba(7,17,25,0.55); z-index:90; opacity:0; pointer-events:none; transition:opacity .3s;
+}
+.sheet-overlay.show{opacity:1; pointer-events:auto;}
+.sheet{
+  position:fixed; left:0; right:0; bottom:0; z-index:91; max-width:430px; margin:0 auto;
+  background:var(--surface); border-radius:26px 26px 0 0; padding:14px 22px 28px;
+  transform:translateY(100%); transition:transform .38s cubic-bezier(.2,.8,.2,1);
+  box-shadow:0 -20px 50px rgba(0,0,0,0.3);
+}
+.sheet.show{transform:translateY(0);}
+.sheet .grabber{width:40px; height:5px; border-radius:100px; background:var(--line); margin:0 auto 18px;}
+.sheet h3{margin:0 0 6px; font-size:1.15rem; font-weight:800;}
+.sheet .sub{color:var(--muted); font-size:0.85rem; margin-bottom:20px;}
+.confirm-row{display:flex; justify-content:space-between; padding:11px 0; border-bottom:1px solid var(--line); font-size:0.86rem;}
+.confirm-row span:first-child{color:var(--muted);}
+.confirm-row span:last-child{font-weight:700;}
+.pay-options{display:flex; gap:8px; margin:18px 0; flex-wrap:wrap;}
+.pay-chip{
+  padding:9px 14px; border-radius:12px; border:1px solid var(--line); font-size:0.78rem; font-weight:700; background:var(--bg);
+  display:flex; align-items:center; gap:6px; color:var(--ink); cursor:pointer;
+}
+.pay-chip svg{width:15px; height:15px;}
+.pay-chip.active{border-color:var(--green); background:rgba(34,224,122,0.1); color:var(--green-dim);}
+html.dark .pay-chip.active{color:var(--green);}
+.btn-confirm{
+  width:100%; background:var(--navy); color:#fff; border:none; padding:17px; border-radius:100px;
+  font-weight:800; font-size:0.96rem; margin-top:10px; transition:transform .2s;
+}
+html.dark .btn-confirm{background:var(--green); color:var(--navy);}
+.btn-confirm:active{transform:scale(0.97);}
+.btn-confirm.loading{opacity:0.7; pointer-events:none;}
+
+/* ---- CONFIRMATION SCREEN ---- */
+.confirm-wrap{text-align:center; padding-top:40px;}
+.check-circle{
+  width:96px; height:96px; border-radius:50%; background:rgba(34,224,122,0.14); margin:0 auto 22px;
+  display:flex; align-items:center; justify-content:center; position:relative;
+}
+.check-circle::after{
+  content:""; position:absolute; inset:-8px; border-radius:50%; border:2px solid var(--green);
+  opacity:0; animation:pulse-ring 1.2s ease-out .3s;
+}
+@keyframes pulse-ring{ 0%{opacity:0.7; transform:scale(0.8);} 100%{opacity:0; transform:scale(1.3);} }
+.check-circle svg{ width:46px; height:46px; }
+.check-circle path{
+  stroke:var(--green); stroke-width:3.5; fill:none; stroke-linecap:round; stroke-linejoin:round;
+  stroke-dasharray:48; stroke-dashoffset:48; animation:draw .5s ease-out .2s forwards;
+}
+@keyframes draw{ to{stroke-dashoffset:0;} }
+.confirm-wrap h1{font-size:1.35rem; margin:0 0 8px; font-weight:800;}
+.confirm-wrap p{color:var(--muted); font-size:0.9rem; margin:0 0 26px;}
+.ticket{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:24px;
+  text-align:left; box-shadow:var(--shadow); position:relative; margin-bottom:20px;
+}
+.ticket .qr{
+  width:120px; height:120px; margin:0 auto 18px; border-radius:14px;
+  background:
+    repeating-linear-gradient(0deg, var(--ink) 0 4px, transparent 4px 8px),
+    repeating-linear-gradient(90deg, var(--ink) 0 4px, transparent 4px 8px);
+  background-blend-mode:multiply; background-color:var(--surface);
+  border:1px solid var(--line);
+}
+.ticket-row{display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px dashed var(--line); font-size:0.85rem;}
+.ticket-row:last-child{border-bottom:none;}
+.ticket-row span:first-child{color:var(--muted);}
+.ticket-row span:last-child{font-weight:700;}
+.btn-home{
+  width:100%; background:var(--navy); color:#fff; border:none; padding:16px; border-radius:100px; font-weight:800; margin-bottom:60px;
+}
+html.dark .btn-home{background:var(--green); color:var(--navy);}
+
+/* ---- BOTTOM NAV ---- */
+.bottomnav{
+  position:fixed; bottom:0; left:0; right:0; z-index:60;
+  max-width:430px; margin:0 auto;
+  background:var(--surface); border-top:1px solid var(--line);
+  display:flex; justify-content:space-around; align-items:center; padding:10px 6px 14px;
+  backdrop-filter:blur(14px);
+}
+.nav-item{display:flex; flex-direction:column; align-items:center; gap:4px; color:var(--muted); font-size:0.66rem; font-weight:700; padding:6px 10px; border-radius:12px; transition:color .2s; cursor:pointer;}
+.nav-item.active{color:var(--ink);}
+.nav-item .ic{width:20px; height:20px;}
+.nav-item.active .ic{color:var(--green-dim);}
+html.dark .nav-item.active .ic{color:var(--green);}
+.nav-item.fab{
+  width:50px; height:50px; border-radius:50%; background:var(--green); color:var(--navy);
+  display:flex; align-items:center; justify-content:center; margin-top:-30px;
+  box-shadow:0 10px 22px -8px rgba(34,224,122,0.6);
+}
+.nav-item.fab svg{width:24px; height:24px; stroke-width:2.4;}
+
+/* ---- PROFILE / BOOKINGS ---- */
+.list-item{
+  display:flex; align-items:center; gap:14px; background:var(--surface); border:1px solid var(--line);
+  border-radius:16px; padding:14px; margin-bottom:12px; cursor:pointer;
+}
+.list-item .ic-box{
+  width:44px;height:44px; border-radius:12px; background:var(--bg); display:flex; align-items:center; justify-content:center; color:var(--ink); flex:0 0 auto;
+}
+.list-item .ic-box svg{width:20px; height:20px;}
+.list-item .info{flex:1;}
+.list-item .info h4{margin:0 0 3px; font-size:0.88rem; font-weight:700;}
+.list-item .info p{margin:0; font-size:0.76rem; color:var(--muted);}
+.status-pill{font-size:0.68rem; font-weight:800; padding:5px 10px; border-radius:100px; background:rgba(34,224,122,0.14); color:var(--green-dim);}
+html.dark .status-pill{color:var(--green);}
+
+.profile-head{display:flex; align-items:center; gap:14px; margin-bottom:26px; padding-top:6px;}
+.avatar{width:58px;height:58px;border-radius:50%; background:linear-gradient(135deg,var(--navy),var(--navy-3)); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:1.2rem;}
+.profile-head h2{margin:0 0 2px; font-size:1.1rem;}
+.profile-head p{margin:0; color:var(--muted); font-size:0.82rem;}
+.menu-item{
+  display:flex; align-items:center; justify-content:space-between; padding:16px 4px; border-bottom:1px solid var(--line); font-size:0.88rem; font-weight:600; cursor:pointer;
+}
+.menu-item .left{display:flex; align-items:center; gap:12px; color:var(--ink);}
+.menu-item .left svg{width:18px; height:18px; color:var(--muted);}
+.menu-item .arrow{color:var(--muted);}
+.empty-state{text-align:center; padding:40px 20px; color:var(--muted); font-size:0.9rem;}
+</style>
+</head>
+<body>
+
+<div class="app-viewport">
+<div class="phone" id="phone">
+
+  <div class="topbar">
+    <div class="brand-mini">
+      <svg viewBox="0 0 100 100" fill="none">
+        <path d="M50 10C31 10 16 23 16 40C16 52 23 61.5 34 66.5L34 66.5L27 82L44 68.5C46 68.8 48 69 50 69C69 69 84 56 84 40C84 23 69 10 50 10Z" fill="#0D1B2A"/>
+        <path d="M30 41L45 56L72 26" stroke="#22E07A" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Gaplashib Qoydim
+    </div>
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn"></button>
+  </div>
+
+  <!-- HOME SCREEN -->
+  <section class="screen active" id="screen-home">
+    <div class="greeting">
+      <h1>Salom, Firdavsbek</h1>
+      <p>Sevimli joyingizni oson bron qiling</p>
+    </div>
+
+    <div class="search-bar" onclick="goTo('search')">
+      <span class="icon" id="searchHomeIcon"></span>
+      <input placeholder="Futbol maydoni, barber, restoran..." readonly>
+    </div>
+
+    <div class="cat-scroll" id="catScroll"></div>
+
+    <div class="promo">
+      <span class="tag">YANGI</span>
+      <h3>Birinchi bronga −20%</h3>
+      <p>Qo'qondagi barcha hamkor joylarda amal qiladi</p>
+    </div>
+
+    <div class="section-title"><h2>Yaqin atrofda</h2><a class="see-all" onclick="goTo('search')">Barchasi</a></div>
+    <div class="venue-row" id="rowNearby"></div>
+
+    <div class="section-title"><h2>Bugun bo'sh joylar</h2><a class="see-all" onclick="goTo('search')">Barchasi</a></div>
+    <div class="venue-row" id="rowToday"></div>
+
+    <div class="section-title"><h2>Ommabop</h2><a class="see-all" onclick="goTo('search')">Barchasi</a></div>
+    <div class="venue-row" id="rowPopular"></div>
+  </section>
+
+  <!-- SEARCH SCREEN -->
+  <section class="screen" id="screen-search">
+    <div class="subheader"><button class="back-btn" onclick="goTo('home')" id="backBtn1"></button><h2>Qidiruv</h2></div>
+    <div style="padding:14px 0 0;">
+      <div class="search-bar" style="margin-bottom:14px;">
+        <span class="icon" id="searchIcon2"></span>
+        <input id="searchInput" placeholder="Nima izlayapsiz?" oninput="filterVenues()">
+      </div>
+      <div class="cat-scroll" id="catScroll2"></div>
+      <div class="section-title"><h2 id="searchCount">24 ta joy topildi</h2></div>
+      <div id="searchList"></div>
+    </div>
+  </section>
+
+  <!-- VENUE SCREEN -->
+  <section class="screen" id="screen-venue">
+    <div class="subheader"><button class="back-btn" onclick="goTo('search')" id="backBtn2"></button><h2 id="venueHeaderTitle">Joy</h2></div>
+    <div style="padding-top:14px;">
+      <div class="venue-hero" id="venueHero">
+        <div class="fav" id="venueFav" onclick="toggleVenueFav(event)"></div>
+      </div>
+      <div class="venue-title">
+        <h1 id="venueName">Chempion Arena</h1>
+        <div class="loc" id="venueLoc">Qo'qon, Farg'ona ko'chasi — 1.2 km</div>
+      </div>
+      <div class="badge-row" id="badgeRow"></div>
+      <p class="desc">Zamonaviy sun'iy gazonli futbol maydoni, yoritish va dush xonalari bilan. Do'stlar bilan o'ynash yoki kichik turnir uchun ideal joy.</p>
+
+      <div class="amenities" id="amenitiesGrid"></div>
+
+      <div class="section-title"><h2>Sanani tanlang</h2></div>
+      <div class="date-scroll" id="dateScroll"></div>
+
+      <div class="section-title"><h2>Bo'sh vaqtlar</h2></div>
+      <div class="slot-grid" id="slotGrid"></div>
+
+      <div class="sticky-cta">
+        <div class="price-box"><div class="lbl">Narxi</div><div class="val" id="venuePriceDisplay">120,000 so'm</div></div>
+        <button class="btn-book" id="bookBtn" disabled onclick="openSheet()">Bron qilish</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKINGS SCREEN -->
+  <section class="screen" id="screen-bookings">
+    <div class="subheader" style="position:static;"><h2 style="padding-top:8px;">Bronlarim</h2></div>
+    <div style="padding-top:14px;" id="bookingsList"></div>
+  </section>
+
+  <!-- FAVORITES SCREEN -->
+  <section class="screen" id="screen-favorites">
+    <div class="subheader" style="position:static;"><h2 style="padding-top:8px;">Sevimlilar</h2></div>
+    <div style="padding-top:14px;" id="favList"></div>
+  </section>
+
+  <!-- PROFILE SCREEN -->
+  <section class="screen" id="screen-profile">
+    <div class="profile-head" style="padding-top:16px;">
+      <div class="avatar">F</div>
+      <div><h2>Firdavsbek</h2><p>+998 90 123 45 67</p></div>
+    </div>
+    <div id="profileMenu"></div>
+    <div style="height:60px;"></div>
+  </section>
+
+  <!-- CONFIRMATION SCREEN -->
+  <section class="screen" id="screen-confirm">
+    <div class="confirm-wrap">
+      <div class="check-circle">
+        <svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>
+      </div>
+      <h1>Bron tasdiqlandi!</h1>
+      <p>Joyingiz tayyor turibdi. Vaqtida boring</p>
+      <div class="ticket">
+        <div class="qr"></div>
+        <div class="ticket-row"><span>Bron raqami</span><span id="tBookingId">#GQ-48213</span></div>
+        <div class="ticket-row"><span>Joy</span><span id="tVenue">Chempion Arena</span></div>
+        <div class="ticket-row"><span>Sana</span><span id="tDate">14-avgust</span></div>
+        <div class="ticket-row"><span>Vaqt</span><span id="tTime">19:00</span></div>
+        <div class="ticket-row"><span>Narxi</span><span id="tPrice">120,000 so'm</span></div>
+      </div>
+      <button class="btn-home" onclick="goTo('home')">Bosh sahifaga qaytish</button>
+    </div>
+  </section>
+
+</div>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottomnav">
+  <div class="nav-item active" data-nav="home" onclick="goTo('home')" id="navHome"></div>
+  <div class="nav-item" data-nav="bookings" onclick="goTo('bookings')" id="navBookings"></div>
+  <div class="nav-item fab" onclick="goTo('search')" id="navFab"></div>
+  <div class="nav-item" data-nav="favorites" onclick="goTo('favorites')" id="navFav"></div>
+  <div class="nav-item" data-nav="profile" onclick="goTo('profile')" id="navProfile"></div>
+</div>
+
+<!-- BOOKING BOTTOM SHEET -->
+<div class="sheet-overlay" id="overlay" onclick="closeSheet()"></div>
+<div class="sheet" id="sheet">
+  <div class="grabber"></div>
+  <h3>Bronni tasdiqlash</h3>
+  <div class="sub">Ma'lumotlarni tekshirib, to'lov usulini tanlang</div>
+  <div class="confirm-row"><span>Joy</span><span id="sVenue">Chempion Arena</span></div>
+  <div class="confirm-row"><span>Sana</span><span id="sDate">14-avgust, Juma</span></div>
+  <div class="confirm-row"><span>Vaqt</span><span id="sTime">19:00 – 20:00</span></div>
+  <div class="confirm-row"><span>Jami</span><span id="sPrice">120,000 so'm</span></div>
+  <div class="pay-options" id="payOptions"></div>
+  <button class="btn-confirm" id="confirmBtn" onclick="confirmBooking()">Bronni tasdiqlash</button>
+</div>
+
+<script>
+/* ---------------- ICON LIBRARY ---------------- */
+const I = {
+  search: `<svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>`,
+  back: `<svg class="ic" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>`,
+  home: `<svg class="ic" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg>`,
+  calendar: `<svg class="ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>`,
+  plus: `<svg class="ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>`,
+  heart: `<svg class="ic" viewBox="0 0 24 24"><path d="M20.8 7.6c0-2.6-2.1-4.6-4.7-4.6-1.7 0-3.2.9-4.1 2.3-.9-1.4-2.4-2.3-4.1-2.3-2.6 0-4.7 2-4.7 4.6 0 5.1 8.8 10.9 8.8 10.9s8.8-5.8 8.8-10.9z"/></svg>`,
+  user: `<svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg>`,
+  star: `<svg class="ic ic-fill" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5.2 4.8 1.4 6.9L12 17.9 5.8 21.1l1.4-6.9L2 9.4l7-.9z"/></svg>`,
+  location: `<svg class="ic" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-11.5A7 7 0 105 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>`,
+  clock: `<svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>`,
+  car: `<svg class="ic" viewBox="0 0 24 24"><path d="M3 13l2-5.5A2 2 0 016.9 6h10.2a2 2 0 011.9 1.5L21 13"/><rect x="2" y="13" width="20" height="6" rx="1.5"/><circle cx="7" cy="19.5" r="1.3" class="ic-fill"/><circle cx="17" cy="19.5" r="1.3" class="ic-fill"/></svg>`,
+  shower: `<svg class="ic" viewBox="0 0 24 24"><path d="M6 9V6a4 4 0 118 0"/><path d="M4 9h16M8 13v1M12 13v1M16 13v1M8 17v1M12 17v1M16 17v1"/></svg>`,
+  bulb: `<svg class="ic" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 00-3.5 10.9c.6.4.9 1 .9 1.6v.5h5.2v-.5c0-.6.3-1.2.9-1.6A6 6 0 0012 3z"/></svg>`,
+  drink: `<svg class="ic" viewBox="0 0 24 24"><path d="M5 4h14l-2 16H7L5 4z"/><path d="M5 4l1.2 4h11.6L19 4"/></svg>`,
+  wallet: `<svg class="ic" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><circle cx="16.5" cy="14.5" r="1" class="ic-fill"/></svg>`,
+  card: `<svg class="ic" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>`,
+  bell: `<svg class="ic" viewBox="0 0 24 24"><path d="M6 9a6 6 0 1112 0c0 5 2 6 2 6H4s2-1 2-6z"/><path d="M10 20a2 2 0 004 0"/></svg>`,
+  globe: `<svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18"/></svg>`,
+  palette: `<svg class="ic" viewBox="0 0 24 24"><path d="M12 3a9 8.5 0 100 17c1.4 0 2-1 2-2.2 0-.6-.3-1-.6-1.4-.3-.4-.6-.8-.6-1.4 0-1.1.9-1.8 2-1.8h2.3C19 13.2 21 11.4 21 9c0-3.3-4-6-9-6z"/><circle cx="7.5" cy="10.5" r="1" class="ic-fill"/><circle cx="10.5" cy="7" r="1" class="ic-fill"/><circle cx="15" cy="7.5" r="1" class="ic-fill"/></svg>`,
+  settings: `<svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 13a7.5 7.5 0 000-2l2-1.4-2-3.4-2.3.7a7.6 7.6 0 00-1.7-1L15 3h-4l-.4 2.9a7.6 7.6 0 00-1.7 1l-2.3-.7-2 3.4L6.6 11a7.5 7.5 0 000 2l-2 1.4 2 3.4 2.3-.7c.5.4 1.1.8 1.7 1L11 21h4l.4-2.9c.6-.2 1.2-.6 1.7-1l2.3.7 2-3.4-2-1.4z"/></svg>`,
+  chevron: `<svg class="ic" viewBox="0 0 24 24" style="width:16px;height:16px;"><path d="M9 6l6 6-6 6"/></svg>`,
+  moon: `<svg class="ic" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>`,
+  sun: `<svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8L6 18M18 6l1.8-1.8"/></svg>`,
+  football: `<svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7.5l3.6 2.6-1.4 4.2H9.8l-1.4-4.2z"/><path d="M12 7.5V4M15.6 10.1l3.2-1.4M14.2 14.3l2.4 3M9.8 14.3l-2.4 3M8.4 10.1L5.2 8.7"/></svg>`,
+  tennis: `<svg class="ic" viewBox="0 0 24 24"><ellipse cx="9" cy="9" rx="6" ry="4.2" transform="rotate(-30 9 9)"/><path d="M13 13l7 7"/><circle cx="20.5" cy="20.5" r="1.4" class="ic-fill"/></svg>`,
+  billiard: `<svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.4"/><text x="12" y="14.5" font-size="5.5" text-anchor="middle" fill="currentColor" stroke="none" font-family="Manrope" font-weight="800">8</text></svg>`,
+  computer: `<svg class="ic" viewBox="0 0 24 24"><rect x="3" y="4" width="14" height="10" rx="1.5"/><path d="M8 20h6M10 14v6"/><rect x="19" y="8" width="3" height="9" rx="1"/></svg>`,
+  gamepad: `<svg class="ic" viewBox="0 0 24 24"><rect x="2" y="8" width="20" height="10" rx="5"/><path d="M7 11v4M5 13h4"/><circle cx="16" cy="12" r="1" class="ic-fill"/><circle cx="18.5" cy="14.5" r="1" class="ic-fill"/></svg>`,
+  dumbbell: `<svg class="ic" viewBox="0 0 24 24"><path d="M2 10v4M22 10v4M5 8v8M19 8v8"/><path d="M5 12h14"/></svg>`,
+  scissors: `<svg class="ic" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.3"/><circle cx="6" cy="18" r="2.3"/><path d="M20 5L7.5 13M20 19L7.5 11"/></svg>`,
+  restaurant: `<svg class="ic" viewBox="0 0 24 24"><path d="M6 2v9a2 2 0 002 2v9M6 2v6M9 2v6M6 8h3"/><path d="M18 2c-2 0-3 2-3 5s1 4 3 4v11"/></svg>`,
+  wrench: `<svg class="ic" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 00-5.6 5.1L3 17.5 6.5 21l6.1-6.1a4 4 0 005.1-5.6l-2.8 2.8-2.2-.6-.6-2.2z"/></svg>`,
+};
+
+const CATEGORY_IMG = {
+  football: 'https://images.pexels.com/photos/15203/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=800',
+  tennis: 'https://images.pexels.com/photos/3026/pexels-photo-3026.jpeg?auto=compress&cs=tinysrgb&w=800',
+  billiard: 'https://images.pexels.com/photos/19680649/pexels-photo-19680649.jpeg?auto=compress&cs=tinysrgb&w=800',
+  computer: 'https://images.pexels.com/photos/6125337/pexels-photo-6125337.jpeg?auto=compress&cs=tinysrgb&w=800',
+  ps: 'https://images.pexels.com/photos/807330/pexels-photo-807330.jpeg?auto=compress&cs=tinysrgb&w=800',
+  gym: 'https://images.pexels.com/photos/28636776/pexels-photo-28636776.jpeg?auto=compress&cs=tinysrgb&w=800',
+  barber: 'https://images.pexels.com/photos/14034429/pexels-photo-14034429.jpeg?auto=compress&cs=tinysrgb&w=800',
+  restaurant: 'https://images.pexels.com/photos/776538/pexels-photo-776538.jpeg?auto=compress&cs=tinysrgb&w=800',
+  repair: 'https://images.pexels.com/photos/162553/pexels-photo-162553.jpeg?auto=compress&cs=tinysrgb&w=800',
+};
+
+function fav(active){
+  return `<svg class="ic ${active?'ic-fill':''}" viewBox="0 0 24 24"><path d="M20.8 7.6c0-2.6-2.1-4.6-4.7-4.6-1.7 0-3.2.9-4.1 2.3-.9-1.4-2.4-2.3-4.1-2.3-2.6 0-4.7 2-4.7 4.6 0 5.1 8.8 10.9 8.8 10.9s8.8-5.8 8.8-10.9z"/></svg>`;
+}
+
+const categories = [
+  {id:'all', ic:I.globe, name:'Barchasi'},
+  {id:'football', ic:I.football, name:'Futbol'},
+  {id:'tennis', ic:I.tennis, name:'Stol tennis'},
+  {id:'billiard', ic:I.billiard, name:'Bilyard'},
+  {id:'computer', ic:I.computer, name:'Kompyuter'},
+  {id:'ps', ic:I.gamepad, name:'PlayStation'},
+  {id:'gym', ic:I.dumbbell, name:'Sport zal'},
+  {id:'barber', ic:I.scissors, name:'Barber'},
+  {id:'restaurant', ic:I.restaurant, name:'Restoran'},
+  {id:'repair', ic:I.wrench, name:'Usta'},
+];
+
+const venues = [
+  {id:1, name:'Chempion Arena', cat:'football', ic:I.football, dist:'1.2 km', rating:4.8, price:'120,000 so\'m'},
+  {id:2, name:'Green Point', cat:'football', ic:I.football, dist:'2.0 km', rating:4.6, price:'100,000 so\'m'},
+  {id:3, name:'Vega Bilyard', cat:'billiard', ic:I.billiard, dist:'0.8 km', rating:4.9, price:'40,000 so\'m/soat'},
+  {id:4, name:'Pro Gamer Club', cat:'computer', ic:I.computer, dist:'1.5 km', rating:4.7, price:'15,000 so\'m/soat'},
+  {id:5, name:'PS Zone', cat:'ps', ic:I.gamepad, dist:'0.6 km', rating:4.9, price:'25,000 so\'m/soat'},
+  {id:6, name:'FitLine Gym', cat:'gym', ic:I.dumbbell, dist:'2.4 km', rating:4.5, price:'50,000 so\'m'},
+  {id:7, name:'Aziz Barbershop', cat:'barber', ic:I.scissors, dist:'0.4 km', rating:5.0, price:'35,000 so\'m'},
+  {id:8, name:'Osiyo Milliy', cat:'restaurant', ic:I.restaurant, dist:'1.1 km', rating:4.6, price:'stol band'},
+];
+
+// Favorites state saved in localStorage
+let favoriteIds = JSON.parse(localStorage.getItem('gq_favorites') || '[1,3,7]');
+let activeCategoryFilter = 'all';
+
+// Bookings state saved in localStorage
+let bookingsData = JSON.parse(localStorage.getItem('gq_bookings') || JSON.stringify([
+  {id: 'GQ-48213', name:'Chempion Arena', ic:I.football, date:'14-avgust, 19:00', price:'120,000 so\'m', status:'Tasdiqlangan'},
+  {id: 'GQ-39102', name:'Aziz Barbershop', ic:I.scissors, date:'16-avgust, 11:00', price:'35,000 so\'m', status:'Kutilmoqda'},
+]));
+
+function renderCats(containerId){
+  const el = document.getElementById(containerId);
+  if(!el) return;
+  el.innerHTML = categories.map((c)=>`
+    <div class="cat-pill ${activeCategoryFilter===c.id?'active':''}" onclick="selectCat(this, '${c.id}')">
+      <div class="cicon">${c.ic}</div><span>${c.name}</span>
+    </div>`).join('');
+}
+
+function selectCat(node, catId){
+  activeCategoryFilter = catId;
+  document.querySelectorAll('.cat-pill').forEach(n => {
+    n.classList.remove('active');
+  });
+  node.classList.add('active');
+  filterVenues();
+}
+
+function toggleFav(vId, event){
+  if(event) event.stopPropagation();
+  const idx = favoriteIds.indexOf(vId);
+  if(idx > -1){
+    favoriteIds.splice(idx, 1);
+  } else {
+    favoriteIds.push(vId);
+  }
+  localStorage.setItem('gq_favorites', JSON.stringify(favoriteIds));
+  renderHomeRows();
+  filterVenues();
+  renderFavorites();
+  if(currentVenue && currentVenue.id === vId){
+    const isFav = favoriteIds.includes(vId);
+    const favEl = document.getElementById('venueFav');
+    if(favEl){
+      favEl.classList.toggle('active', isFav);
+      favEl.innerHTML = fav(isFav);
+    }
+  }
+}
+
+function venueCard(v){
+  const isFav = favoriteIds.includes(v.id);
+  return `<div class="vcard" onclick="openVenue(${v.id})">
+    <div class="thumb" style="background-image:url('${CATEGORY_IMG[v.cat]}')">
+      <div class="cbadge">${v.ic}</div>
+      <div class="fav ${isFav?'active':''}" onclick="toggleFav(${v.id}, event)">${fav(isFav)}</div>
+    </div>
+    <div class="body">
+      <h3>${v.name}</h3>
+      <div class="meta"><span>${v.dist}</span><span class="rating">${I.star} ${v.rating}</span></div>
+      <div class="price">${v.price}</div>
+    </div>
+  </div>`;
+}
+
+function renderHomeRows(){
+  document.getElementById('rowNearby').innerHTML = venues.slice(0,4).map(venueCard).join('');
+  document.getElementById('rowToday').innerHTML = venues.slice(2,6).map(venueCard).join('');
+  document.getElementById('rowPopular').innerHTML = venues.slice(4,8).map(venueCard).join('');
+}
+
+function filterVenues(){
+  const searchInput = document.getElementById('searchInput');
+  const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+  
+  const filtered = venues.filter(v => {
+    const matchesCat = activeCategoryFilter === 'all' || v.cat === activeCategoryFilter;
+    const matchesQuery = !query || v.name.toLowerCase().includes(query) || v.cat.toLowerCase().includes(query);
+    return matchesCat && matchesQuery;
+  });
+
+  const countEl = document.getElementById('searchCount');
+  if(countEl) countEl.textContent = `${filtered.length} ta joy topildi`;
+
+  const listEl = document.getElementById('searchList');
+  if(!listEl) return;
+
+  if(filtered.length === 0){
+    listEl.innerHTML = `<div class="empty-state">Hech narsa topilmadi. Qidiruv so'zini o'zgartirib ko'ring.</div>`;
+    return;
+  }
+
+  listEl.innerHTML = filtered.map(v=>`
+    <div class="list-item" onclick="openVenue(${v.id})">
+      <div class="ic-box">${v.ic}</div>
+      <div class="info"><h4>${v.name}</h4><p>${v.dist} • ${v.rating}★ • ${v.price}</p></div>
+      <span class="arrow">${I.chevron}</span>
+    </div>`).join('');
+}
+
+let selectedDay = '14-avgust';
+let selectedTime = '19:00';
+
+function renderDates(){
+  const days = ['Bug','Ert','Chor','Pay','Jum','Shan','Yak'];
+  const months = ['avgust', 'avgust', 'avgust', 'avgust', 'avgust', 'avgust', 'avgust'];
+  const el = document.getElementById('dateScroll');
+  el.innerHTML = Array.from({length:7}).map((_,i)=>{
+    const dateNum = 14 + i;
+    const fullDateStr = `${dateNum}-${months[i]}`;
+    return `<div class="date-chip ${i===0?'active':''}" onclick="selectDate(this, '${fullDateStr}')">
+      <div class="d">${days[i]}</div><div class="n">${dateNum}</div>
+    </div>`;
+  }).join('');
+}
+
+function selectDate(node, dateStr){
+  node.parentElement.querySelectorAll('.date-chip').forEach(n=>n.classList.remove('active'));
+  node.classList.add('active');
+  selectedDay = dateStr;
+  document.getElementById('bookBtn').disabled = true;
+  document.querySelectorAll('.slot').forEach(s=>s.classList.remove('active'));
+}
+
+function renderSlots(){
+  const times = ['09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00'];
+  const taken = ['11:00','15:00','20:00'];
+  const el = document.getElementById('slotGrid');
+  el.innerHTML = times.map(t=>`
+    <div class="slot ${taken.includes(t)?'taken':''}" onclick="selectSlot(this, '${t}')">${t}</div>`).join('');
+}
+
+function selectSlot(node, timeStr){
+  document.querySelectorAll('.slot').forEach(s=>s.classList.remove('active'));
+  node.classList.add('active');
+  selectedTime = timeStr;
+  document.getElementById('bookBtn').disabled = false;
+}
+
+function renderBadgesAndAmenities(){
+  document.getElementById('badgeRow').innerHTML = `
+    <span class="badge rating">${I.star} 4.8 (126)</span>
+    <span class="badge">${I.clock} 09:00 – 23:00</span>
+    <span class="badge">${I.car} Parking</span>`;
+  document.getElementById('amenitiesGrid').innerHTML = `
+    <div class="amenity">${I.shower} Dush xona</div>
+    <div class="amenity">${I.bulb} Yoritish</div>
+    <div class="amenity">${I.car} Bepul parking</div>
+    <div class="amenity">${I.drink} Avtomat</div>`;
+  document.getElementById('venueLoc').innerHTML = `${I.location} Qo'qon, Farg'ona ko'chasi — 1.2 km`;
+}
+
+let currentVenue = venues[0];
+
+function openVenue(id){
+  const v = venues.find(x=>x.id===id) || venues[0];
+  currentVenue = v;
+  const isFav = favoriteIds.includes(v.id);
+
+  document.getElementById('venueName').textContent = v.name;
+  document.getElementById('venueHeaderTitle').textContent = v.name;
+  document.getElementById('venuePriceDisplay').textContent = v.price;
+  document.getElementById('venueHero').style.backgroundImage = `url('${CATEGORY_IMG[v.cat]}')`;
+  document.getElementById('venueHero').innerHTML = `<div class="cbadge">${v.ic}</div><div class="fav ${isFav?'active':''}" id="venueFav" onclick="toggleFav(${v.id}, event)">${fav(isFav)}</div>`;
+  document.getElementById('bookBtn').disabled = true;
+  
+  goTo('venue');
+  renderDates();
+  renderSlots();
+  renderBadgesAndAmenities();
+}
+
+function selectPay(node){
+  node.parentElement.querySelectorAll('.pay-chip').forEach(n=>n.classList.remove('active'));
+  node.classList.add('active');
+}
+
+function openSheet(){
+  document.getElementById('sVenue').textContent = currentVenue.name;
+  document.getElementById('sDate').textContent = `${selectedDay}`;
+  document.getElementById('sTime').textContent = `${selectedTime} – ${parseInt(selectedTime)+1}:00`;
+  document.getElementById('sPrice').textContent = currentVenue.price;
+
+  document.getElementById('overlay').classList.add('show');
+  document.getElementById('sheet').classList.add('show');
+}
+
+function closeSheet(){
+  document.getElementById('overlay').classList.remove('show');
+  document.getElementById('sheet').classList.remove('show');
+}
+
+function confirmBooking(){
+  const btn = document.getElementById('confirmBtn');
+  btn.classList.add('loading');
+  btn.textContent = 'Tasdiqlanmoqda...';
+  setTimeout(()=>{
+    btn.classList.remove('loading');
+    btn.textContent = 'Bronni tasdiqlash';
+    closeSheet();
+
+    const newId = '#GQ-' + Math.floor(10000+Math.random()*89999);
+    
+    // Add to bookings list
+    bookingsData.unshift({
+      id: newId,
+      name: currentVenue.name,
+      ic: currentVenue.ic,
+      date: `${selectedDay}, ${selectedTime}`,
+      price: currentVenue.price,
+      status: 'Tasdiqlangan'
+    });
+    localStorage.setItem('gq_bookings', JSON.stringify(bookingsData));
+
+    document.getElementById('tVenue').textContent = currentVenue.name;
+    document.getElementById('tBookingId').textContent = newId;
+    document.getElementById('tDate').textContent = selectedDay;
+    document.getElementById('tTime').textContent = selectedTime;
+    document.getElementById('tPrice').textContent = currentVenue.price;
+
+    goTo('confirm');
+    renderBookings();
+  }, 1000);
+}
+
+function renderBookings(){
+  const listEl = document.getElementById('bookingsList');
+  if(!listEl) return;
+  if(bookingsData.length === 0){
+    listEl.innerHTML = `<div class="empty-state">Hali bronlaringiz yo'q.</div>`;
+    return;
+  }
+  listEl.innerHTML = bookingsData.map(b=>`
+    <div class="list-item">
+      <div class="ic-box">${b.ic}</div>
+      <div class="info"><h4>${b.name}</h4><p>${b.date} • ${b.price}</p></div>
+      <span class="status-pill">${b.status}</span>
+    </div>`).join('');
+}
+
+function renderFavorites(){
+  const el = document.getElementById('favList');
+  if(!el) return;
+  const favVenues = venues.filter(v => favoriteIds.includes(v.id));
+  if(favVenues.length === 0){
+    el.style.display = 'block';
+    el.innerHTML = `<div class="empty-state">Sevimlilar ro'yxati bo'sh. Yurakcha tugmasini bosib qo'shing.</div>`;
+    return;
+  }
+  el.style.display = 'grid';
+  el.style.gridTemplateColumns = '1fr 1fr';
+  el.style.gap = '14px';
+  el.innerHTML = favVenues.map(venueCard).join('');
+}
+
+function renderProfileMenu(){
+  const items = [
+    [I.calendar, 'Bronlarim', ()=>goTo('bookings')],
+    [I.heart, 'Sevimlilar', ()=>goTo('favorites')],
+    [I.wallet, "To'lov usullari", ()=>alert("Hozirda Naqd, Click va Payme to'lovlari faol!")],
+    [I.bell, 'Bildirishnomalar', ()=>alert("Yangi bildirishnomalar yo'q")],
+    [I.globe, "Til — O'zbekcha", ()=>alert("Platforma til: O'zbekcha")],
+    [I.palette, 'Mavzu (Tungi/Kungi)', ()=>toggleTheme()],
+    [I.settings, 'Sozlamalar', ()=>alert("Gaplashib Qo'ydim v1.0.0 — Barcha huquqlar himoyalangan")]
+  ];
+  document.getElementById('profileMenu').innerHTML = items.map((it,i)=>`
+    <div class="menu-item" style="${i===items.length-1?'border-bottom:none;':''}" onclick="profileActions[${i}]()">
+      <div class="left">${it[0]}<span>${it[1]}</span></div><span class="arrow">${I.chevron}</span>
+    </div>`).join('');
+  window.profileActions = items.map(it => it[2]);
+}
+
+function renderStaticIcons(){
+  const searchHomeEl = document.getElementById('searchHomeIcon');
+  if(searchHomeEl) searchHomeEl.innerHTML = I.search;
+  document.getElementById('searchIcon2').innerHTML = I.search;
+  document.getElementById('backBtn1').innerHTML = I.back;
+  document.getElementById('backBtn2').innerHTML = I.back;
+  document.getElementById('navHome').innerHTML = `<span class="ic">${I.home}</span>Bosh sahifa`;
+  document.getElementById('navBookings').innerHTML = `<span class="ic">${I.calendar}</span>Bronlarim`;
+  document.getElementById('navFab').innerHTML = I.plus;
+  document.getElementById('navFav').innerHTML = `<span class="ic">${I.heart}</span>Sevimlilar`;
+  document.getElementById('navProfile').innerHTML = `<span class="ic">${I.user}</span>Profil`;
+  
+  const isDark = document.documentElement.classList.contains('dark');
+  document.getElementById('themeBtn').innerHTML = isDark ? I.sun : I.moon;
+
+  document.getElementById('payOptions').innerHTML = `
+    <div class="pay-chip active" onclick="selectPay(this)">${I.wallet} Naqd (joyida)</div>
+    <div class="pay-chip" onclick="selectPay(this)">${I.card} Click</div>
+    <div class="pay-chip" onclick="selectPay(this)">${I.card} Payme</div>
+    <div class="pay-chip" onclick="selectPay(this)">${I.card} UzCard</div>`;
+}
+
+function goTo(screen){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  const targetScreen = document.getElementById('screen-'+screen);
+  if(targetScreen) targetScreen.classList.add('active');
+
+  document.querySelectorAll('.nav-item[data-nav]').forEach(n=>n.classList.remove('active'));
+  const navEl = document.querySelector(`.nav-item[data-nav="${screen}"]`);
+  if(navEl) navEl.classList.add('active');
+
+  document.getElementById('phone').scrollTop = 0;
+  window.scrollTo(0,0);
+}
+
+function toggleTheme(){
+  const isDark = document.documentElement.classList.toggle('dark');
+  localStorage.setItem('gq_theme', isDark ? 'dark' : 'light');
+  document.getElementById('themeBtn').innerHTML = isDark ? I.sun : I.moon;
+}
+
+// Initial theme setup
+if(localStorage.getItem('gq_theme') === 'dark' || (!localStorage.getItem('gq_theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)){
+  document.documentElement.classList.add('dark');
+}
+
+renderStaticIcons();
+renderCats('catScroll');
+renderCats('catScroll2');
+renderHomeRows();
+filterVenues();
+renderBookings();
+renderFavorites();
+renderProfileMenu();
+</script>
+</body>
+</html>

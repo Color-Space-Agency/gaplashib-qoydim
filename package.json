@@ -1,0 +1,12 @@
+{
+  "name": "gaplashib-qoydim",
+  "version": "1.0.0",
+  "description": "Gaplashib Qo'ydim — Sevimli joylarni oson bron qilish platformasi",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": ["booking", "uzbekistan", "gaplashib-qoydim"],
+  "author": "Firdavsbek",
+  "license": "MIT"
+}
