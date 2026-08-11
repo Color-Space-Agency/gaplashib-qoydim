@@ -135,10 +135,10 @@ button{font-family:inherit; cursor:pointer;}
 .topbar{
   position:sticky; top:0; z-index:40;
   background:rgba(243, 245, 247, 0.96); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
-  padding: max(14px, env(safe-area-inset-top, 14px)) 12px 10px 12px;
+  padding: max(12px, env(safe-area-inset-top, 12px)) 10px 8px 10px;
   display:flex; align-items:center; justify-content:space-between;
   border-bottom: 1px solid var(--line); transition: background 0.3s ease;
-  width: 100%; gap: 6px; box-sizing: border-box;
+  width: 100%; gap: 4px; box-sizing: border-box;
 }
 html.dark .topbar{
   background:rgba(14, 29, 48, 0.96);
@@ -149,69 +149,57 @@ html.dark .topbar{
   flex-shrink:0; min-width:max-content;
 }
 .brand-logo-img{
-  height: 32px; width: 32px; object-fit: contain; border-radius: 50%;
+  height: 30px; width: 30px; object-fit: contain; border-radius: 50%;
   box-shadow: 0 3px 10px rgba(0,0,0,0.12); flex-shrink: 0;
 }
 .brand-mini .brand-text {
-  white-space: nowrap; font-weight: 800; font-size: 0.88rem;
+  white-space: nowrap; font-weight: 800; font-size: 0.85rem;
 }
 
 .topbar-controls{
-  display: flex; align-items: center; gap: 5px; position: relative; flex-shrink:0;
+  display: flex; align-items: center; gap: 4px; position: relative; flex-shrink:0;
 }
 
 /* Pulsing Green Blinking Install App Button */
 .btn-install-app{
-  display: flex; align-items: center; gap: 4px; background: var(--green);
-  color: var(--navy); font-weight: 800; font-size: 0.72rem; padding: 5px 10px;
+  display: flex; align-items: center; gap: 3px; background: var(--green);
+  color: var(--navy); font-weight: 800; font-size: 0.7rem; padding: 5px 9px;
   border-radius: 100px; border: none; cursor: pointer; white-space: nowrap;
   animation: pulseGreen 1.8s infinite cubic-bezier(0.66, 0, 0, 1);
   transition: transform 0.2s; flex-shrink: 0;
 }
 @keyframes pulseGreen {
-  0% {
-    box-shadow: 0 0 0 0 rgba(34, 224, 122, 0.7);
-    transform: scale(1);
-  }
-  50% {
-    box-shadow: 0 0 0 8px rgba(34, 224, 122, 0);
-    transform: scale(1.03);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(34, 224, 122, 0);
-    transform: scale(1);
-  }
+  0% { box-shadow: 0 0 0 0 rgba(34, 224, 122, 0.7); transform: scale(1); }
+  50% { box-shadow: 0 0 0 6px rgba(34, 224, 122, 0); transform: scale(1.03); }
+  100% { box-shadow: 0 0 0 0 rgba(34, 224, 122, 0); transform: scale(1); }
 }
 .btn-install-app:active{ transform: scale(0.95); }
 
 /* User Greeting Chip / Single Profile Button */
 .user-greeting-chip{
-  display: flex; align-items: center; gap: 5px; background: var(--surface);
-  border: 1px solid var(--line); border-radius: 100px; padding: 3px 8px 3px 3px;
-  font-size: 0.76rem; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  display: flex; align-items: center; gap: 4px; background: var(--surface);
+  border: 1px solid var(--line); border-radius: 100px; padding: 3px 6px 3px 3px;
+  font-size: 0.74rem; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.04);
   transition: all 0.2s ease; flex-shrink: 0; white-space: nowrap;
 }
 .user-greeting-chip:hover, .user-greeting-chip.active{
   border-color: var(--green); background: rgba(34,224,122,0.1);
 }
 .user-greeting-chip .avatar-mini{
-  width: 24px; height: 24px; border-radius: 50%; background: var(--green); color: var(--navy);
-  display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.75rem;
+  width: 22px; height: 22px; border-radius: 50%; background: var(--green); color: var(--navy);
+  display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.72rem;
 }
 
-/* Mobile Screen Clean Fit Adjustments (< 480px) */
-@media (max-width: 480px) {
+/* Hide user chip when logged out or on mobile header (< 420px) to guarantee Theme Toggle is ALWAYS visible inside header frame */
+@media (max-width: 420px) {
   .user-greeting-chip #txtUserGreetingBadge {
     display: none !important;
   }
-  .user-greeting-chip {
-    padding: 3px; border-radius: 50%;
-  }
   .brand-mini .brand-text {
-    font-size: 0.82rem;
+    font-size: 0.8rem;
   }
   .btn-install-app {
-    padding: 5px 8px; font-size: 0.68rem;
+    padding: 5px 7px; font-size: 0.65rem;
   }
 }
 
@@ -220,13 +208,13 @@ html.dark .topbar{
   position: relative; flex-shrink: 0;
 }
 .lang-dropdown-pill{
-  display: flex; align-items: center; gap: 4px; background: var(--surface);
-  border: 1px solid var(--line); border-radius: 100px; padding: 5px 8px;
-  font-weight: 700; font-size: 0.74rem; color: var(--ink); cursor: pointer;
+  display: flex; align-items: center; gap: 3px; background: var(--surface);
+  border: 1px solid var(--line); border-radius: 100px; padding: 5px 7px;
+  font-weight: 800; font-size: 0.72rem; color: var(--ink); cursor: pointer;
   transition: all 0.2s ease; box-shadow: 0 2px 6px rgba(0,0,0,0.04); white-space: nowrap;
 }
 .lang-dropdown-pill:hover{ border-color: var(--green); }
-.lang-dropdown-pill svg{ width: 12px; height: 12px; color: var(--muted); }
+.lang-dropdown-pill svg{ width: 11px; height: 11px; color: var(--muted); }
 
 .lang-menu-popover{
   position: absolute; top: calc(100% + 8px); right: 0; z-index: 100;
@@ -245,11 +233,11 @@ html.dark .topbar{
 .lang-option.active{ color: var(--green-dim); }
 html.dark .lang-option.active{ color: var(--green); }
 
-/* LARGER THEME TOGGLE FRAME FOR SENIOR ACCESSIBILITY */
+/* ALWAYS VISIBLE THEME TOGGLE BUTTON INSIDE TOPBAR FRAME */
 .theme-toggle{
-  width:32px; height:32px; border-radius:50%; border:1px solid var(--line);
+  width:32px; height:32px; border-radius:50%; border:1.5px solid var(--line);
   background:var(--surface); display:flex; align-items:center; justify-content:center;
-  color:var(--ink); transition:transform .2s, background-color .3s; flex-shrink:0; margin-right:2px;
+  color:var(--ink); transition:transform .2s, background-color .3s; flex-shrink:0;
 }
 .theme-toggle svg { width: 18px; height: 18px; }
 .theme-toggle:active{transform:scale(0.9);}
@@ -392,37 +380,49 @@ html.dark .desktop-nav-link.active{
   margin: 0; font-size: 0.82rem; color: rgba(255,255,255,0.85); font-weight: 500; line-height: 1.35;
 }
 
-/* 2026 ROLE SELECTION GLASSMOPHIC CARDS */
+/* 2026 ROLE SELECTION HIGH-CONTRAST VIBRANT CARDS */
 .role-selection-wrapper{
   text-align: left; margin-bottom: 20px;
 }
 .role-label{
-  font-size: 0.86rem; font-weight: 800; color: var(--ink); margin-bottom: 10px; display: block;
+  font-size: 0.88rem; font-weight: 800; color: var(--ink); margin-bottom: 10px; display: block;
 }
 .role-cards-grid{
   display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
 }
 .role-card-2026{
-  background: var(--surface); border: 2px solid var(--line); border-radius: 20px;
-  padding: 16px 14px; text-align: center; cursor: pointer; transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  background: var(--surface); border: 2px solid var(--line); border-radius: 22px;
+  padding: 18px 14px; text-align: center; cursor: pointer; transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
   position: relative; overflow: hidden; box-shadow: var(--shadow);
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
 }
+
 .role-card-2026 .role-icon-wrapper{
-  width: 44px; height: 44px; border-radius: 14px; background: rgba(13,27,42,0.05);
+  width: 48px; height: 48px; border-radius: 16px; background: rgba(13,27,42,0.06);
   display: flex; align-items: center; justify-content: center; color: var(--ink);
   transition: all 0.25s ease;
 }
-html.dark .role-card-2026 .role-icon-wrapper{ background: rgba(255,255,255,0.06); }
+html.dark .role-card-2026 .role-icon-wrapper{ background: rgba(255,255,255,0.08); color: var(--ink); }
+
+/* VIBRANT VIVID HIGH-CONTRAST ACTIVE STATE */
 .role-card-2026.active{
-  border-color: var(--green); background: rgba(34,224,122,0.09);
-  box-shadow: 0 8px 24px -6px rgba(34,224,122,0.3); transform: translateY(-2px);
+  border-color: var(--green); background: linear-gradient(135deg, rgba(34,224,122,0.18) 0%, rgba(13,27,42,0.05) 100%);
+  box-shadow: 0 10px 28px -6px rgba(34,224,122,0.35); transform: translateY(-3px);
 }
+html.dark .role-card-2026.active{
+  background: linear-gradient(135deg, rgba(34,224,122,0.22) 0%, rgba(14,29,48,0.4) 100%);
+}
+
 .role-card-2026.active .role-icon-wrapper{
-  background: var(--green); color: var(--navy); box-shadow: 0 4px 14px rgba(34,224,122,0.4);
+  background: var(--green); color: #0D1B2A; box-shadow: 0 6px 18px rgba(34,224,122,0.5);
 }
-.role-card-title{ font-weight: 800; font-size: 0.9rem; color: var(--ink); margin-top: 2px; }
-.role-card-sub{ font-size: 0.72rem; color: var(--muted); font-weight: 600; }
+.role-card-2026.active .role-icon-wrapper svg{ stroke: #0D1B2A !important; stroke-width: 2.5 !important; }
+
+.role-card-title{ font-weight: 800; font-size: 0.94rem; color: var(--ink); margin-top: 2px; }
+.role-card-2026.active .role-card-title{ color: var(--ink); font-weight: 800; }
+.role-card-sub{ font-size: 0.74rem; color: var(--muted); font-weight: 700; }
+.role-card-2026.active .role-card-sub{ color: var(--green-dim); font-weight: 800; }
+html.dark .role-card-2026.active .role-card-sub{ color: var(--green); }
 
 .btn-google-auth{
   width: 100%; display: flex; align-items: center; justify-content: center; gap: 12px;
@@ -434,7 +434,7 @@ html.dark .role-card-2026 .role-icon-wrapper{ background: rgba(255,255,255,0.06)
 .btn-google-auth:hover{ border-color: var(--green); transform: translateY(-2px); }
 .btn-google-auth:active{ transform: scale(0.97); }
 
-/* 2026 CONTACT & SUPPORT PILL BUTTONS */
+/* 2026 VIBRANT HIGH-CONTRAST CONTACT & SUPPORT PILLS */
 .contact-support-card{
   background: var(--surface); border: 1px solid var(--line); border-radius: 22px;
   padding: 18px; text-align: left; box-shadow: var(--shadow); margin-top: 10px;
@@ -445,17 +445,17 @@ html.dark .contact-card-title svg{ color: var(--green); }
 
 .contact-pills-grid{ display: flex; flex-direction: column; gap: 10px; }
 .contact-pill-btn{
-  display: flex; align-items: center; justify-content: space-between; padding: 12px 16px;
-  border-radius: 16px; background: var(--bg); border: 1px solid var(--line);
-  font-weight: 700; font-size: 0.85rem; color: var(--ink); transition: all 0.2s ease;
+  display: flex; align-items: center; justify-content: space-between; padding: 13px 16px;
+  border-radius: 16px; background: var(--bg); border: 1.5px solid var(--line);
+  font-weight: 800; font-size: 0.86rem; color: var(--ink); transition: all 0.2s ease;
   text-decoration: none;
 }
 .contact-pill-btn:hover{ border-color: var(--green); background: rgba(34,224,122,0.08); }
 .contact-pill-btn .c-left{ display: flex; align-items: center; gap: 10px; }
-.contact-pill-btn.phone-glow{ background: rgba(34,224,122,0.12); border-color: var(--green); color: var(--green-dim); }
+.contact-pill-btn.phone-glow{ background: rgba(34,224,122,0.14); border-color: var(--green); color: var(--green-dim); }
 html.dark .contact-pill-btn.phone-glow{ color: var(--green); }
-.contact-pill-btn.insta-glow{ background: rgba(225,48,108,0.08); border-color: rgba(225,48,108,0.3); color: #E1306C; }
-.contact-pill-btn.tg-glow{ background: rgba(0,136,204,0.08); border-color: rgba(0,136,204,0.3); color: #0088CC; }
+.contact-pill-btn.insta-glow{ background: rgba(225,48,108,0.12); border-color: #E1306C; color: #E1306C; }
+.contact-pill-btn.tg-glow{ background: rgba(0,136,204,0.12); border-color: #0088CC; color: #0088CC; }
 
 .search-bar{
   display:flex; align-items:center; gap:10px;
@@ -883,7 +883,7 @@ html.dark .status-pill{color:var(--green);}
       </button>
 
       <!-- Single Profile Button (User Chip) -->
-      <div class="user-greeting-chip" onclick="goTo('profile')">
+      <div class="user-greeting-chip" id="topbarUserGreetingChip" onclick="goTo('profile')">
         <div class="avatar-mini" id="avatarInitialPill">F</div>
         <span id="txtUserGreetingBadge">Firdavsbek</span>
       </div>
@@ -893,7 +893,7 @@ html.dark .status-pill{color:var(--green);}
         <div class="lang-dropdown-pill" onclick="toggleLangMenu(event)">
           <span id="langIconSlot"></span>
           <span id="currentLangCode">UZ</span>
-          <svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.5;"><path d="M6 9l6 6 6-6"/></svg>
+          <svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.5;"><path d="M6 9l6 6 6-6"/></svg>
         </div>
 
         <div class="lang-menu-popover" id="langPopoverMenu">
@@ -903,12 +903,12 @@ html.dark .status-pill{color:var(--green);}
         </div>
       </div>
 
-      <!-- Sized Theme Toggle -->
-      <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn"></button>
+      <!-- ALWAYS VISIBLE HIGH CONTRAST THEME TOGGLE BUTTON -->
+      <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Mavzuni almashtirish"></button>
     </div>
   </div>
 
-  <!-- 2026 ONBOARDING & GOOGLE AUTH SCREEN WITH REDESIGNED MODERN UI/UX -->
+  <!-- 2026 ONBOARDING & GOOGLE AUTH SCREEN WITH REDESIGNED HIGH-CONTRAST VIBRANT UI/UX -->
   <section class="screen" id="screen-auth">
     <div class="auth-container">
       
@@ -921,7 +921,7 @@ html.dark .status-pill{color:var(--green);}
         </div>
       </div>
 
-      <!-- 2026 SLEEK ROLE SELECTION CARDS (FOYDALANUVCHI / BIZNES EGASI) -->
+      <!-- 2026 HIGH-CONTRAST VIBRANT ROLE SELECTION CARDS -->
       <div class="role-selection-wrapper">
         <label class="role-label" id="lblRoleTitle">Ro'yhatdan o'tish maqsadini tanlang:</label>
         <div class="role-cards-grid">
@@ -929,7 +929,7 @@ html.dark .status-pill{color:var(--green);}
           <!-- FOYDALANUVCHI CARD -->
           <div class="role-card-2026 active" id="roleUserCard" onclick="selectRole('user')">
             <div class="role-icon-wrapper">
-              <svg class="ic" viewBox="0 0 24 24" style="width:24px;height:24px;stroke-width:2.2;"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg>
+              <svg class="ic" viewBox="0 0 24 24" style="width:24px;height:24px;stroke:currentColor;stroke-width:2.4;"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg>
             </div>
             <div class="role-card-title" id="txtRoleUserTitle">Foydalanuvchi</div>
             <div class="role-card-sub" id="txtRoleUserSub">Joy bron qilish uchun</div>
@@ -938,7 +938,7 @@ html.dark .status-pill{color:var(--green);}
           <!-- BIZNES EGASI CARD -->
           <div class="role-card-2026" id="roleVendorCard" onclick="selectRole('vendor')">
             <div class="role-icon-wrapper">
-              <svg class="ic" viewBox="0 0 24 24" style="width:24px;height:24px;stroke-width:2.2;"><path d="M3 21h18M5 21V5a2 2 0 012-2h10a2 2 0 012 2v16M9 9h6M9 13h6M9 17h6"/></svg>
+              <svg class="ic" viewBox="0 0 24 24" style="width:24px;height:24px;stroke:currentColor;stroke-width:2.4;"><path d="M3 21h18M5 21V5a2 2 0 012-2h10a2 2 0 012 2v16M9 9h6M9 13h6M9 17h6"/></svg>
             </div>
             <div class="role-card-title" id="txtRoleVendorTitle">Biznes Egasi</div>
             <div class="role-card-sub" id="txtRoleVendorSub">Joy joylashtirish uchun</div>
@@ -962,7 +962,7 @@ html.dark .status-pill{color:var(--green);}
         Mehmon bo'lib ko'rib chiqish →
       </button>
 
-      <!-- 2026 MODERN CONTACT & SUPPORT PILLS GRID -->
+      <!-- 2026 MODERN HIGH-CONTRAST CONTACT & SUPPORT PILLS GRID -->
       <div class="contact-support-card">
         <div class="contact-card-title" id="txtSupportTitle">
           <svg class="ic" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
@@ -1834,17 +1834,20 @@ function updateUserUI(){
   const initialEl = document.getElementById('avatarInitialPill');
   const profileNameEl = document.getElementById('userNameProfile');
   const profilePhoneEl = document.getElementById('userPhoneProfile');
+  const userChip = document.getElementById('topbarUserGreetingChip');
 
   if(currentUser){
     if(badgeEl) badgeEl.textContent = currentUser.name.split(' ')[0];
     if(initialEl) initialEl.textContent = currentUser.avatar || 'F';
     if(profileNameEl) profileNameEl.textContent = currentUser.name;
     if(profilePhoneEl) profilePhoneEl.textContent = currentUser.phone || currentUser.email;
+    if(userChip) userChip.style.display = 'flex';
   } else {
     if(badgeEl) badgeEl.textContent = "Kirish";
     if(initialEl) initialEl.textContent = "?";
     if(profileNameEl) profileNameEl.textContent = "Mehmon";
     if(profilePhoneEl) profilePhoneEl.textContent = "Ro'yhatdan o'tilmagan";
+    if(userChip) userChip.style.display = 'none'; // Hide chip when logged out to make Theme Toggle perfectly visible
   }
 }
 
