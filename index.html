@@ -133,19 +133,19 @@ button{font-family:inherit; cursor:pointer;}
 .topbar{
   position:sticky; top:0; z-index:40;
   background:rgba(243, 245, 247, 0.94); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
-  padding:12px 18px; display:flex; align-items:center; justify-content:space-between;
+  padding:10px 14px; display:flex; align-items:center; justify-content:space-between;
   border-bottom: 1px solid var(--line); transition: background 0.3s ease;
-  width: 100%; gap: 10px; box-sizing: border-box;
+  width: 100%; gap: 6px; box-sizing: border-box;
 }
 html.dark .topbar{
   background:rgba(14, 29, 48, 0.94);
 }
 .brand-mini{
-  display:flex; align-items:center; gap:8px; font-weight:800; font-size:0.95rem; cursor:pointer;
+  display:flex; align-items:center; gap:6px; font-weight:800; font-size:0.92rem; cursor:pointer;
   flex-shrink:0; min-width:max-content;
 }
 .brand-logo-img{
-  height: 36px; width: 36px; object-fit: contain; border-radius: 50%;
+  height: 34px; width: 34px; object-fit: contain; border-radius: 50%;
   box-shadow: 0 3px 10px rgba(0,0,0,0.12); flex-shrink: 0;
 }
 .brand-mini .brand-text {
@@ -153,13 +153,13 @@ html.dark .topbar{
 }
 
 .topbar-controls{
-  display: flex; align-items: center; gap: 8px; position: relative; flex-shrink:0;
+  display: flex; align-items: center; gap: 6px; position: relative; flex-shrink:0;
 }
 
 /* Pulsing Green Blinking Install App Button */
 .btn-install-app{
-  display: flex; align-items: center; gap: 5px; background: var(--green);
-  color: var(--navy); font-weight: 800; font-size: 0.76rem; padding: 6px 12px;
+  display: flex; align-items: center; gap: 4px; background: var(--green);
+  color: var(--navy); font-weight: 800; font-size: 0.72rem; padding: 5px 10px;
   border-radius: 100px; border: none; cursor: pointer; white-space: nowrap;
   animation: pulseGreen 1.8s infinite cubic-bezier(0.66, 0, 0, 1);
   transition: transform 0.2s; flex-shrink: 0;
@@ -182,17 +182,17 @@ html.dark .topbar{
 
 /* User Greeting Chip / Single Profile Button */
 .user-greeting-chip{
-  display: flex; align-items: center; gap: 6px; background: var(--surface);
-  border: 1px solid var(--line); border-radius: 100px; padding: 3px 10px 3px 3px;
-  font-size: 0.78rem; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  display: flex; align-items: center; gap: 5px; background: var(--surface);
+  border: 1px solid var(--line); border-radius: 100px; padding: 3px 8px 3px 3px;
+  font-size: 0.75rem; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.04);
   transition: all 0.2s ease; flex-shrink: 0; white-space: nowrap;
 }
 .user-greeting-chip:hover, .user-greeting-chip.active{
   border-color: var(--green); background: rgba(34,224,122,0.1);
 }
 .user-greeting-chip .avatar-mini{
-  width: 26px; height: 26px; border-radius: 50%; background: var(--green); color: var(--navy);
-  display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.75rem;
+  width: 24px; height: 24px; border-radius: 50%; background: var(--green); color: var(--navy);
+  display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.72rem;
 }
 
 /* Compact Popover Language Selector Dropdown */
@@ -200,13 +200,13 @@ html.dark .topbar{
   position: relative; flex-shrink: 0;
 }
 .lang-dropdown-pill{
-  display: flex; align-items: center; gap: 4px; background: var(--surface);
-  border: 1px solid var(--line); border-radius: 100px; padding: 6px 10px;
-  font-weight: 700; font-size: 0.76rem; color: var(--ink); cursor: pointer;
+  display: flex; align-items: center; gap: 3px; background: var(--surface);
+  border: 1px solid var(--line); border-radius: 100px; padding: 5px 8px;
+  font-weight: 700; font-size: 0.74rem; color: var(--ink); cursor: pointer;
   transition: all 0.2s ease; box-shadow: 0 2px 6px rgba(0,0,0,0.04); white-space: nowrap;
 }
 .lang-dropdown-pill:hover{ border-color: var(--green); }
-.lang-dropdown-pill svg{ width: 11px; height: 11px; color: var(--muted); }
+.lang-dropdown-pill svg{ width: 10px; height: 10px; color: var(--muted); }
 
 .lang-menu-popover{
   position: absolute; top: calc(100% + 8px); right: 0; z-index: 100;
@@ -227,7 +227,7 @@ html.dark .lang-option.active{ color: var(--green); }
 
 /* Theme Toggle Frame Fix */
 .theme-toggle{
-  width:34px; height:34px; border-radius:50%; border:1px solid var(--line);
+  width:32px; height:32px; border-radius:50%; border:1px solid var(--line);
   background:var(--surface); display:flex; align-items:center; justify-content:center;
   color:var(--ink); transition:transform .2s, background-color .3s; flex-shrink:0;
 }
@@ -578,9 +578,9 @@ html.dark .badge-tag.approved{ color: var(--green); }
 }
 .reward-val{ font-size: 2rem; font-weight: 800; color: var(--green); margin: 6px 0 2px; }
 
-/* ---- BOTTOM SHEET ---- */
+/* ---- BOTTOM SHEET & INSTALL MODAL SHEET ---- */
 .sheet-overlay{
-  position:fixed; inset:0; background:rgba(7,17,25,0.6); z-index:90; opacity:0; pointer-events:none; transition:opacity .3s;
+  position:fixed; inset:0; background:rgba(7,17,25,0.65); z-index:90; opacity:0; pointer-events:none; transition:opacity .3s;
 }
 .sheet-overlay.show{opacity:1; pointer-events:auto;}
 .sheet{
@@ -611,6 +611,17 @@ html.dark .pay-chip.active{color:var(--green);}
 html.dark .btn-confirm{background:var(--green); color:var(--navy);}
 .btn-confirm:active{transform:scale(0.97);}
 .btn-confirm.loading{opacity:0.7; pointer-events:none;}
+
+/* ---- SMART INSTALL PWA MODAL SHEET ---- */
+.install-step-card{
+  display: flex; align-items: center; gap: 14px; background: var(--bg);
+  padding: 12px 16px; border-radius: 16px; margin-bottom: 10px; border: 1px solid var(--line);
+}
+.install-step-num{
+  width: 32px; height: 32px; border-radius: 50%; background: var(--green); color: var(--navy);
+  display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; flex-shrink: 0;
+}
+.install-step-text{ font-size: 0.84rem; font-weight: 700; color: var(--ink); line-height: 1.35; }
 
 /* ---- CONFIRMATION SCREEN ---- */
 .confirm-wrap{text-align:center; padding-top:40px;}
@@ -736,7 +747,7 @@ html.dark .status-pill{color:var(--green);}
 
     <div class="topbar-controls">
       <!-- Pulsing Green Blinking Install App Button -->
-      <button class="btn-install-app" id="btnInstallApp" onclick="installPWAApp()">
+      <button class="btn-install-app" id="btnInstallApp" onclick="handleAppInstallClick()">
         <svg class="ic" viewBox="0 0 24 24" style="width:13px;height:13px;stroke-width:2.5;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
         <span id="txtInstallBtn">Ilovani yuklab olish</span>
       </button>
@@ -752,7 +763,7 @@ html.dark .status-pill{color:var(--green);}
         <div class="lang-dropdown-pill" onclick="toggleLangMenu(event)">
           <span id="langIconSlot"></span>
           <span id="currentLangCode">UZ</span>
-          <svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.5;"><path d="M6 9l6 6 6-6"/></svg>
+          <svg viewBox="0 0 24 24" style="width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2.5;"><path d="M6 9l6 6 6-6"/></svg>
         </div>
 
         <div class="lang-menu-popover" id="langPopoverMenu">
@@ -1153,6 +1164,34 @@ html.dark .status-pill{color:var(--green);}
   <button class="btn-confirm" id="confirmBtn" onclick="confirmBooking()">Bronni tasdiqlash</button>
 </div>
 
+<!-- SMART 1-CLICK PWA INSTALL MODAL SHEET -->
+<div class="sheet-overlay" id="installOverlay" onclick="closeInstallSheet()"></div>
+<div class="sheet" id="installSheet">
+  <div class="grabber"></div>
+  <div style="text-align:center; padding-top:4px;">
+    <img src="logo.jpg" style="width:64px; height:64px; border-radius:50%; box-shadow:0 6px 18px rgba(0,0,0,0.15); margin-bottom:12px;">
+    <h3 style="margin:0 0 6px; font-size:1.25rem;">Gaplashib Qo'ydim Ilovasini O'rnatish</h3>
+    <div class="sub" style="margin-bottom:16px;">Telefonga to'g'ridan-to'g me rasmiy mobil ilova sifatda saqlang!</div>
+  </div>
+
+  <div class="install-step-card">
+    <div class="install-step-num">1</div>
+    <div class="install-step-text">Brauzeringiz menyusini ( <b>⋮</b> yoki Ulashish <b>⎋</b> ) bosing</div>
+  </div>
+  <div class="install-step-card">
+    <div class="install-step-num">2</div>
+    <div class="install-step-text"><b>"Bosh ekranga qo'shish"</b> (Add to Home Screen) opsiyasini tanlang</div>
+  </div>
+  <div class="install-step-card">
+    <div class="install-step-num">3</div>
+    <div class="install-step-text">Ilova smartfoningizda alohida icon bo'lib saqlanadi!</div>
+  </div>
+
+  <button class="btn-confirm" style="background:var(--green); color:var(--navy); font-size:1rem; margin-top:14px;" onclick="triggerDirectPWAInstallPrompt()">
+    📲 Ekraningizga avtomatik qo'shish
+  </button>
+</div>
+
 <script>
 /* ---------------- MULTILINGUAL DICTIONARY ---------------- */
 const DICT = {
@@ -1198,7 +1237,7 @@ const DICT = {
     dnavFav: "Sevimlilar",
     footerTitle: "Reklama va Hamkorlik uchun",
     footerSub: "O'z biznesingizni va joyingizni joylashtiring va mijozlar oqimini oshiring!",
-    installBtn: "Ilovani yuklab olish",
+    installBtn: "Yuklab olish",
     s1Tag: "YANGI AKSIYA",
     s1Title: "Birinchi bronga −20% chegirma",
     s1Desc: "Qo'qondagi barcha futbol maydoni va sport komplekslarida amal qiladi",
@@ -1266,7 +1305,7 @@ const DICT = {
     dnavFav: "Избранное",
     footerTitle: "Для рекламы и сотрудничества",
     footerSub: "Разместите ваш бизнес и увеличьте поток клиентов!",
-    installBtn: "Скачать приложение",
+    installBtn: "Скачать",
     s1Tag: "НОВАЯ АКЦИЯ",
     s1Title: "Скидка −20% на 1-е бронирование",
     s1Desc: "Действует во всех спортивных комплексах Коканда",
@@ -1479,14 +1518,14 @@ function scrollNav(amount) {
   }
 }
 
-// PWA Deferred Installation Prompt
+// PWA Deferred Installation Prompt Handler
 let deferredPrompt;
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
 });
 
-function installPWAApp(){
+function handleAppInstallClick(){
   if(deferredPrompt){
     deferredPrompt.prompt();
     deferredPrompt.userChoice.then((choiceResult) => {
@@ -1496,8 +1535,26 @@ function installPWAApp(){
       deferredPrompt = null;
     });
   } else {
-    alert("📱 Gaplashib Qo'ydim ilovasini o'rnatish:\n\n1. Brauzeringiz menyusini (Share / Boshqalar) bosing.\n2. 'Bosh ekranga qo'shish' (Add to Home Screen) tugmasini tanlang.\n3. Smartfoningizda ilova kabi saqlanadi!");
+    // Show sleek 1-click Install PWA Modal Sheet
+    openInstallSheet();
   }
+}
+
+function triggerDirectPWAInstallPrompt(){
+  if(deferredPrompt){
+    deferredPrompt.prompt();
+  } else {
+    alert("📲 Ilovani o'rnatish uchun brauzeringizning (Share / Menyusidan) 'Bosh ekranga qo'shish' tugmasini bosing!");
+  }
+}
+
+function openInstallSheet(){
+  document.getElementById('installOverlay').classList.add('show');
+  document.getElementById('installSheet').classList.add('show');
+}
+function closeInstallSheet(){
+  document.getElementById('installOverlay').classList.remove('show');
+  document.getElementById('installSheet').classList.remove('show');
 }
 
 // Auto Carousel rotation
