@@ -47,7 +47,9 @@ html, body{
   user-select: none;
   overscroll-behavior-y: none;
 }
-svg.ic{width:20px; height:20px; stroke:currentColor; stroke-width:1.8; fill:none; stroke-linecap:round; stroke-linejoin:round; display:block;}
+
+/* ENLARGED CLEAR ICONS FOR BETTER READABILITY (SENIOR ACCESSIBLE) */
+svg.ic{width:22px; height:22px; stroke:currentColor; stroke-width:2.0; fill:none; stroke-linecap:round; stroke-linejoin:round; display:block;}
 svg.ic-fill{fill:currentColor; stroke:none;}
 
 /* App Layout & Desktop Web Responsiveness */
@@ -133,35 +135,35 @@ button{font-family:inherit; cursor:pointer;}
 .topbar{
   position:sticky; top:0; z-index:40;
   background:rgba(243, 245, 247, 0.96); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
-  padding: max(14px, env(safe-area-inset-top, 14px)) 10px 10px 10px;
+  padding: max(14px, env(safe-area-inset-top, 14px)) 12px 10px 12px;
   display:flex; align-items:center; justify-content:space-between;
   border-bottom: 1px solid var(--line); transition: background 0.3s ease;
-  width: 100%; gap: 4px; box-sizing: border-box;
+  width: 100%; gap: 6px; box-sizing: border-box;
 }
 html.dark .topbar{
   background:rgba(14, 29, 48, 0.96);
 }
 
 .brand-mini{
-  display:flex; align-items:center; gap:5px; font-weight:800; font-size:0.88rem; cursor:pointer;
+  display:flex; align-items:center; gap:6px; font-weight:800; font-size:0.9rem; cursor:pointer;
   flex-shrink:0; min-width:max-content;
 }
 .brand-logo-img{
-  height: 30px; width: 30px; object-fit: contain; border-radius: 50%;
+  height: 32px; width: 32px; object-fit: contain; border-radius: 50%;
   box-shadow: 0 3px 10px rgba(0,0,0,0.12); flex-shrink: 0;
 }
 .brand-mini .brand-text {
-  white-space: nowrap; font-weight: 800; font-size: 0.85rem;
+  white-space: nowrap; font-weight: 800; font-size: 0.88rem;
 }
 
 .topbar-controls{
-  display: flex; align-items: center; gap: 4px; position: relative; flex-shrink:0;
+  display: flex; align-items: center; gap: 5px; position: relative; flex-shrink:0;
 }
 
 /* Pulsing Green Blinking Install App Button */
 .btn-install-app{
   display: flex; align-items: center; gap: 4px; background: var(--green);
-  color: var(--navy); font-weight: 800; font-size: 0.68rem; padding: 4px 8px;
+  color: var(--navy); font-weight: 800; font-size: 0.72rem; padding: 5px 10px;
   border-radius: 100px; border: none; cursor: pointer; white-space: nowrap;
   animation: pulseGreen 1.8s infinite cubic-bezier(0.66, 0, 0, 1);
   transition: transform 0.2s; flex-shrink: 0;
@@ -184,17 +186,17 @@ html.dark .topbar{
 
 /* User Greeting Chip / Single Profile Button */
 .user-greeting-chip{
-  display: flex; align-items: center; gap: 4px; background: var(--surface);
-  border: 1px solid var(--line); border-radius: 100px; padding: 2px 6px 2px 2px;
-  font-size: 0.72rem; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  display: flex; align-items: center; gap: 5px; background: var(--surface);
+  border: 1px solid var(--line); border-radius: 100px; padding: 3px 8px 3px 3px;
+  font-size: 0.76rem; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.04);
   transition: all 0.2s ease; flex-shrink: 0; white-space: nowrap;
 }
 .user-greeting-chip:hover, .user-greeting-chip.active{
   border-color: var(--green); background: rgba(34,224,122,0.1);
 }
 .user-greeting-chip .avatar-mini{
-  width: 22px; height: 22px; border-radius: 50%; background: var(--green); color: var(--navy);
-  display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.7rem;
+  width: 24px; height: 24px; border-radius: 50%; background: var(--green); color: var(--navy);
+  display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.75rem;
 }
 
 /* Mobile Screen Clean Fit Adjustments (< 480px) */
@@ -203,13 +205,13 @@ html.dark .topbar{
     display: none !important;
   }
   .user-greeting-chip {
-    padding: 2px; border-radius: 50%;
+    padding: 3px; border-radius: 50%;
   }
   .brand-mini .brand-text {
-    font-size: 0.8rem;
+    font-size: 0.82rem;
   }
   .btn-install-app {
-    padding: 4px 6px; font-size: 0.65rem;
+    padding: 5px 8px; font-size: 0.68rem;
   }
 }
 
@@ -218,18 +220,18 @@ html.dark .topbar{
   position: relative; flex-shrink: 0;
 }
 .lang-dropdown-pill{
-  display: flex; align-items: center; gap: 3px; background: var(--surface);
-  border: 1px solid var(--line); border-radius: 100px; padding: 4px 6px;
-  font-weight: 700; font-size: 0.7rem; color: var(--ink); cursor: pointer;
+  display: flex; align-items: center; gap: 4px; background: var(--surface);
+  border: 1px solid var(--line); border-radius: 100px; padding: 5px 8px;
+  font-weight: 700; font-size: 0.74rem; color: var(--ink); cursor: pointer;
   transition: all 0.2s ease; box-shadow: 0 2px 6px rgba(0,0,0,0.04); white-space: nowrap;
 }
 .lang-dropdown-pill:hover{ border-color: var(--green); }
-.lang-dropdown-pill svg{ width: 10px; height: 10px; color: var(--muted); }
+.lang-dropdown-pill svg{ width: 12px; height: 12px; color: var(--muted); }
 
 .lang-menu-popover{
   position: absolute; top: calc(100% + 8px); right: 0; z-index: 100;
   background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
-  padding: 6px; width: 130px; box-shadow: 0 14px 36px rgba(0,0,0,0.18);
+  padding: 6px; width: 135px; box-shadow: 0 14px 36px rgba(0,0,0,0.18);
   display: none; flex-direction: column; gap: 4px; animation: popoverIn 0.2s cubic-bezier(0.25, 1, 0.5, 1);
 }
 .lang-menu-popover.show{ display: flex; }
@@ -237,18 +239,19 @@ html.dark .topbar{
 
 .lang-option{
   display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 100px;
-  font-size: 0.82rem; font-weight: 700; color: var(--muted); cursor: pointer; transition: background 0.15s;
+  font-size: 0.84rem; font-weight: 700; color: var(--muted); cursor: pointer; transition: background 0.15s;
 }
 .lang-option:hover, .lang-option.active{ background: rgba(34,224,122,0.12); color: var(--ink); }
 .lang-option.active{ color: var(--green-dim); }
 html.dark .lang-option.active{ color: var(--green); }
 
-/* Theme Toggle Frame Fix */
+/* LARGER THEME TOGGLE FRAME FOR SENIOR ACCESSIBILITY */
 .theme-toggle{
-  width:28px; height:28px; border-radius:50%; border:1px solid var(--line);
+  width:32px; height:32px; border-radius:50%; border:1px solid var(--line);
   background:var(--surface); display:flex; align-items:center; justify-content:center;
   color:var(--ink); transition:transform .2s, background-color .3s; flex-shrink:0; margin-right:2px;
 }
+.theme-toggle svg { width: 18px; height: 18px; }
 .theme-toggle:active{transform:scale(0.9);}
 
 /* Desktop 2026 Navigation Wrapper with Arrow Controls */
@@ -260,7 +263,7 @@ html.dark .lang-option.active{ color: var(--green); }
 }
 
 .nav-arrow-btn {
-  width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--line);
+  width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line);
   background: var(--surface); color: var(--ink); display: flex; align-items: center;
   justify-content: center; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.06);
   transition: all 0.2s ease; flex-shrink: 0; z-index: 2;
@@ -271,7 +274,7 @@ html.dark .lang-option.active{ color: var(--green); }
 .nav-arrow-btn:active { transform: scale(0.9); }
 
 .desktop-nav{
-  display: flex; align-items: center; gap: 2px; font-weight: 700; font-size: 0.82rem;
+  display: flex; align-items: center; gap: 2px; font-weight: 700; font-size: 0.84rem;
   margin: 0; background: rgba(13,27,42,0.04); padding: 4px; border-radius: 100px;
   border: 1px solid var(--line); flex-shrink: 1; overflow-x: auto; scrollbar-width: none;
   scroll-behavior: smooth;
@@ -280,7 +283,7 @@ html.dark .desktop-nav{ background: rgba(255,255,255,0.04); }
 .desktop-nav::-webkit-scrollbar{ display:none; }
 
 .desktop-nav-link{
-  color: var(--muted); padding: 6px 12px; border-radius: 100px; transition: all 0.2s ease; cursor: pointer;
+  color: var(--muted); padding: 6px 14px; border-radius: 100px; transition: all 0.2s ease; cursor: pointer;
   display: flex; align-items: center; gap: 4px; white-space: nowrap; word-break: keep-all; flex-shrink: 0;
 }
 .desktop-nav-link:hover{ color: var(--ink); background: rgba(0,0,0,0.04); }
@@ -353,6 +356,24 @@ html.dark .desktop-nav-link.active{
 .screen.active{display:block;}
 @keyframes fadeIn{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
 
+/* ONBOARDING & GOOGLE AUTH SCREEN (`#screen-auth`) */
+.auth-hero{
+  text-align: center; padding: 20px 10px 10px;
+}
+.auth-logo-img{
+  width: 76px; height: 76px; border-radius: 50%; object-fit: contain;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.15); margin-bottom: 14px;
+}
+.btn-google-auth{
+  width: 100%; display: flex; align-items: center; justify-content: center; gap: 12px;
+  background: var(--surface); color: var(--ink); border: 1px solid var(--line);
+  padding: 15px; border-radius: 100px; font-weight: 800; font-size: 0.96rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06); transition: transform 0.2s, border-color 0.2s;
+  cursor: pointer; margin-bottom: 12px;
+}
+.btn-google-auth:hover{ border-color: var(--green); transform: translateY(-2px); }
+.btn-google-auth:active{ transform: scale(0.97); }
+
 .search-bar{
   display:flex; align-items:center; gap:10px;
   background:var(--surface); border:1px solid var(--line); border-radius:100px;
@@ -364,20 +385,22 @@ html.dark .desktop-nav-link.active{
 }
 .search-bar .icon{color:var(--muted); display:flex;}
 
+/* ENLARGED CATEGORY PILLS FOR ACCESSIBILITY */
 .cat-scroll{display:flex; gap:10px; overflow-x:auto; padding-bottom:6px; margin-bottom:24px; scrollbar-width:none;}
 .cat-scroll::-webkit-scrollbar{display:none;}
 .cat-pill{
   flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:8px;
-  padding:12px 14px; background:var(--surface); border:1px solid var(--line); border-radius:16px;
-  min-width:82px; transition:transform .2s, border-color .2s, box-shadow .2s;
+  padding:14px 16px; background:var(--surface); border:1px solid var(--line); border-radius:18px;
+  min-width:90px; transition:transform .2s, border-color .2s, box-shadow .2s;
   cursor: pointer;
 }
 .cat-pill:active{transform:scale(0.94);}
 .cat-pill.active{border-color:var(--green); box-shadow:0 0 0 3px rgba(34,224,122,0.15); background:rgba(34,224,122,0.08);}
-.cat-pill .cicon{color:var(--ink); width:22px; height:22px;}
+.cat-pill .cicon{color:var(--ink); width:28px; height:28px; display:flex; align-items:center; justify-content:center;}
+.cat-pill .cicon svg{ width:26px; height:26px; stroke-width:2.1; }
 .cat-pill.active .cicon{color:var(--green-dim);}
 html.dark .cat-pill.active .cicon{color:var(--green);}
-.cat-pill span{font-size:0.72rem; font-weight:700; color:var(--muted); white-space:nowrap;}
+.cat-pill span{font-size:0.78rem; font-weight:800; color:var(--muted); white-space:nowrap;}
 .cat-pill.active span{color:var(--ink);}
 
 .section-title{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
@@ -403,35 +426,36 @@ html.dark .section-title .see-all{color:var(--green);}
   background:linear-gradient(180deg, rgba(13,27,42,0.05) 40%, rgba(13,27,42,0.75) 100%);
 }
 .vcard .thumb .cbadge{
-  position:relative; z-index:1; width:32px; height:32px; border-radius:10px;
-  background:rgba(255,255,255,0.22); backdrop-filter:blur(8px);
+  position:relative; z-index:1; width:36px; height:36px; border-radius:12px;
+  background:rgba(255,255,255,0.25); backdrop-filter:blur(8px);
   display:flex; align-items:center; justify-content:center; margin:10px;
 }
-.vcard .thumb .cbadge svg{width:16px; height:16px;}
+.vcard .thumb .cbadge svg{width:20px; height:20px;}
 .vcard .fav{
-  position:absolute; top:10px; right:10px; width:32px; height:32px; border-radius:50%;
-  background:rgba(255,255,255,0.22); backdrop-filter:blur(8px);
+  position:absolute; top:10px; right:10px; width:34px; height:34px; border-radius:50%;
+  background:rgba(255,255,255,0.25); backdrop-filter:blur(8px);
   display:flex; align-items:center; justify-content:center; color:#fff;
   transition:transform .2s;
 }
-.vcard .fav svg{width:16px; height:16px;}
+.vcard .fav svg{width:18px; height:18px;}
 .vcard .fav.active{color:#FF5A6E; transform:scale(1.15);}
 .vcard .fav.active svg{fill:#FF5A6E; stroke:#FF5A6E;}
 .vcard .body{padding:12px 12px 14px;}
 .vcard h3{font-size:0.92rem; margin:0 0 4px; font-weight:700;}
 .vcard .meta{display:flex; align-items:center; justify-content:space-between; font-size:0.78rem; color:var(--muted);}
 .vcard .rating{display:flex; align-items:center; gap:4px; font-weight:700; color:var(--ink);}
-.vcard .rating svg{width:13px; height:13px; fill:#F5A623; stroke:#F5A623;}
+.vcard .rating svg{width:14px; height:14px; fill:#F5A623; stroke:#F5A623;}
 .vcard .price{font-size:0.84rem; font-weight:800; color:var(--green-dim); margin-top:6px;}
 html.dark .vcard .price{color:var(--green);}
 
 /* ---- BACK HEADER ---- */
 .subheader{display:flex; align-items:center; gap:14px; padding:12px 0 8px; position:sticky; top:0; background:var(--bg); z-index:30;}
 .back-btn{
-  width:38px; height:38px; border-radius:50%; background:var(--surface); border:1px solid var(--line);
+  width:40px; height:40px; border-radius:50%; background:var(--surface); border:1px solid var(--line);
   display:flex; align-items:center; justify-content:center; color:var(--ink); flex:0 0 auto;
   transition:transform .15s;
 }
+.back-btn svg { width: 22px; height: 22px; }
 .back-btn:active{transform:scale(0.9);}
 .subheader h2{font-size:1.05rem; margin:0; font-weight:800;}
 
@@ -450,24 +474,24 @@ html.dark .vcard .price{color:var(--green);}
   background:rgba(255,255,255,0.22); backdrop-filter:blur(8px);
   display:flex; align-items:center; justify-content:center; margin:16px;
 }
-.venue-hero .cbadge svg{width:22px; height:22px;}
+.venue-hero .cbadge svg{width:24px; height:24px;}
 .venue-hero .fav{
-  position:absolute; top:14px; right:14px; width:38px; height:38px; border-radius:50%;
+  position:absolute; top:14px; right:14px; width:40px; height:40px; border-radius:50%;
   background:rgba(255,255,255,0.22); backdrop-filter:blur(8px);
   display:flex; align-items:center; justify-content:center; color:#fff;
   transition:transform .2s; cursor:pointer;
 }
-.venue-hero .fav svg{width:18px; height:18px;}
+.venue-hero .fav svg{width:20px; height:20px;}
 .venue-hero .fav.active svg{fill:#FF5A6E; stroke:#FF5A6E;}
 .venue-title h1{font-size:1.35rem; margin:0 0 4px; font-weight:800;}
 .venue-title .loc{color:var(--muted); font-size:0.86rem; display:flex; align-items:center; gap:6px; margin-bottom:10px;}
-.venue-title .loc svg{width:14px; height:14px;}
+.venue-title .loc svg{width:16px; height:16px;}
 .badge-row{display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap;}
 .badge{
   background:var(--surface); border:1px solid var(--line); padding:7px 13px; border-radius:100px;
   font-size:0.78rem; font-weight:700; color:var(--muted); display:flex; align-items:center; gap:5px;
 }
-.badge svg{width:14px; height:14px;}
+.badge svg{width:16px; height:16px;}
 .badge.rating{color:var(--ink);}
 .badge.rating svg{fill:#F5A623; stroke:#F5A623;}
 .desc{font-size:0.9rem; color:var(--muted); line-height:1.6; margin-bottom:22px;}
@@ -477,7 +501,7 @@ html.dark .vcard .price{color:var(--green);}
   background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:12px 14px;
   font-size:0.84rem; font-weight:600; display:flex; align-items:center; gap:8px; color:var(--ink);
 }
-.amenity svg{width:16px; height:16px; color:var(--green-dim); flex:0 0 auto;}
+.amenity svg{width:18px; height:18px; color:var(--green-dim); flex:0 0 auto;}
 html.dark .amenity svg{color:var(--green);}
 
 .date-scroll{display:flex; gap:10px; overflow-x:auto; margin-bottom:16px; padding-bottom:4px; scrollbar-width:none;}
@@ -583,7 +607,7 @@ html.dark .badge-tag.approved{ color: var(--green); }
   transition: background 0.2s; text-decoration: none;
 }
 .footer-link-item:hover{ background: rgba(34,224,122,0.2); }
-.footer-link-item svg{ width: 18px; height: 18px; color: var(--green); flex: 0 0 auto; }
+.footer-link-item svg{ width: 20px; height: 20px; color: var(--green); flex: 0 0 auto; }
 
 /* ---- REWARDS & PROMO CODES ---- */
 .reward-card{
@@ -619,7 +643,7 @@ html.dark .badge-tag.approved{ color: var(--green); }
   padding:9px 14px; border-radius:12px; border:1px solid var(--line); font-size:0.8rem; font-weight:700; background:var(--bg);
   display:flex; align-items:center; gap:6px; color:var(--ink); cursor:pointer;
 }
-.pay-chip svg{width:15px; height:15px;}
+.pay-chip svg{width:16px; height:16px;}
 .pay-chip.active{border-color:var(--green); background:rgba(34,224,122,0.1); color:var(--green-dim);}
 html.dark .pay-chip.active{color:var(--green);}
 .btn-confirm{
@@ -695,7 +719,7 @@ html.dark .bottomnav{
 }
 .nav-item{display:flex; flex-direction:column; align-items:center; gap:4px; color:var(--muted); font-size:0.68rem; font-weight:700; padding:6px 10px; border-radius:12px; transition:color .2s; cursor:pointer;}
 .nav-item.active{color:var(--ink);}
-.nav-item .ic{width:20px; height:20px;}
+.nav-item .ic{width:22px; height:22px;}
 .nav-item.active .ic{color:var(--green-dim);}
 html.dark .nav-item.active .ic{color:var(--green);}
 .nav-item.fab{
@@ -703,7 +727,7 @@ html.dark .nav-item.active .ic{color:var(--green);}
   display:flex; align-items:center; justify-content:center; margin-top:-26px;
   box-shadow:0 10px 22px -8px rgba(34,224,122,0.6);
 }
-.nav-item.fab svg{width:22px; height:22px; stroke-width:2.4;}
+.nav-item.fab svg{width:24px; height:24px; stroke-width:2.4;}
 
 /* ---- PROFILE / LIST ITEMS ---- */
 .list-item{
@@ -711,12 +735,12 @@ html.dark .nav-item.active .ic{color:var(--green);}
   border-radius:16px; padding:14px; margin-bottom:12px; cursor:pointer;
 }
 .list-item .ic-box{
-  width:44px;height:44px; border-radius:12px; background:var(--bg); display:flex; align-items:center; justify-content:center; color:var(--ink); flex:0 0 auto;
+  width:48px; height:48px; border-radius:14px; background:var(--bg); display:flex; align-items:center; justify-content:center; color:var(--ink); flex:0 0 auto;
 }
-.list-item .ic-box svg{width:20px; height:20px;}
+.list-item .ic-box svg{width:24px; height:24px;}
 .list-item .info{flex:1;}
-.list-item .info h4{margin:0 0 3px; font-size:0.9rem; font-weight:700;}
-.list-item .info p{margin:0; font-size:0.78rem; color:var(--muted);}
+.list-item .info h4{margin:0 0 3px; font-size:0.92rem; font-weight:700;}
+.list-item .info p{margin:0; font-size:0.8rem; color:var(--muted);}
 .status-pill{font-size:0.7rem; font-weight:800; padding:5px 10px; border-radius:100px; background:rgba(34,224,122,0.14); color:var(--green-dim);}
 html.dark .status-pill{color:var(--green);}
 
@@ -725,11 +749,15 @@ html.dark .status-pill{color:var(--green);}
 .profile-head h2{margin:0 0 2px; font-size:1.15rem;}
 .profile-head p{margin:0; color:var(--muted); font-size:0.84rem;}
 .menu-item{
-  display:flex; align-items:center; justify-content:space-between; padding:16px 4px; border-bottom:1px solid var(--line); font-size:0.9rem; font-weight:600; cursor:pointer;
+  display:flex; align-items:center; justify-content:space-between; padding:16px 4px; border-bottom:1px solid var(--line); font-size:0.92rem; font-weight:600; cursor:pointer;
 }
 .menu-item .left{display:flex; align-items:center; gap:12px; color:var(--ink);}
-.menu-item .left svg{width:18px; height:18px; color:var(--muted);}
+.menu-item .left svg{width:20px; height:20px; color:var(--muted);}
 .menu-item .arrow{color:var(--muted);}
+.menu-item.logout{ color:#FF5A6E; }
+.menu-item.logout .left{ color:#FF5A6E; }
+.menu-item.logout .left svg{ color:#FF5A6E; }
+
 .empty-state{text-align:center; padding:40px 20px; color:var(--muted); font-size:0.92rem;}
 </style>
 </head>
@@ -747,7 +775,7 @@ html.dark .status-pill{color:var(--green);}
     <!-- 2026 Desktop Navigation Links Wrapper with Scroll Arrow Controls -->
     <div class="desktop-nav-wrapper">
       <button class="nav-arrow-btn" onclick="scrollNav(-140)" title="Chapga scroll">
-        <svg class="ic" viewBox="0 0 24 24" style="width:13px;height:13px;stroke-width:2.5;"><path d="M15 18l-6-6 6-6"/></svg>
+        <svg class="ic" viewBox="0 0 24 24" style="width:14px;height:14px;stroke-width:2.5;"><path d="M15 18l-6-6 6-6"/></svg>
       </button>
 
       <div class="desktop-nav" id="desktopNav">
@@ -760,20 +788,20 @@ html.dark .status-pill{color:var(--green);}
       </div>
 
       <button class="nav-arrow-btn" onclick="scrollNav(140)" title="O'ngga scroll">
-        <svg class="ic" viewBox="0 0 24 24" style="width:13px;height:13px;stroke-width:2.5;"><path d="M9 18l6-6-6-6"/></svg>
+        <svg class="ic" viewBox="0 0 24 24" style="width:14px;height:14px;stroke-width:2.5;"><path d="M9 18l6-6-6-6"/></svg>
       </button>
     </div>
 
     <div class="topbar-controls">
       <!-- Pulsing Green Blinking Install App Button -->
       <button class="btn-install-app" id="btnInstallApp" onclick="handleAppInstallClick()">
-        <svg class="ic" viewBox="0 0 24 24" style="width:13px;height:13px;stroke-width:2.5;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        <svg class="ic" viewBox="0 0 24 24" style="width:14px;height:14px;stroke-width:2.5;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
         <span id="txtInstallBtn">Yuklab olish</span>
       </button>
 
       <!-- Single Profile Button (User Chip) -->
       <div class="user-greeting-chip" onclick="goTo('profile')">
-        <div class="avatar-mini">F</div>
+        <div class="avatar-mini" id="avatarInitialPill">F</div>
         <span id="txtUserGreetingBadge">Firdavsbek</span>
       </div>
 
@@ -782,7 +810,7 @@ html.dark .status-pill{color:var(--green);}
         <div class="lang-dropdown-pill" onclick="toggleLangMenu(event)">
           <span id="langIconSlot"></span>
           <span id="currentLangCode">UZ</span>
-          <svg viewBox="0 0 24 24" style="width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2.5;"><path d="M6 9l6 6 6-6"/></svg>
+          <svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.5;"><path d="M6 9l6 6 6-6"/></svg>
         </div>
 
         <div class="lang-menu-popover" id="langPopoverMenu">
@@ -796,6 +824,34 @@ html.dark .status-pill{color:var(--green);}
       <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn"></button>
     </div>
   </div>
+
+  <!-- ONBOARDING & GOOGLE AUTH SCREEN -->
+  <section class="screen" id="screen-auth">
+    <div class="auth-hero">
+      <img src="logo.jpg" alt="Gaplashib Qoydim Logo" class="auth-logo-img">
+      <h2 style="font-size:1.4rem; margin:0 0 6px; font-weight:800;" id="txtAuthTitle">Gaplashib Qo'ydim ga Xush Kelibsiz!</h2>
+      <p style="font-size:0.86rem; color:var(--muted); margin:0 0 24px;" id="txtAuthSub">Qo'qon shahrining barcha futbol maydonlari, gul do'konlari, tort va xizmatlarini 1-klifda oson bron qiling</p>
+
+      <!-- GOOGLE ONE-TAP REGISTRATION / SIGN IN BUTTON -->
+      <button class="btn-google-auth" onclick="loginWithGoogle()">
+        <svg style="width:22px; height:22px;" viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+        </svg>
+        <span id="txtGoogleAuthBtn">Google orqali ro'yhatdan o'tish</span>
+      </button>
+
+      <button class="btn-primary" style="background:var(--surface); border:1px solid var(--line); color:var(--ink); margin-bottom:14px;" onclick="goTo('home')" id="txtGuestAuthBtn">
+        Mehmon bo'lib ko'rib chiqish →
+      </button>
+
+      <div style="font-size:0.75rem; color:var(--muted); margin-top:16px;">
+        Ro'yhatdan o'tish orqali foydalanish shartlariga rozilik bildirasiz.
+      </div>
+    </div>
+  </section>
 
   <!-- HOME SCREEN -->
   <section class="screen active" id="screen-home">
@@ -1133,8 +1189,11 @@ html.dark .status-pill{color:var(--green);}
   <!-- PROFILE SCREEN -->
   <section class="screen" id="screen-profile">
     <div class="profile-head" style="padding-top:16px;">
-      <div class="avatar">F</div>
-      <div><h2>Firdavsbek</h2><p>+998 90 123 45 67</p></div>
+      <div class="avatar" id="avatarBigProfile">F</div>
+      <div>
+        <h2 id="userNameProfile">Firdavsbek</h2>
+        <p id="userPhoneProfile">+998 90 123 45 67</p>
+      </div>
     </div>
     <div id="profileMenu"></div>
     <div style="height:60px;"></div>
@@ -1235,6 +1294,7 @@ const DICT = {
     rewards: "Promokodlar",
     vendorCabinet: "Sotuvchi Kabineti",
     adminPanel: "Admin Moderatsiya",
+    logout: "Profildan chiqish",
     confirmTitle: "Bron tasdiqlandi!",
     confirmSub: "Joyingiz tayyor turibdi. Vaqtida boring",
     ticketId: "Bron raqami",
@@ -1266,6 +1326,10 @@ const DICT = {
     installStep2: "<b>\"Bosh ekranga qo'shish\"</b> (Add to Home Screen) opsiyasini tanlang",
     installStep3: "Ilova smartfoningizda alohida icon bo'lib saqlanadi!",
     installAutoBtn: "📲 Ekraningizga avtomatik qo'shish",
+    authTitle: "Gaplashib Qo'ydim ga Xush Kelibsiz!",
+    authSub: "Qo'qon shahrining barcha futbol maydonlari, gul do'konlari, tort va xizmatlarini 1-klifda oson bron qiling",
+    googleAuthBtn: "Google orqali ro'yhatdan o'tish",
+    guestAuthBtn: "Mehmon bo'lib ko'rib chiqish →",
     s1Tag: "YANGI AKSIYA",
     s1Title: "Birinchi bronga −20% chegirma",
     s1Desc: "Qo'qondagi barcha futbol maydoni va sport komplekslarida amal qiladi",
@@ -1309,6 +1373,7 @@ const DICT = {
     rewards: "Промокоды",
     vendorCabinet: "Кабинет продавца",
     adminPanel: "Админ модерация",
+    logout: "Выйти из профиля",
     confirmTitle: "Бронирование подтверждено!",
     confirmSub: "Ваше место готово. Пожалуйста, приходите вовремя",
     ticketId: "Номер брони",
@@ -1340,6 +1405,10 @@ const DICT = {
     installStep2: "Выберите опцию <b>«На экран «Домой»»</b> (Add to Home Screen)",
     installStep3: "Приложение появится как отдельная иконка на рабочем столе!",
     installAutoBtn: "📲 Автоматически добавить на экран",
+    authTitle: "Добро пожаловать в Gaplashib Qo'ydim!",
+    authSub: "Бронируйте футбольные поля, букеты, торты и услуги Коканда в 1 клик",
+    googleAuthBtn: "Войти через Google",
+    guestAuthBtn: "Продолжить как гость →",
     s1Tag: "НОВАЯ АКЦИЯ",
     s1Title: "Скидка −20% на 1-е бронирование",
     s1Desc: "Действует во всех спортивных комплексах Коканда",
@@ -1383,6 +1452,7 @@ const DICT = {
     rewards: "Promo Codes",
     vendorCabinet: "Seller Cabinet",
     adminPanel: "Admin Panel",
+    logout: "Log Out",
     confirmTitle: "Booking Confirmed!",
     confirmSub: "Your spot is reserved. Please arrive on time",
     ticketId: "Booking ID",
@@ -1414,6 +1484,10 @@ const DICT = {
     installStep2: "Select <b>\"Add to Home Screen\"</b> option",
     installStep3: "App icon will appear on your phone home screen!",
     installAutoBtn: "📲 Add to Home Screen Automatically",
+    authTitle: "Welcome to Gaplashib Qo'ydim!",
+    authSub: "Book all football fields, flower shops, cakes & services in Kokand in 1 click",
+    googleAuthBtn: "Sign in with Google",
+    guestAuthBtn: "Continue as Guest →",
     s1Tag: "SPECIAL OFFER",
     s1Title: "−20% Off First Booking",
     s1Desc: "Valid across all partner sports complexes in Kokand",
@@ -1465,6 +1539,7 @@ const I = {
   globe: `<svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18"/></svg>`,
   palette: `<svg class="ic" viewBox="0 0 24 24"><path d="M12 3a9 8.5 0 100 17c1.4 0 2-1 2-2.2 0-.6-.3-1-.6-1.4-.3-.4-.6-.8-.6-1.4 0-1.1.9-1.8 2-1.8h2.3C19 13.2 21 11.4 21 9c0-3.3-4-6-9-6z"/><circle cx="7.5" cy="10.5" r="1" class="ic-fill"/><circle cx="10.5" cy="7" r="1" class="ic-fill"/><circle cx="15" cy="7.5" r="1" class="ic-fill"/></svg>`,
   settings: `<svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 13a7.5 7.5 0 000-2l2-1.4-2-3.4-2.3.7a7.6 7.6 0 00-1.7-1L15 3h-4l-.4 2.9a7.6 7.6 0 00-1.7 1l-2.3-.7-2 3.4L6.6 11a7.5 7.5 0 000 2l-2 1.4 2 3.4 2.3-.7c.5.4 1.1.8 1.7 1L11 21h4l.4-2.9c.6-.2 1.2-.6 1.7-1l2.3.7 2-3.4-2-1.4z"/></svg>`,
+  logout: `<svg class="ic" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>`,
   chevron: `<svg class="ic" viewBox="0 0 24 24" style="width:16px;height:16px;"><path d="M9 6l6 6-6 6"/></svg>`,
   moon: `<svg class="ic" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>`,
   sun: `<svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8L6 18M18 6l1.8-1.8"/></svg>`,
@@ -1530,6 +1605,50 @@ const venues = [
   {id:11, name:'Orkideya Florist', cat:'flowers', ic:I.flower, dist:'1.3 km', rating:4.8, price:'70,000 so\'m/buyurtma'},
   {id:12, name:'Safia Pastry', cat:'bakery', ic:I.cake, dist:'1.0 km', rating:5.0, price:'120,000 so\'m/tort'},
 ];
+
+// USER AUTHENTICATION STATE
+let currentUser = JSON.parse(localStorage.getItem('gq_user_session') || 'null');
+
+function loginWithGoogle(){
+  currentUser = {
+    name: 'Firdavsbek Artikov',
+    email: 'firdavsbek@gmail.com',
+    phone: '+998 77 007 76 45',
+    avatar: 'F',
+    provider: 'google'
+  };
+  localStorage.setItem('gq_user_session', JSON.stringify(currentUser));
+  updateUserUI();
+  alert(`✅ Google orqali muvaffaqiyatli kirdingiz!\nXush kelibsiz, ${currentUser.name}`);
+  goTo('home');
+}
+
+function logoutUser(){
+  currentUser = null;
+  localStorage.removeItem('gq_user_session');
+  updateUserUI();
+  alert("👋 Profildan chiqildi.");
+  goTo('auth');
+}
+
+function updateUserUI(){
+  const badgeEl = document.getElementById('txtUserGreetingBadge');
+  const initialEl = document.getElementById('avatarInitialPill');
+  const profileNameEl = document.getElementById('userNameProfile');
+  const profilePhoneEl = document.getElementById('userPhoneProfile');
+
+  if(currentUser){
+    if(badgeEl) badgeEl.textContent = currentUser.name.split(' ')[0];
+    if(initialEl) initialEl.textContent = currentUser.avatar || 'F';
+    if(profileNameEl) profileNameEl.textContent = currentUser.name;
+    if(profilePhoneEl) profilePhoneEl.textContent = currentUser.phone || currentUser.email;
+  } else {
+    if(badgeEl) badgeEl.textContent = "Kirish";
+    if(initialEl) initialEl.textContent = "?";
+    if(profileNameEl) profileNameEl.textContent = "Mehmon";
+    if(profilePhoneEl) profilePhoneEl.textContent = "Ro'yhatdan o'tilmagan";
+  }
+}
 
 // Pending moderation venues queue for Admin review
 let pendingVenues = JSON.parse(localStorage.getItem('gq_pending_venues') || JSON.stringify([
@@ -1732,6 +1851,12 @@ function applyTranslations(){
   setHtml('txtInstallStep2', t.installStep2);
   setTx('txtInstallStep3', t.installStep3);
   setTx('btnInstallAutoPrompt', t.installAutoBtn);
+
+  // Auth Screen Multilingual
+  setTx('txtAuthTitle', t.authTitle);
+  setTx('txtAuthSub', t.authSub);
+  setTx('txtGoogleAuthBtn', t.googleAuthBtn);
+  setTx('txtGuestAuthBtn', t.guestAuthBtn);
 
   // Promo Slider translations
   setTx('slide1Tag', t.s1Tag);
@@ -2251,9 +2376,10 @@ function renderProfileMenu(){
     [I.settings, t.adminPanel, ()=>goTo('admin')],
     [I.globe, currentLang === 'ru' ? "Язык — Русский" : (currentLang === 'en' ? "Language — English" : "Til — O'zbekcha"), ()=>setLanguage(currentLang === 'uz' ? 'ru' : (currentLang === 'ru' ? 'en' : 'uz'))],
     [I.palette, currentLang === 'ru' ? "Тема" : (currentLang === 'en' ? "Theme" : "Mavzu"), ()=>toggleTheme()],
+    [I.logout, t.logout, ()=>logoutUser(), 'logout']
   ];
   document.getElementById('profileMenu').innerHTML = items.map((it,i)=>`
-    <div class="menu-item" style="${i===items.length-1?'border-bottom:none;':''}" onclick="profileActions[${i}]()">
+    <div class="menu-item ${it[3]||''}" style="${i===items.length-1?'border-bottom:none;':''}" onclick="profileActions[${i}]()">
       <div class="left">${it[0]}<span>${it[1]}</span></div><span class="arrow">${I.chevron}</span>
     </div>`).join('');
   window.profileActions = items.map(it => it[2]);
@@ -2318,6 +2444,14 @@ function toggleTheme(){
 // Initial theme setup
 if(localStorage.getItem('gq_theme') === 'dark' || (!localStorage.getItem('gq_theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)){
   document.documentElement.classList.add('dark');
+}
+
+// Init user state
+updateUserUI();
+
+// If user hasn't logged in before, show Auth Screen on first launch
+if(!currentUser){
+  goTo('auth');
 }
 
 // Init language & UI
