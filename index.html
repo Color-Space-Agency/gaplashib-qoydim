@@ -128,21 +128,25 @@ button{font-family:inherit; cursor:pointer;}
 html.dark .topbar{
   background:rgba(14, 29, 48, 0.88);
 }
-.brand-mini{display:flex; align-items:center; gap:10px; font-weight:800; font-size:1.15rem; cursor:pointer;}
+.brand-mini{display:flex; align-items:center; gap:10px; font-weight:800; font-size:1.1rem; cursor:pointer; flex-shrink:0;}
 .brand-logo-img{
-  height: 42px; width: auto; object-fit: contain; border-radius: 50%;
+  height: 38px; width: auto; object-fit: contain; border-radius: 50%;
   box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
 .topbar-controls{
-  display: flex; align-items: center; gap: 10px; position: relative;
+  display: flex; align-items: center; gap: 8px; position: relative; flex-shrink:0;
 }
 
-/* User Greeting Chip */
+/* User Greeting Chip / Single Profile Button */
 .user-greeting-chip{
   display: flex; align-items: center; gap: 8px; background: var(--surface);
   border: 1px solid var(--line); border-radius: 100px; padding: 4px 12px 4px 4px;
   font-size: 0.82rem; font-weight: 700; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: all 0.2s ease;
+}
+.user-greeting-chip:hover, .user-greeting-chip.active{
+  border-color: var(--green); background: rgba(34,224,122,0.1);
 }
 .user-greeting-chip .avatar-mini{
   width: 28px; height: 28px; border-radius: 50%; background: var(--green); color: var(--navy);
@@ -154,13 +158,13 @@ html.dark .topbar{
   position: relative;
 }
 .lang-dropdown-pill{
-  display: flex; align-items: center; gap: 6px; background: var(--surface);
-  border: 1px solid var(--line); border-radius: 100px; padding: 6px 12px;
+  display: flex; align-items: center; gap: 5px; background: var(--surface);
+  border: 1px solid var(--line); border-radius: 100px; padding: 6px 11px;
   font-weight: 700; font-size: 0.8rem; color: var(--ink); cursor: pointer;
-  transition: all 0.2s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: all 0.2s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.04); white-space: nowrap;
 }
 .lang-dropdown-pill:hover{ border-color: var(--green); }
-.lang-dropdown-pill svg{ width: 14px; height: 14px; color: var(--muted); }
+.lang-dropdown-pill svg{ width: 13px; height: 13px; color: var(--muted); }
 
 .lang-menu-popover{
   position: absolute; top: calc(100% + 8px); right: 0; z-index: 100;
@@ -172,7 +176,7 @@ html.dark .topbar{
 @keyframes popoverIn{ from{opacity:0; transform:translateY(-8px) scale(0.96);} to{opacity:1; transform:translateY(0) scale(1);} }
 
 .lang-option{
-  display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 10px;
+  display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 100px;
   font-size: 0.82rem; font-weight: 700; color: var(--muted); cursor: pointer; transition: background 0.15s;
 }
 .lang-option:hover, .lang-option.active{ background: rgba(34,224,122,0.12); color: var(--ink); }
@@ -180,23 +184,23 @@ html.dark .topbar{
 html.dark .lang-option.active{ color: var(--green); }
 
 .theme-toggle{
-  width:38px;height:38px;border-radius:50%; border:1px solid var(--line);
+  width:36px;height:36px;border-radius:50%; border:1px solid var(--line);
   background:var(--surface); display:flex; align-items:center; justify-content:center;
-  color:var(--ink); transition:transform .2s, background-color .3s;
+  color:var(--ink); transition:transform .2s, background-color .3s; flex-shrink:0;
 }
 .theme-toggle:active{transform:scale(0.9);}
 
-/* Desktop 2026 Navigation Pills */
+/* Desktop 2026 Navigation Pills (STRICT SINGLE LINE) */
 .desktop-nav{
-  display: none; align-items: center; gap: 6px; font-weight: 700; font-size: 0.88rem;
-  margin-left: 10px; background: rgba(13,27,42,0.04); padding: 4px; border-radius: 100px;
+  display: none; align-items: center; gap: 4px; font-weight: 700; font-size: 0.85rem;
+  margin: 0 10px; background: rgba(13,27,42,0.04); padding: 4px; border-radius: 100px;
   border: 1px solid var(--line);
 }
 html.dark .desktop-nav{ background: rgba(255,255,255,0.04); }
 
 .desktop-nav-link{
-  color: var(--muted); padding: 7px 16px; border-radius: 100px; transition: all 0.2s ease; cursor: pointer;
-  display: flex; align-items: center; gap: 6px;
+  color: var(--muted); padding: 6px 14px; border-radius: 100px; transition: all 0.2s ease; cursor: pointer;
+  display: flex; align-items: center; gap: 6px; white-space: nowrap; word-break: keep-all;
 }
 .desktop-nav-link:hover{ color: var(--ink); background: rgba(0,0,0,0.04); }
 html.dark .desktop-nav-link:hover{ background: rgba(255,255,255,0.08); }
@@ -644,19 +648,18 @@ html.dark .status-pill{color:var(--green);}
       <span class="brand-text">Gaplashib Qoydim</span>
     </div>
 
-    <!-- 2026 Desktop Navigation Links -->
+    <!-- 2026 Desktop Navigation Links (CLEAN SINGLE-LINE & NO DUPLICATE PROFILES) -->
     <div class="desktop-nav">
       <div class="desktop-nav-link active" id="dnav-home" data-dnav="home" onclick="goTo('home')">Bosh sahifa</div>
       <div class="desktop-nav-link" id="dnav-search" data-dnav="search" onclick="goTo('search')">Qidiruv</div>
       <div class="desktop-nav-link" id="dnav-rewards" data-dnav="rewards" onclick="goTo('rewards')">Promokodlar</div>
-      <div class="desktop-nav-link" id="dnav-vendor" data-dnav="vendor" onclick="goTo('vendor')">Tariflar & Biznes</div>
+      <div class="desktop-nav-link" id="dnav-vendor" data-dnav="vendor" onclick="goTo('vendor')">Biznes & Tariflar</div>
       <div class="desktop-nav-link" id="dnav-bookings" data-dnav="bookings" onclick="goTo('bookings')">Bronlarim</div>
       <div class="desktop-nav-link" id="dnav-favorites" data-dnav="favorites" onclick="goTo('favorites')">Sevimlilar</div>
-      <div class="desktop-nav-link" id="dnav-profile" data-dnav="profile" onclick="goTo('profile')">Profil</div>
     </div>
 
     <div class="topbar-controls">
-      <!-- User Greeting Badge -->
+      <!-- Single Profile Button (User Chip) -->
       <div class="user-greeting-chip" onclick="goTo('profile')">
         <div class="avatar-mini">F</div>
         <span id="txtUserGreetingBadge">Firdavsbek</span>
@@ -684,7 +687,7 @@ html.dark .status-pill{color:var(--green);}
   <!-- HOME SCREEN -->
   <section class="screen active" id="screen-home">
     
-    <!-- LARGE HIGH-IMPACT ROTATING REKLAMA PROMO CAROUSEL (POSITIONED AT TOP, GREETING REMOVED) -->
+    <!-- LARGE HIGH-IMPACT ROTATING REKLAMA PROMO CAROUSEL (POSITIONED AT TOP) -->
     <div class="promo-carousel">
       <div class="promo-slider" id="promoSlider">
         
@@ -1107,10 +1110,9 @@ const DICT = {
     dnavHome: "Bosh sahifa",
     dnavSearch: "Qidiruv",
     dnavRewards: "Promokodlar",
-    dnavVendor: "Tariflar & Biznes",
+    dnavVendor: "Biznes & Tariflar",
     dnavBookings: "Bronlarim",
     dnavFav: "Sevimlilar",
-    dnavProfile: "Profil",
     footerTitle: "Reklama va Hamkorlik uchun",
     footerSub: "O'z biznesingizni va joyingizni joylashtiring va mijozlar oqimini oshiring!",
     s1Tag: "YANGI AKSIYA",
@@ -1175,10 +1177,9 @@ const DICT = {
     dnavHome: "Главная",
     dnavSearch: "Поиск",
     dnavRewards: "Промокоды",
-    dnavVendor: "Тарифы и Бизнес",
+    dnavVendor: "Бизнес и Тарифы",
     dnavBookings: "Мои брони",
     dnavFav: "Избранное",
-    dnavProfile: "Профиль",
     footerTitle: "Для рекламы и сотрудничества",
     footerSub: "Разместите ваш бизнес и увеличьте поток клиентов!",
     s1Tag: "НОВАЯ АКЦИЯ",
@@ -1243,10 +1244,9 @@ const DICT = {
     dnavHome: "Home",
     dnavSearch: "Search",
     dnavRewards: "Promos",
-    dnavVendor: "Tariffs & Business",
+    dnavVendor: "Business & Tariffs",
     dnavBookings: "Bookings",
     dnavFav: "Favorites",
-    dnavProfile: "Profile",
     footerTitle: "For Advertising & Partnership",
     footerSub: "List your business and boost your customer flow!",
     s1Tag: "SPECIAL OFFER",
@@ -1529,14 +1529,13 @@ function applyTranslations(){
   setTx('slide4Desc', t.s4Desc);
   setTx('slide4Btn', t.s4Btn);
 
-  // Top Desktop Nav Translations
+  // Top Desktop Nav Translations (No duplicates)
   setTx('dnav-home', t.dnavHome);
   setTx('dnav-search', t.dnavSearch);
   setTx('dnav-rewards', t.dnavRewards);
   setTx('dnav-vendor', t.dnavVendor);
   setTx('dnav-bookings', t.dnavBookings);
   setTx('dnav-favorites', t.dnavFav);
-  setTx('dnav-profile', t.dnavProfile);
 
   // Bottom Nav
   const navH = document.getElementById('navHome');
@@ -2068,6 +2067,10 @@ function goTo(screen){
   document.querySelectorAll('.desktop-nav-link[data-dnav]').forEach(n=>n.classList.remove('active'));
   const dNavEl = document.querySelector(`.desktop-nav-link[data-dnav="${screen}"]`);
   if(dNavEl) dNavEl.classList.add('active');
+
+  // Single Profile Button Active State
+  const profileChip = document.querySelector('.user-greeting-chip');
+  if(profileChip) profileChip.classList.toggle('active', screen === 'profile');
 
   document.getElementById('phone').scrollTop = 0;
   window.scrollTo(0,0);
