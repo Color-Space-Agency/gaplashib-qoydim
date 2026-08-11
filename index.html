@@ -100,55 +100,84 @@ svg.ic-fill{fill:currentColor; stroke:none;}
   .tariff-grid {
     grid-template-columns: repeat(3, 1fr) !important;
   }
+  .promo-carousel {
+    height: 320px !important;
+  }
+  .promo-slide {
+    min-height: 320px !important;
+    padding: 40px 48px !important;
+  }
+  .promo-slide h3 {
+    font-size: 2rem !important;
+  }
+  .promo-slide p {
+    font-size: 1.05rem !important;
+  }
 }
 
 a{color:inherit; text-decoration:none;}
 button{font-family:inherit; cursor:pointer;}
 
-/* ---- TOPBAR ---- */
+/* ---- 2026 ULTRA-MODERN TOPBAR ---- */
 .topbar{
   position:sticky; top:0; z-index:40;
-  background:var(--bg); padding:14px 20px;
-  display:flex; align-items:center; justify-content:space-between;
-  border-bottom: 1px solid var(--line);
+  background:rgba(243, 245, 247, 0.88); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+  padding:12px 20px; display:flex; align-items:center; justify-content:space-between;
+  border-bottom: 1px solid var(--line); transition: background 0.3s ease;
 }
-.brand-mini{display:flex; align-items:center; gap:12px; font-weight:800; font-size:1.1rem; cursor:pointer;}
+html.dark .topbar{
+  background:rgba(14, 29, 48, 0.88);
+}
+.brand-mini{display:flex; align-items:center; gap:10px; font-weight:800; font-size:1.15rem; cursor:pointer;}
 .brand-logo-img{
-  height: 40px; width: auto; object-fit: contain; border-radius: 50%;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  height: 42px; width: auto; object-fit: contain; border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
 .topbar-controls{
-  display: flex; align-items: center; gap: 10px;
+  display: flex; align-items: center; gap: 10px; position: relative;
 }
 
 /* User Greeting Chip */
 .user-greeting-chip{
   display: flex; align-items: center; gap: 8px; background: var(--surface);
   border: 1px solid var(--line); border-radius: 100px; padding: 4px 12px 4px 4px;
-  font-size: 0.8rem; font-weight: 700; cursor: pointer;
+  font-size: 0.82rem; font-weight: 700; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 .user-greeting-chip .avatar-mini{
   width: 28px; height: 28px; border-radius: 50%; background: var(--green); color: var(--navy);
   display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.8rem;
 }
 
-/* Language selector */
-.lang-selector{
-  display: flex; background: var(--surface); border: 1px solid var(--line);
-  border-radius: 100px; padding: 3px; gap: 2px;
+/* Compact Popover Language Selector (2026 Trend) */
+.lang-dropdown-wrapper{
+  position: relative;
 }
-.lang-btn{
-  border: none; background: transparent; color: var(--muted);
-  font-weight: 700; font-size: 0.75rem; padding: 6px 10px; border-radius: 100px;
-  transition: all 0.2s;
+.lang-dropdown-pill{
+  display: flex; align-items: center; gap: 6px; background: var(--surface);
+  border: 1px solid var(--line); border-radius: 100px; padding: 6px 12px;
+  font-weight: 700; font-size: 0.8rem; color: var(--ink); cursor: pointer;
+  transition: all 0.2s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
-.lang-btn.active{
-  background: var(--navy); color: #fff;
+.lang-dropdown-pill:hover{ border-color: var(--green); }
+.lang-dropdown-pill svg{ width: 14px; height: 14px; color: var(--muted); }
+
+.lang-menu-popover{
+  position: absolute; top: calc(100% + 8px); right: 0; z-index: 100;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
+  padding: 6px; width: 130px; box-shadow: 0 14px 36px rgba(0,0,0,0.18);
+  display: none; flex-direction: column; gap: 4px; animation: popoverIn 0.2s cubic-bezier(0.25, 1, 0.5, 1);
 }
-html.dark .lang-btn.active{
-  background: var(--green); color: var(--navy);
+.lang-menu-popover.show{ display: flex; }
+@keyframes popoverIn{ from{opacity:0; transform:translateY(-8px) scale(0.96);} to{opacity:1; transform:translateY(0) scale(1);} }
+
+.lang-option{
+  display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 10px;
+  font-size: 0.82rem; font-weight: 700; color: var(--muted); cursor: pointer; transition: background 0.15s;
 }
+.lang-option:hover, .lang-option.active{ background: rgba(34,224,122,0.12); color: var(--ink); }
+.lang-option.active{ color: var(--green-dim); }
+html.dark .lang-option.active{ color: var(--green); }
 
 .theme-toggle{
   width:38px;height:38px;border-radius:50%; border:1px solid var(--line);
@@ -157,66 +186,82 @@ html.dark .lang-btn.active{
 }
 .theme-toggle:active{transform:scale(0.9);}
 
-/* Desktop Nav Items */
+/* Desktop 2026 Navigation Pills */
 .desktop-nav{
-  display: none; align-items: center; gap: 20px; font-weight: 700; font-size: 0.9rem;
-  margin-left: 14px;
+  display: none; align-items: center; gap: 6px; font-weight: 700; font-size: 0.88rem;
+  margin-left: 10px; background: rgba(13,27,42,0.04); padding: 4px; border-radius: 100px;
+  border: 1px solid var(--line);
 }
+html.dark .desktop-nav{ background: rgba(255,255,255,0.04); }
+
 .desktop-nav-link{
-  color: var(--muted); transition: color 0.2s; cursor: pointer; display: flex; align-items: center; gap: 6px;
+  color: var(--muted); padding: 7px 16px; border-radius: 100px; transition: all 0.2s ease; cursor: pointer;
+  display: flex; align-items: center; gap: 6px;
 }
-.desktop-nav-link:hover, .desktop-nav-link.active{
-  color: var(--ink);
-}
+.desktop-nav-link:hover{ color: var(--ink); background: rgba(0,0,0,0.04); }
+html.dark .desktop-nav-link:hover{ background: rgba(255,255,255,0.08); }
 .desktop-nav-link.active{
-  color: var(--green-dim);
+  background: var(--navy); color: #fff; box-shadow: 0 4px 12px rgba(13,27,42,0.18);
 }
 html.dark .desktop-nav-link.active{
-  color: var(--green);
+  background: var(--green); color: var(--navy); box-shadow: 0 4px 14px rgba(34,224,122,0.3);
 }
 
-/* ---- HOME GREETING ---- */
-.greeting h1{font-size:1.5rem; margin:6px 0 2px; font-weight:800;}
-.greeting p{color:var(--muted); margin:0 0 18px; font-size:0.92rem;}
-
-/* ---- PROMO BANNER CAROUSEL ---- */
+/* ---- LARGE HIGH-IMPACT PROMO BANNER CAROUSEL ---- */
 .promo-carousel{
-  position: relative; overflow: hidden; border-radius: var(--radius);
-  margin-bottom: 24px; box-shadow: var(--shadow); background: var(--navy);
+  position: relative; overflow: hidden; border-radius: 24px;
+  margin-bottom: 24px; box-shadow: 0 18px 40px -15px rgba(0,0,0,0.35); background: var(--navy);
+  height: 230px;
 }
 .promo-slider{
-  display: flex; transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
-  width: 100%;
+  display: flex; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  width: 100%; height: 100%;
 }
 .promo-slide{
-  min-width: 100%; box-sizing: border-box; padding: 26px 24px; color: #fff;
-  position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center;
-  min-height: 160px;
+  min-width: 100%; box-sizing: border-box; padding: 28px 26px; color: #fff;
+  position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end;
+  min-height: 230px; background-size: cover; background-position: center;
 }
-.promo-slide-1{ background: linear-gradient(135deg, #0D1B2A 0%, #1C3350 100%); }
-.promo-slide-2{ background: linear-gradient(135deg, #1AA85E 0%, #0D1B2A 100%); }
-.promo-slide-3{ background: linear-gradient(135deg, #4A0E17 0%, #0D1B2A 100%); }
-.promo-slide-4{ background: linear-gradient(135deg, #2D1B4E 0%, #0D1B2A 100%); }
 
+/* Slide Overlay Gradients for maximum text readability */
 .promo-slide::before{
-  content:""; position:absolute; width:240px; height:240px; border-radius:50%;
-  background:radial-gradient(circle, rgba(34,224,122,0.3), transparent 70%); top:-90px; right:-70px;
+  content:""; position:absolute; inset:0; z-index:1;
+  background: linear-gradient(180deg, rgba(13,27,42,0.15) 0%, rgba(13,27,42,0.85) 75%, rgba(13,27,42,0.95) 100%);
 }
-.promo-slide h3{margin:0 0 6px; font-size:1.25rem; position:relative; font-weight:800; z-index:2;}
-.promo-slide p{margin:0; font-size:0.88rem; color:rgba(255,255,255,0.85); position:relative; z-index:2; max-width: 85%;}
+
+.promo-slide-1{ background-image: url('hero_banner.jpg'); }
+.promo-slide-2{ background-image: url('https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=1200&q=80'); }
+.promo-slide-3{ background-image: url('https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1200&q=80'); }
+.promo-slide-4{ background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80'); }
+
 .promo-slide .tag{
-  display:inline-block; background:var(--green); color:var(--navy); font-weight:800; font-size:0.72rem;
-  padding:4px 12px; border-radius:100px; margin-bottom:10px; position:relative; align-self: flex-start; z-index:2;
+  display:inline-block; background:var(--green); color:var(--navy); font-weight:800; font-size:0.75rem;
+  padding:5px 14px; border-radius:100px; margin-bottom:10px; position:relative; align-self: flex-start; z-index:2;
+  box-shadow: 0 4px 12px rgba(34,224,122,0.4);
 }
+.promo-slide h3{
+  margin:0 0 6px; font-size:1.45rem; position:relative; font-weight:800; z-index:2; text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+.promo-slide p{
+  margin:0 0 14px; font-size:0.92rem; color:rgba(255,255,255,0.9); position:relative; z-index:2; max-width: 85%;
+  line-height: 1.4;
+}
+.promo-slide .banner-btn{
+  position: relative; z-index:2; align-self: flex-start; background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); color: #fff; border: 1px solid rgba(255,255,255,0.4);
+  padding: 8px 18px; border-radius: 100px; font-weight: 700; font-size: 0.82rem; transition: transform 0.2s, background 0.2s;
+  cursor: pointer; display: flex; align-items: center; gap: 6px;
+}
+.promo-slide .banner-btn:hover{ background: var(--green); color: var(--navy); border-color: var(--green); }
 
 .carousel-dots{
-  position: absolute; bottom: 12px; right: 20px; display: flex; gap: 6px; z-index: 5;
+  position: absolute; top: 20px; right: 20px; display: flex; gap: 6px; z-index: 5;
 }
 .dot{
-  width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.35);
+  width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4);
   transition: all 0.3s ease; cursor: pointer;
 }
-.dot.active{ width: 22px; border-radius: 100px; background: var(--green); }
+.dot.active{ width: 24px; border-radius: 100px; background: var(--green); box-shadow: 0 0 10px var(--green); }
 
 /* ---- SCREENS ---- */
 .screen{display:none; padding:16px 20px; animation:fadeIn .35s ease;}
@@ -599,7 +644,7 @@ html.dark .status-pill{color:var(--green);}
       <span class="brand-text">Gaplashib Qoydim</span>
     </div>
 
-    <!-- Desktop Navigation Links -->
+    <!-- 2026 Desktop Navigation Links -->
     <div class="desktop-nav">
       <div class="desktop-nav-link active" id="dnav-home" data-dnav="home" onclick="goTo('home')">Bosh sahifa</div>
       <div class="desktop-nav-link" id="dnav-search" data-dnav="search" onclick="goTo('search')">Qidiruv</div>
@@ -617,11 +662,19 @@ html.dark .status-pill{color:var(--green);}
         <span id="txtUserGreetingBadge">Firdavsbek</span>
       </div>
 
-      <!-- Language Selector -->
-      <div class="lang-selector">
-        <button class="lang-btn active" id="lang-uz" onclick="setLanguage('uz')">UZ</button>
-        <button class="lang-btn" id="lang-ru" onclick="setLanguage('ru')">RU</button>
-        <button class="lang-btn" id="lang-en" onclick="setLanguage('en')">EN</button>
+      <!-- 2026 Compact Popover Language Selector Dropdown -->
+      <div class="lang-dropdown-wrapper">
+        <div class="lang-dropdown-pill" onclick="toggleLangMenu(event)">
+          <span id="langIconSlot"></span>
+          <span id="currentLangCode">UZ</span>
+          <svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.5;"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+
+        <div class="lang-menu-popover" id="langPopoverMenu">
+          <div class="lang-option active" id="lopt-uz" onclick="selectLang('uz')">🇺🇿 O'zbekcha</div>
+          <div class="lang-option" id="lopt-ru" onclick="selectLang('ru')">🇷🇺 Русский</div>
+          <div class="lang-option" id="lopt-en" onclick="selectLang('en')">🇬🇧 English</div>
+        </div>
       </div>
 
       <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn"></button>
@@ -630,36 +683,43 @@ html.dark .status-pill{color:var(--green);}
 
   <!-- HOME SCREEN -->
   <section class="screen active" id="screen-home">
-
-    <!-- HOME GREETING HEADER -->
-    <div class="greeting">
-      <h1 id="txtGreeting">Salom, Firdavsbek</h1>
-      <p id="txtSubGreeting">Sevimli joyingizni oson bron qiling</p>
-    </div>
     
-    <!-- ROTATING REKLAMA PROMO CAROUSEL SLIDER -->
+    <!-- LARGE HIGH-IMPACT ROTATING REKLAMA PROMO CAROUSEL (POSITIONED AT TOP, GREETING REMOVED) -->
     <div class="promo-carousel">
       <div class="promo-slider" id="promoSlider">
+        
+        <!-- SLIDE 1 (SPORTS/FOOTBALL ARENAS) -->
         <div class="promo-slide promo-slide-1">
-          <span class="tag" id="slide1Tag">YANGI</span>
+          <span class="tag" id="slide1Tag">YANGI AKSIYA</span>
           <h3 id="slide1Title">Birinchi bronga −20% chegirma</h3>
-          <p id="slide1Desc">Qo'qondagi barcha hamkor futbol maydoni va sport komplekslarida amal qiladi</p>
+          <p id="slide1Desc">Qo'qondagi barcha futbol maydoni va sport komplekslarida amal qiladi</p>
+          <button class="banner-btn" onclick="goTo('search')" id="slide1Btn">Hozir bron qilish →</button>
         </div>
+
+        <!-- SLIDE 2 (FLOWERS/LILIYA FLOWERS) -->
         <div class="promo-slide promo-slide-2">
-          <span class="tag" id="slide2Tag">AKSIYA</span>
-          <h3 id="slide2Title">Liliya Flowers — Bepul yetkazish</h3>
-          <p id="slide2Desc">Guldasta buyurtma qiling va bayramingizni unutilmas qiling</p>
+          <span class="tag" id="slide2Tag">BEPUL YETKAZISH</span>
+          <h3 id="slide2Title">Liliya Flowers — Eksklyuziv Guldastalar</h3>
+          <p id="slide2Desc">Sevimli insoningiz uchun saralangan gullarni bepul yetkazib beramiz</p>
+          <button class="banner-btn" onclick="openVenue(9)" id="slide2Btn">Buyurtma berish →</button>
         </div>
+
+        <!-- SLIDE 3 (CAKES/SWEET HOUSE BAKERY) -->
         <div class="promo-slide promo-slide-3">
           <span class="tag" id="slide3Tag">TORT & PISHIRIQ</span>
-          <h3 id="slide3Title">Sweet House — Maxsus Tortlar</h3>
-          <p id="slide3Desc">Tug'ilgan kun uchun 15% bonus keshbek bilan buyurtma bering</p>
+          <h3 id="slide3Title">Sweet House — Bayram Tortlari</h3>
+          <p id="slide3Desc">Tug'ilgan kun uchun 15% keshbek bonus bilan tayyorlab beramiz</p>
+          <button class="banner-btn" onclick="openVenue(10)" id="slide3Btn">Bonusni olish →</button>
         </div>
+
+        <!-- SLIDE 4 (VIP GAMING/PRO GAMER CLUB) -->
         <div class="promo-slide promo-slide-4">
           <span class="tag" id="slide4Tag">VIP GAMING</span>
-          <h3 id="slide4Title">Pro Gamer Club — 3+1 Soat</h3>
-          <p id="slide4Desc">3 soat kompyuter bron qiling va 1 soat bonusga ega bo'ling</p>
+          <h3 id="slide4Title">Pro Gamer Club — 3+1 Soat Aksiyasi</h3>
+          <p id="slide4Desc">3 soat kompyuter bron qiling va +1 soat bonus o'yin sovg'asini oling</p>
+          <button class="banner-btn" onclick="openVenue(4)" id="slide4Btn">3+1 Soat Bron →</button>
         </div>
+
       </div>
       <div class="carousel-dots" id="carouselDots">
         <div class="dot active" onclick="goToSlide(0)"></div>
@@ -675,7 +735,7 @@ html.dark .status-pill{color:var(--green);}
       <input id="txtSearchPlaceholder" placeholder="Futbol maydoni, gul do'koni, tort, barber..." readonly>
     </div>
 
-    <!-- CATEGORY PILLS BAR (EXPLICIT & PROMINENT) -->
+    <!-- CATEGORY PILLS BAR -->
     <div class="cat-scroll" id="catScroll"></div>
 
     <div class="section-title"><h2 id="txtSecNearby">Yaqin atrofda</h2><a class="see-all txtSeeAll" onclick="goTo('search')">Barchasi</a></div>
@@ -1011,8 +1071,6 @@ html.dark .status-pill{color:var(--green);}
 /* ---------------- MULTILINGUAL DICTIONARY ---------------- */
 const DICT = {
   uz: {
-    greeting: "Salom, Firdavsbek",
-    subGreeting: "Sevimli joyingizni oson bron qiling",
     searchPlaceholder: "Futbol maydoni, gul do'koni, tort, barber...",
     searchHeader: "Qidiruv",
     searchBoxPlaceholder: "Nima izlayapsiz?",
@@ -1055,18 +1113,22 @@ const DICT = {
     dnavProfile: "Profil",
     footerTitle: "Reklama va Hamkorlik uchun",
     footerSub: "O'z biznesingizni va joyingizni joylashtiring va mijozlar oqimini oshiring!",
-    s1Tag: "YANGI",
+    s1Tag: "YANGI AKSIYA",
     s1Title: "Birinchi bronga −20% chegirma",
-    s1Desc: "Qo'qondagi barcha hamkor futbol maydoni va sport komplekslarida amal qiladi",
-    s2Tag: "AKSIYA",
-    s2Title: "Liliya Flowers — Bepul yetkazish",
-    s2Desc: "Guldasta buyurtma qiling va bayramingizni unutilmas qiling",
+    s1Desc: "Qo'qondagi barcha futbol maydoni va sport komplekslarida amal qiladi",
+    s1Btn: "Hozir bron qilish →",
+    s2Tag: "BEPUL YETKAZISH",
+    s2Title: "Liliya Flowers — Eksklyuziv Guldastalar",
+    s2Desc: "Sevimli insoningiz uchun saralangan gullarni bepul yetkazib beramiz",
+    s2Btn: "Buyurtma berish →",
     s3Tag: "TORT & PISHIRIQ",
-    s3Title: "Sweet House — Maxsus Tortlar",
-    s3Desc: "Tug'ilgan kun uchun 15% bonus keshbek bilan buyurtma bering",
+    s3Title: "Sweet House — Bayram Tortlari",
+    s3Desc: "Tug'ilgan kun uchun 15% keshbek bonus bilan tayyorlab beramiz",
+    s3Btn: "Bonusni olish →",
     s4Tag: "VIP GAMING",
-    s4Title: "Pro Gamer Club — 3+1 Soat",
-    s4Desc: "3 soat kompyuter bron qiling va 1 soat bonusga ega bo'ling",
+    s4Title: "Pro Gamer Club — 3+1 Soat Aksiyasi",
+    s4Desc: "3 soat kompyuter bron qiling va +1 soat bonus o'yin sovg'asini oling",
+    s4Btn: "3+1 Soat Bron →",
     emptySearch: "Hech narsa topilmadi. Qidiruv so'zini o'zgartirib ko'ring.",
     emptyBookings: "Hali bronlaringiz yo'q.",
     emptyFavs: "Sevimlilar ro'yxati bo'sh. Yurakcha tugmasini bosib qo'shing.",
@@ -1077,8 +1139,6 @@ const DICT = {
     monthName: 'avgust'
   },
   ru: {
-    greeting: "Привет, Фирдавсбек",
-    subGreeting: "Легко бронируйте любимые места",
     searchPlaceholder: "Футбольное поле, цветы, торты, барбер...",
     searchHeader: "Поиск",
     searchBoxPlaceholder: "Что вы ищете?",
@@ -1121,18 +1181,22 @@ const DICT = {
     dnavProfile: "Профиль",
     footerTitle: "Для рекламы и сотрудничества",
     footerSub: "Разместите ваш бизнес и увеличьте поток клиентов!",
-    s1Tag: "АКЦИЯ",
+    s1Tag: "НОВАЯ АКЦИЯ",
     s1Title: "Скидка −20% на 1-е бронирование",
     s1Desc: "Действует во всех спортивных комплексах Коканда",
-    s2Tag: "АКЦИЯ",
-    s2Title: "Liliya Flowers — Бесплатная доставка",
-    s2Desc: "Закажите букет и сделайте ваш праздник незабываемым",
+    s1Btn: "Забронировать сейчас →",
+    s2Tag: "БЕСПЛАТНАЯ ДОСТАВКА",
+    s2Title: "Liliya Flowers — Эксклюзивные букеты",
+    s2Desc: "Бесплатная доставка букетов для ваших близких",
+    s2Btn: "Заказать букет →",
     s3Tag: "ТОРТЫ И ВЫПЕЧКА",
-    s3Title: "Sweet House — Авторские торты",
-    s3Desc: "Закажите на день рождения с кэшбэком 15%",
+    s3Title: "Sweet House — Праздничные торты",
+    s3Desc: "Принимаем заказы на день рождения с кэшбэком 15%",
+    s3Btn: "Получить бонус →",
     s4Tag: "VIP GAMING",
-    s4Title: "Pro Gamer Club — 3+1 Час",
-    s4Desc: "Забронируйте 3 часа ПК и получите 1 час в подарок",
+    s4Title: "Pro Gamer Club — Акция 3+1 Час",
+    s4Desc: "Забронируйте 3 часа ПК и получите 1 час игры в подарок",
+    s4Btn: "Забронировать 3+1 →",
     emptySearch: "Ничего не найдено. Попробуйте другой запрос.",
     emptyBookings: "У вас пока нет бронирований.",
     emptyFavs: "Список избранного пуст. Нажмите сердечко, чтобы добавить.",
@@ -1143,8 +1207,6 @@ const DICT = {
     monthName: 'августа'
   },
   en: {
-    greeting: "Hello, Firdavsbek",
-    subGreeting: "Easily book your favorite spots",
     searchPlaceholder: "Football arena, flower shop, bakery, barber...",
     searchHeader: "Search",
     searchBoxPlaceholder: "What are you looking for?",
@@ -1187,18 +1249,22 @@ const DICT = {
     dnavProfile: "Profile",
     footerTitle: "For Advertising & Partnership",
     footerSub: "List your business and boost your customer flow!",
-    s1Tag: "NEW",
+    s1Tag: "SPECIAL OFFER",
     s1Title: "−20% Off First Booking",
     s1Desc: "Valid across all partner sports complexes in Kokand",
-    s2Tag: "OFFER",
-    s2Title: "Liliya Flowers — Free Delivery",
-    s2Desc: "Order fresh flower bouquets for your special occasions",
+    s1Btn: "Book Now →",
+    s2Tag: "FREE DELIVERY",
+    s2Title: "Liliya Flowers — Exclusive Bouquets",
+    s2Desc: "Free delivery of luxury flower bouquets for loved ones",
+    s2Btn: "Order Flowers →",
     s3Tag: "CAKES & PASTRIES",
     s3Title: "Sweet House — Custom Cakes",
-    s3Desc: "Order birthday cakes with 15% bonus cashback",
+    s3Desc: "Order birthday cakes with 15% cashback bonus",
+    s3Btn: "Get Cashback →",
     s4Tag: "VIP GAMING",
-    s4Title: "Pro Gamer Club — 3+1 Hours",
+    s4Title: "Pro Gamer Club — 3+1 Hours Promo",
     s4Desc: "Book 3 PC gaming hours and get 1 bonus hour free",
+    s4Btn: "Book 3+1 Hours →",
     emptySearch: "No results found. Try a different search term.",
     emptyBookings: "You have no bookings yet.",
     emptyFavs: "Your favorites list is empty. Click the heart icon to add.",
@@ -1344,13 +1410,42 @@ function updateCarousel(){
   dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
 }
 
+/* 2026 POPOVER LANGUAGE DROPDOWN CONTROLS */
+function toggleLangMenu(e){
+  if(e) e.stopPropagation();
+  const menu = document.getElementById('langPopoverMenu');
+  if(menu) menu.classList.toggle('show');
+}
+
+function selectLang(lang){
+  setLanguage(lang);
+  const menu = document.getElementById('langPopoverMenu');
+  if(menu) menu.classList.remove('show');
+}
+
+// Close popover menu when clicking outside
+document.addEventListener('click', function(e){
+  const menu = document.getElementById('langPopoverMenu');
+  const pill = document.querySelector('.lang-dropdown-pill');
+  if(menu && menu.classList.contains('show')){
+    if(!menu.contains(e.target) && !pill.contains(e.target)){
+      menu.classList.remove('show');
+    }
+  }
+});
+
 function setLanguage(lang){
   currentLang = lang;
   localStorage.setItem('gq_lang', lang);
-  
-  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-  const activeBtn = document.getElementById('lang-' + lang);
-  if(activeBtn) activeBtn.classList.add('active');
+
+  // Update current lang label in compact topbar pill
+  const codeEl = document.getElementById('currentLangCode');
+  if(codeEl) codeEl.textContent = lang.toUpperCase();
+
+  // Update active state in popover menu
+  document.querySelectorAll('.lang-option').forEach(opt => opt.classList.remove('active'));
+  const activeOpt = document.getElementById('lopt-' + lang);
+  if(activeOpt) activeOpt.classList.add('active');
 
   applyTranslations();
   renderCats('catScroll');
@@ -1376,8 +1471,6 @@ function applyTranslations(){
     if(el) el.placeholder = text;
   };
 
-  setTx('txtGreeting', t.greeting);
-  setTx('txtSubGreeting', t.subGreeting);
   setPl('txtSearchPlaceholder', t.searchPlaceholder);
   setTx('txtSearchHeader', t.searchHeader);
   setPl('searchInput', t.searchBoxPlaceholder);
@@ -1419,15 +1512,22 @@ function applyTranslations(){
   setTx('slide1Tag', t.s1Tag);
   setTx('slide1Title', t.s1Title);
   setTx('slide1Desc', t.s1Desc);
+  setTx('slide1Btn', t.s1Btn);
+
   setTx('slide2Tag', t.s2Tag);
   setTx('slide2Title', t.s2Title);
   setTx('slide2Desc', t.s2Desc);
+  setTx('slide2Btn', t.s2Btn);
+
   setTx('slide3Tag', t.s3Tag);
   setTx('slide3Title', t.s3Title);
   setTx('slide3Desc', t.s3Desc);
+  setTx('slide3Btn', t.s3Btn);
+
   setTx('slide4Tag', t.s4Tag);
   setTx('slide4Title', t.s4Title);
   setTx('slide4Desc', t.s4Desc);
+  setTx('slide4Btn', t.s4Btn);
 
   // Top Desktop Nav Translations
   setTx('dnav-home', t.dnavHome);
@@ -1942,6 +2042,9 @@ function renderStaticIcons(){
   document.getElementById('backBtn1').innerHTML = I.back;
   document.getElementById('backBtn2').innerHTML = I.back;
   
+  const langSlot = document.getElementById('langIconSlot');
+  if(langSlot) langSlot.innerHTML = I.globe;
+
   const isDark = document.documentElement.classList.contains('dark');
   document.getElementById('themeBtn').innerHTML = isDark ? I.sun : I.moon;
 
