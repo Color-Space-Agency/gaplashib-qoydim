@@ -186,7 +186,7 @@ html.dark .desktop-nav-link.active{
 .cat-pill{
   flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:8px;
   padding:14px 16px; background:var(--surface); border:1px solid var(--line); border-radius:16px;
-  min-width:82px; transition:transform .2s, border-color .2s, box-shadow .2s;
+  min-width:86px; transition:transform .2s, border-color .2s, box-shadow .2s;
   cursor: pointer;
 }
 .cat-pill:active{transform:scale(0.94);}
@@ -512,7 +512,7 @@ html.dark .status-pill{color:var(--green);}
 
     <div class="search-bar" onclick="goTo('search')">
       <span class="icon" id="searchHomeIcon"></span>
-      <input id="txtSearchPlaceholder" placeholder="Futbol maydoni, barber, restoran..." readonly>
+      <input id="txtSearchPlaceholder" placeholder="Futbol maydoni, gul do'koni, tort, barber..." readonly>
     </div>
 
     <div class="cat-scroll" id="catScroll"></div>
@@ -542,7 +542,7 @@ html.dark .status-pill{color:var(--green);}
         <input id="searchInput" placeholder="Nima izlayapsiz?" oninput="filterVenues()">
       </div>
       <div class="cat-scroll" id="catScroll2"></div>
-      <div class="section-title"><h2 id="searchCount">8 ta joy topildi</h2></div>
+      <div class="section-title"><h2 id="searchCount">12 ta joy topildi</h2></div>
       <div id="searchList"></div>
     </div>
   </section>
@@ -561,7 +561,7 @@ html.dark .status-pill{color:var(--green);}
             <div class="loc" id="venueLoc">Qo'qon, Farg'ona ko'chasi — 1.2 km</div>
           </div>
           <div class="badge-row" id="badgeRow"></div>
-          <p class="desc" id="venueDesc">Zamonaviy sun'iy gazonli futbol maydoni, yoritish va dush xonalari bilan. Do'stlar bilan o'ynash yoki kichik turnir uchun ideal joy.</p>
+          <p class="desc" id="venueDesc">Zamonaviy va shinam joy, ajoyib xizmat va qulay sharoitlar bilan.</p>
           <div class="amenities" id="amenitiesGrid"></div>
         </div>
 
@@ -655,7 +655,7 @@ const DICT = {
   uz: {
     greeting: "Salom, Firdavsbek",
     subGreeting: "Sevimli joyingizni oson bron qiling",
-    searchPlaceholder: "Futbol maydoni, barber, restoran...",
+    searchPlaceholder: "Futbol maydoni, gul do'koni, tort, barber...",
     searchHeader: "Qidiruv",
     searchBoxPlaceholder: "Nima izlayapsiz?",
     promoTag: "YANGI",
@@ -700,7 +700,7 @@ const DICT = {
   ru: {
     greeting: "Привет, Фирдавсбек",
     subGreeting: "Легко бронируйте любимые места",
-    searchPlaceholder: "Футбольное поле, барбер, ресторан...",
+    searchPlaceholder: "Футбольное поле, цветы, торты, барбер...",
     searchHeader: "Поиск",
     searchBoxPlaceholder: "Что вы ищете?",
     promoTag: "АКЦИЯ",
@@ -745,7 +745,7 @@ const DICT = {
   en: {
     greeting: "Hello, Firdavsbek",
     subGreeting: "Easily book your favorite spots",
-    searchPlaceholder: "Football arena, barber, restaurant...",
+    searchPlaceholder: "Football arena, flower shop, bakery, barber...",
     searchHeader: "Search",
     searchBoxPlaceholder: "What are you looking for?",
     promoTag: "NEW",
@@ -825,6 +825,8 @@ const I = {
   scissors: `<svg class="ic" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.3"/><circle cx="6" cy="18" r="2.3"/><path d="M20 5L7.5 13M20 19L7.5 11"/></svg>`,
   restaurant: `<svg class="ic" viewBox="0 0 24 24"><path d="M6 2v9a2 2 0 002 2v9M6 2v6M9 2v6M6 8h3"/><path d="M18 2c-2 0-3 2-3 5s1 4 3 4v11"/></svg>`,
   wrench: `<svg class="ic" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 00-5.6 5.1L3 17.5 6.5 21l6.1-6.1a4 4 0 005.1-5.6l-2.8 2.8-2.2-.6-.6-2.2z"/></svg>`,
+  flower: `<svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2a4.5 4.5 0 000 9 4.5 4.5 0 000-9zM12 13a4.5 4.5 0 000 9 4.5 4.5 0 000-9zM2 12a4.5 4.5 0 009 0 4.5 4.5 0 00-9 0zM13 12a4.5 4.5 0 009 0 4.5 4.5 0 00-9 0z"/></svg>`,
+  cake: `<svg class="ic" viewBox="0 0 24 24"><path d="M20 21v-8a2 2 0 00-2-2H6a2 2 0 00-2 2v8"/><path d="M4 16h16M12 3v3M12 6a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/></svg>`,
 };
 
 // High resolution, reliable image URLs for every venue
@@ -836,7 +838,11 @@ const VENUE_IMAGES = {
   5: 'https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&w=800&q=80',
   6: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80',
   7: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80',
-  8: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80'
+  8: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80',
+  9: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=800&q=80',
+  10: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80',
+  11: 'https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=800&q=80',
+  12: 'https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&w=800&q=80'
 };
 
 function fav(active){
@@ -845,6 +851,8 @@ function fav(active){
 
 const categoriesData = [
   {id:'all', ic:I.globe, name:{uz:'Barchasi', ru:'Все', en:'All'}},
+  {id:'flowers', ic:I.flower, name:{uz:'Gul do\'koni', ru:'Цветы', en:'Flowers'}},
+  {id:'bakery', ic:I.cake, name:{uz:'Tort va pishiriq', ru:'Торты и выпечка', en:'Bakery & Cakes'}},
   {id:'football', ic:I.football, name:{uz:'Futbol', ru:'Футбол', en:'Football'}},
   {id:'tennis', ic:I.tennis, name:{uz:'Stol tennis', ru:'Наст. теннис', en:'Table tennis'}},
   {id:'billiard', ic:I.billiard, name:{uz:'Bilyard', ru:'Бильярд', en:'Billiards'}},
@@ -859,22 +867,26 @@ const categoriesData = [
 const venues = [
   {id:1, name:'Chempion Arena', cat:'football', ic:I.football, dist:'1.2 km', rating:4.8, price:'120,000 so\'m'},
   {id:2, name:'Green Point', cat:'football', ic:I.football, dist:'2.0 km', rating:4.6, price:'100,000 so\'m'},
+  {id:9, name:'Liliya Flowers', cat:'flowers', ic:I.flower, dist:'0.5 km', rating:4.9, price:'50,000 so\'m/guldasta'},
+  {id:10, name:'Sweet House Bakery', cat:'bakery', ic:I.cake, dist:'0.7 km', rating:4.9, price:'150,000 so\'m/tort'},
   {id:3, name:'Vega Bilyard', cat:'billiard', ic:I.billiard, dist:'0.8 km', rating:4.9, price:'40,000 so\'m/soat'},
   {id:4, name:'Pro Gamer Club', cat:'computer', ic:I.computer, dist:'1.5 km', rating:4.7, price:'15,000 so\'m/soat'},
   {id:5, name:'PS Zone', cat:'ps', ic:I.gamepad, dist:'0.6 km', rating:4.9, price:'25,000 so\'m/soat'},
   {id:6, name:'FitLine Gym', cat:'gym', ic:I.dumbbell, dist:'2.4 km', rating:4.5, price:'50,000 so\'m'},
   {id:7, name:'Aziz Barbershop', cat:'barber', ic:I.scissors, dist:'0.4 km', rating:5.0, price:'35,000 so\'m'},
   {id:8, name:'Osiyo Milliy', cat:'restaurant', ic:I.restaurant, dist:'1.1 km', rating:4.6, price:'stol band'},
+  {id:11, name:'Orkideya Florist', cat:'flowers', ic:I.flower, dist:'1.3 km', rating:4.8, price:'70,000 so\'m/buyurtma'},
+  {id:12, name:'Safia Pastry', cat:'bakery', ic:I.cake, dist:'1.0 km', rating:5.0, price:'120,000 so\'m/tort'},
 ];
 
 // Favorites state saved in localStorage
-let favoriteIds = JSON.parse(localStorage.getItem('gq_favorites') || '[1,3,6,7]');
+let favoriteIds = JSON.parse(localStorage.getItem('gq_favorites') || '[1,9,10,6]');
 let activeCategoryFilter = 'all';
 
 // Bookings state saved in localStorage
 let bookingsData = JSON.parse(localStorage.getItem('gq_bookings') || JSON.stringify([
-  {id: 'GQ-48213', name:'Chempion Arena', ic:I.football, date:'14-avgust, 19:00', price:'120,000 so\'m', status:'Tasdiqlangan'},
-  {id: 'GQ-39102', name:'FitLine Gym', ic:I.dumbbell, date:'15-avgust, 10:00', price:'50,000 so\'m', status:'Tasdiqlangan'},
+  {id: 'GQ-48213', name:'Liliya Flowers', ic:I.flower, date:'14-avgust, 15:00', price:'50,000 so\'m', status:'Tasdiqlangan'},
+  {id: 'GQ-39102', name:'Sweet House Bakery', ic:I.cake, date:'15-avgust, 12:00', price:'150,000 so\'m', status:'Tasdiqlangan'},
 ]));
 
 function setLanguage(lang){
@@ -1007,9 +1019,9 @@ function venueCard(v){
 }
 
 function renderHomeRows(){
-  document.getElementById('rowNearby').innerHTML = venues.slice(0,4).map(venueCard).join('');
-  document.getElementById('rowToday').innerHTML = venues.slice(2,6).map(venueCard).join('');
-  document.getElementById('rowPopular').innerHTML = [venues[5], venues[6], venues[0], venues[2]].map(venueCard).join('');
+  document.getElementById('rowNearby').innerHTML = [venues[2], venues[3], venues[0], venues[6]].map(venueCard).join('');
+  document.getElementById('rowToday').innerHTML = [venues[8], venues[9], venues[4], venues[7]].map(venueCard).join('');
+  document.getElementById('rowPopular').innerHTML = [venues[2], venues[3], venues[7], venues[5]].map(venueCard).join('');
 }
 
 function filterVenues(){
@@ -1083,15 +1095,15 @@ function selectSlot(node, timeStr){
 
 function renderBadgesAndAmenities(){
   document.getElementById('badgeRow').innerHTML = `
-    <span class="badge rating">${I.star} 4.8 (126)</span>
-    <span class="badge">${I.clock} 09:00 – 23:00</span>
+    <span class="badge rating">${I.star} 4.9 (142)</span>
+    <span class="badge">${I.clock} 08:00 – 22:00</span>
     <span class="badge">${I.car} Parking</span>`;
   document.getElementById('amenitiesGrid').innerHTML = `
-    <div class="amenity">${I.shower} Dush xona</div>
-    <div class="amenity">${I.bulb} Yoritish / Yoritilgan</div>
+    <div class="amenity">${I.shower} Yetkazib berish</div>
+    <div class="amenity">${I.bulb} Individual buyurtma</div>
     <div class="amenity">${I.car} Bepul parking</div>
-    <div class="amenity">${I.drink} Ichimliklar avtomati</div>`;
-  document.getElementById('venueLoc').innerHTML = `${I.location} Qo'qon, Farg'ona ko'chasi — 1.2 km`;
+    <div class="amenity">${I.drink} Sovg'abop o'ram</div>`;
+  document.getElementById('venueLoc').innerHTML = `${I.location} Qo'qon, Alisher Navoiy ko'chasi — 0.7 km`;
 }
 
 let currentVenue = venues[0];
@@ -1210,7 +1222,7 @@ function renderProfileMenu(){
     [I.bell, 'Bildirishnomalar / Уведомления', ()=>alert("Yangi bildirishnomalar yo'q / Нет новых уведомлений")],
     [I.globe, "Til / Язык / Language", ()=>setLanguage(currentLang === 'uz' ? 'ru' : (currentLang === 'ru' ? 'en' : 'uz'))],
     [I.palette, 'Mavzu (Tungi/Kungi)', ()=>toggleTheme()],
-    [I.settings, 'Sozlamalar / Настройки', ()=>alert("Gaplashib Qo'ydim v1.1.0 — Web & Mobile Edition")]
+    [I.settings, 'Sozlamalar / Настройки', ()=>alert("Gaplashib Qo'ydim v1.2.0 — Flowers & Bakery Edition")]
   ];
   document.getElementById('profileMenu').innerHTML = items.map((it,i)=>`
     <div class="menu-item" style="${i===items.length-1?'border-bottom:none;':''}" onclick="profileActions[${i}]()">
