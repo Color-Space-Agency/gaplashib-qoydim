@@ -843,7 +843,7 @@ html.dark .status-pill{color:var(--green);}
         <span id="txtGoogleAuthBtn">Google orqali ro'yhatdan o'tish</span>
       </button>
 
-      <button class="btn-primary" style="background:var(--surface); border:1px solid var(--line); color:var(--ink); margin-bottom:14px;" onclick="goTo('home')" id="txtGuestAuthBtn">
+      <button class="btn-primary" style="background:var(--surface); border:1px solid var(--line); color:var(--ink); margin-bottom:14px;" onclick="continueAsGuest()" id="txtGuestAuthBtn">
         Mehmon bo'lib ko'rib chiqish →
       </button>
 
@@ -1606,7 +1606,7 @@ const venues = [
   {id:12, name:'Safia Pastry', cat:'bakery', ic:I.cake, dist:'1.0 km', rating:5.0, price:'120,000 so\'m/tort'},
 ];
 
-// USER AUTHENTICATION STATE
+// USER AUTHENTICATION STATE (STRICT AUTH GUARD)
 let currentUser = JSON.parse(localStorage.getItem('gq_user_session') || 'null');
 
 function loginWithGoogle(){
@@ -1623,11 +1623,24 @@ function loginWithGoogle(){
   goTo('home');
 }
 
+function continueAsGuest(){
+  currentUser = {
+    name: 'Mehmon',
+    email: 'guest@gaplashib.uz',
+    phone: '+998 90 000 00 00',
+    avatar: 'M',
+    provider: 'guest'
+  };
+  localStorage.setItem('gq_user_session', JSON.stringify(currentUser));
+  updateUserUI();
+  goTo('home');
+}
+
 function logoutUser(){
   currentUser = null;
   localStorage.removeItem('gq_user_session');
   updateUserUI();
-  alert("👋 Profildan chiqildi.");
+  alert("👋 Profildan muvaffaqiyatli chiqildi.");
   goTo('auth');
 }
 
@@ -2414,10 +2427,28 @@ function renderStaticIcons(){
     <div class="pay-chip" onclick="selectPay(this)">${I.card} UzCard</div>`;
 }
 
+/* STRICT AUTHENTICATION GUARD IN NAVIGATION */
 function goTo(screen){
+  // Enforce auth screen when not logged in
+  if(!currentUser && screen !== 'auth'){
+    screen = 'auth';
+  }
+
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   const targetScreen = document.getElementById('screen-'+screen);
   if(targetScreen) targetScreen.classList.add('active');
+
+  // Toggle Bottom Navigation and Topbar controls visibility
+  const bottomNav = document.querySelector('.bottomnav');
+  const desktopNavWrapper = document.querySelector('.desktop-nav-wrapper');
+  
+  if(screen === 'auth'){
+    if(bottomNav) bottomNav.style.display = 'none';
+    if(desktopNavWrapper) desktopNavWrapper.style.display = 'none';
+  } else {
+    if(bottomNav && window.innerWidth < 900) bottomNav.style.display = 'flex';
+    if(desktopNavWrapper && window.innerWidth >= 900) desktopNavWrapper.style.display = 'flex';
+  }
 
   document.querySelectorAll('.nav-item[data-nav]').forEach(n=>n.classList.remove('active'));
   const navEl = document.querySelector(`.nav-item[data-nav="${screen}"]`);
@@ -2449,9 +2480,11 @@ if(localStorage.getItem('gq_theme') === 'dark' || (!localStorage.getItem('gq_the
 // Init user state
 updateUserUI();
 
-// If user hasn't logged in before, show Auth Screen on first launch
+// Strict Auth Route Protection
 if(!currentUser){
   goTo('auth');
+} else {
+  goTo('home');
 }
 
 // Init language & UI
