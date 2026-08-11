@@ -2,8 +2,8 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<title>Gaplashib Qoydim — Sevimli joyingizni oson bron qiling</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Gaplashib Qo'ydim — Sevimli joyingizni oson bron qiling</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -38,7 +38,7 @@ body{
 svg.ic{width:20px; height:20px; stroke:currentColor; stroke-width:1.8; fill:none; stroke-linecap:round; stroke-linejoin:round; display:block;}
 svg.ic-fill{fill:currentColor; stroke:none;}
 
-/* Container for desktop centering */
+/* App Layout & Desktop Web Responsiveness */
 .app-viewport {
   width: 100%;
   min-height: 100vh;
@@ -56,28 +56,113 @@ svg.ic-fill{fill:currentColor; stroke:none;}
   position: relative;
   background: var(--bg);
   padding-bottom: 92px;
-  box-shadow: 0 0 40px rgba(0,0,0,0.08);
+  box-shadow: 0 0 40px rgba(0,0,0,0.06);
+  transition: max-width 0.3s ease, padding 0.3s ease;
 }
+
+@media (min-width: 900px) {
+  .phone {
+    max-width: 1100px;
+    padding-bottom: 40px;
+    margin: 20px auto;
+    border-radius: 28px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    border: 1px solid var(--line);
+  }
+  .bottomnav {
+    display: none !important;
+  }
+  .desktop-nav {
+    display: flex !important;
+  }
+  .venue-row {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    overflow-x: visible !important;
+  }
+  .vcard {
+    width: 100% !important;
+  }
+  .venue-desktop-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 24px;
+  }
+  .sticky-cta {
+    position: static !important;
+    margin-top: 20px !important;
+    background: transparent !important;
+    padding: 0 !important;
+  }
+  .slot-grid {
+    margin-bottom: 20px !important;
+  }
+}
+
 a{color:inherit; text-decoration:none;}
 button{font-family:inherit; cursor:pointer;}
 
 /* ---- TOPBAR ---- */
 .topbar{
   position:sticky; top:0; z-index:40;
-  background:var(--bg); padding:18px 20px 10px;
-  display:flex; align-items:center; justify-space-between;
+  background:var(--bg); padding:16px 20px 12px;
+  display:flex; align-items:center; justify-content:space-between;
+  border-bottom: 1px solid var(--line);
 }
-.brand-mini{display:flex; align-items:center; gap:10px; font-weight:800; font-size:1rem;}
-.brand-mini svg{width:32px;height:32px;}
+.brand-mini{display:flex; align-items:center; gap:12px; font-weight:800; font-size:1.1rem; cursor:pointer;}
+.brand-logo-img{
+  height: 42px; width: auto; object-fit: contain; border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.topbar-controls{
+  display: flex; align-items: center; gap: 10px;
+}
+
+/* Language selector */
+.lang-selector{
+  display: flex; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 100px; padding: 3px; gap: 2px;
+}
+.lang-btn{
+  border: none; background: transparent; color: var(--muted);
+  font-weight: 700; font-size: 0.75rem; padding: 6px 10px; border-radius: 100px;
+  transition: all 0.2s;
+}
+.lang-btn.active{
+  background: var(--navy); color: #fff;
+}
+html.dark .lang-btn.active{
+  background: var(--green); color: var(--navy);
+}
+
 .theme-toggle{
-  width:42px;height:42px;border-radius:50%; border:1px solid var(--line);
+  width:40px;height:40px;border-radius:50%; border:1px solid var(--line);
   background:var(--surface); display:flex; align-items:center; justify-content:center;
   color:var(--ink); transition:transform .2s, background-color .3s;
 }
 .theme-toggle:active{transform:scale(0.9);}
 
+/* Desktop Nav Items */
+.desktop-nav{
+  display: none; align-items: center; gap: 24px; font-weight: 700; font-size: 0.92rem;
+  margin-left: 20px;
+}
+.desktop-nav-link{
+  color: var(--muted); transition: color 0.2s; cursor: pointer; display: flex; align-items: center; gap: 6px;
+}
+.desktop-nav-link:hover, .desktop-nav-link.active{
+  color: var(--ink);
+}
+.desktop-nav-link.active{
+  color: var(--green-dim);
+}
+html.dark .desktop-nav-link.active{
+  color: var(--green);
+}
+
 /* ---- SCREENS ---- */
-.screen{display:none; padding:0 20px; animation:fadeIn .35s ease;}
+.screen{display:none; padding:16px 20px; animation:fadeIn .35s ease;}
 .screen.active{display:block;}
 @keyframes fadeIn{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
 
@@ -101,7 +186,7 @@ button{font-family:inherit; cursor:pointer;}
 .cat-pill{
   flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:8px;
   padding:14px 16px; background:var(--surface); border:1px solid var(--line); border-radius:16px;
-  min-width:78px; transition:transform .2s, border-color .2s, box-shadow .2s;
+  min-width:82px; transition:transform .2s, border-color .2s, box-shadow .2s;
   cursor: pointer;
 }
 .cat-pill:active{transform:scale(0.94);}
@@ -113,75 +198,79 @@ html.dark .cat-pill.active .cicon{color:var(--green);}
 .cat-pill.active span{color:var(--ink);}
 
 .section-title{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
-.section-title h2{font-size:1.05rem; font-weight:800; margin:0;}
-.section-title .see-all{font-size:0.8rem; color:var(--green-dim); font-weight:700; cursor:pointer;}
+.section-title h2{font-size:1.1rem; font-weight:800; margin:0;}
+.section-title .see-all{font-size:0.82rem; color:var(--green-dim); font-weight:700; cursor:pointer;}
 html.dark .section-title .see-all{color:var(--green);}
 
-.venue-row{display:flex; gap:14px; overflow-x:auto; padding-bottom:6px; margin-bottom:30px; scrollbar-width:none;}
+.venue-row{display:flex; gap:16px; overflow-x:auto; padding-bottom:6px; margin-bottom:30px; scrollbar-width:none;}
 .venue-row::-webkit-scrollbar{display:none;}
 .vcard{
   flex:0 0 auto; width:210px; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
-  overflow:hidden; box-shadow:var(--shadow); transition:transform .25s ease; cursor:pointer;
+  overflow:hidden; box-shadow:var(--shadow); transition:transform .25s ease, box-shadow .25s ease; cursor:pointer;
 }
+.vcard:hover{transform:translateY(-3px); box-shadow:0 18px 36px -16px rgba(0,0,0,0.2);}
 .vcard:active{transform:scale(0.97);}
 .vcard .thumb{
-  height:120px; display:flex; align-items:flex-end; justify-content:flex-start; color:#fff;
+  height:130px; display:flex; align-items:flex-end; justify-content:flex-start; color:#fff;
   background-size:cover; background-position:center; position:relative; overflow:hidden;
+  background-color: var(--navy-3);
 }
 .vcard .thumb::before{
   content:""; position:absolute; inset:0;
   background:linear-gradient(180deg, rgba(13,27,42,0.05) 40%, rgba(13,27,42,0.75) 100%);
 }
 .vcard .thumb .cbadge{
-  position:relative; z-index:1; width:30px; height:30px; border-radius:9px;
-  background:rgba(255,255,255,0.18); backdrop-filter:blur(6px);
+  position:relative; z-index:1; width:32px; height:32px; border-radius:10px;
+  background:rgba(255,255,255,0.22); backdrop-filter:blur(8px);
   display:flex; align-items:center; justify-content:center; margin:10px;
 }
 .vcard .thumb .cbadge svg{width:16px; height:16px;}
 .vcard .fav{
-  position:absolute; top:10px; right:10px; width:30px; height:30px; border-radius:50%;
-  background:rgba(255,255,255,0.16); backdrop-filter:blur(6px);
+  position:absolute; top:10px; right:10px; width:32px; height:32px; border-radius:50%;
+  background:rgba(255,255,255,0.22); backdrop-filter:blur(8px);
   display:flex; align-items:center; justify-content:center; color:#fff;
   transition:transform .2s;
 }
 .vcard .fav svg{width:16px; height:16px;}
 .vcard .fav.active{color:#FF5A6E; transform:scale(1.15);}
 .vcard .fav.active svg{fill:#FF5A6E; stroke:#FF5A6E;}
-.vcard .body{padding:12px 14px 14px;}
-.vcard h3{font-size:0.9rem; margin:0 0 4px; font-weight:700;}
-.vcard .meta{display:flex; align-items:center; justify-content:space-between; font-size:0.76rem; color:var(--muted);}
+.vcard .body{padding:14px 14px 16px;}
+.vcard h3{font-size:0.95rem; margin:0 0 4px; font-weight:700;}
+.vcard .meta{display:flex; align-items:center; justify-content:space-between; font-size:0.78rem; color:var(--muted);}
 .vcard .rating{display:flex; align-items:center; gap:4px; font-weight:700; color:var(--ink);}
 .vcard .rating svg{width:13px; height:13px; fill:#F5A623; stroke:#F5A623;}
-.vcard .price{font-size:0.8rem; font-weight:800; color:var(--green-dim); margin-top:8px;}
+.vcard .price{font-size:0.85rem; font-weight:800; color:var(--green-dim); margin-top:8px;}
 html.dark .vcard .price{color:var(--green);}
 
 .promo{
   background:linear-gradient(135deg, var(--navy) 0%, var(--navy-3) 100%);
-  border-radius:var(--radius); padding:22px; color:#fff; margin-bottom:30px; position:relative; overflow:hidden;
+  border-radius:var(--radius); padding:24px; color:#fff; margin-bottom:30px; position:relative; overflow:hidden;
+  display: flex; flex-direction: column; justify-content: center;
 }
-.promo::before{content:""; position:absolute; width:180px; height:180px; border-radius:50%;
-  background:radial-gradient(circle, rgba(34,224,122,0.35), transparent 70%); top:-70px; right:-50px;}
-.promo h3{margin:0 0 6px; font-size:1.05rem; position:relative;}
-.promo p{margin:0; font-size:0.82rem; color:rgba(255,255,255,0.7); position:relative;}
+.promo::before{content:""; position:absolute; width:220px; height:220px; border-radius:50%;
+  background:radial-gradient(circle, rgba(34,224,122,0.35), transparent 70%); top:-80px; right:-60px;}
+.promo h3{margin:0 0 6px; font-size:1.15rem; position:relative; font-weight:800;}
+.promo p{margin:0; font-size:0.86rem; color:rgba(255,255,255,0.75); position:relative;}
 .promo .tag{
   display:inline-block; background:var(--green); color:var(--navy); font-weight:800; font-size:0.72rem;
-  padding:5px 12px; border-radius:100px; margin-bottom:12px; position:relative;
+  padding:5px 12px; border-radius:100px; margin-bottom:12px; position:relative; align-self: flex-start;
 }
 
 /* ---- BACK HEADER ---- */
-.subheader{display:flex; align-items:center; gap:14px; padding:18px 20px 4px; position:sticky; top:0; background:var(--bg); z-index:30;}
+.subheader{display:flex; align-items:center; gap:14px; padding:14px 0 10px; position:sticky; top:0; background:var(--bg); z-index:30;}
 .back-btn{
   width:40px;height:40px;border-radius:50%; background:var(--surface); border:1px solid var(--line);
   display:flex; align-items:center; justify-content:center; color:var(--ink); flex:0 0 auto;
   transition:transform .15s;
 }
 .back-btn:active{transform:scale(0.9);}
-.subheader h2{font-size:1.05rem; margin:0; font-weight:800;}
+.subheader h2{font-size:1.1rem; margin:0; font-weight:800;}
 
 /* ---- VENUE PAGE ---- */
 .venue-hero{
-  height:220px; border-radius:var(--radius); background-size:cover; background-position:center;
+  height:240px; border-radius:var(--radius); background-size:cover; background-position:center;
   display:flex; align-items:flex-end; justify-content:flex-start; color:#fff; margin-bottom:16px; position:relative; overflow:hidden;
+  background-color: var(--navy-3);
 }
 .venue-hero::before{
   content:""; position:absolute; inset:0;
@@ -189,35 +278,35 @@ html.dark .vcard .price{color:var(--green);}
 }
 .venue-hero .cbadge{
   position:relative; z-index:1; width:44px; height:44px; border-radius:13px;
-  background:rgba(255,255,255,0.18); backdrop-filter:blur(6px);
+  background:rgba(255,255,255,0.22); backdrop-filter:blur(8px);
   display:flex; align-items:center; justify-content:center; margin:16px;
 }
 .venue-hero .cbadge svg{width:22px; height:22px;}
 .venue-hero .fav{
   position:absolute; top:14px; right:14px; width:38px; height:38px; border-radius:50%;
-  background:rgba(255,255,255,0.16); backdrop-filter:blur(8px);
+  background:rgba(255,255,255,0.22); backdrop-filter:blur(8px);
   display:flex; align-items:center; justify-content:center; color:#fff;
   transition:transform .2s; cursor:pointer;
 }
 .venue-hero .fav svg{width:18px; height:18px;}
 .venue-hero .fav.active svg{fill:#FF5A6E; stroke:#FF5A6E;}
-.venue-title h1{font-size:1.3rem; margin:0 0 4px; font-weight:800;}
-.venue-title .loc{color:var(--muted); font-size:0.85rem; display:flex; align-items:center; gap:6px; margin-bottom:10px;}
+.venue-title h1{font-size:1.35rem; margin:0 0 4px; font-weight:800;}
+.venue-title .loc{color:var(--muted); font-size:0.86rem; display:flex; align-items:center; gap:6px; margin-bottom:10px;}
 .venue-title .loc svg{width:14px; height:14px;}
 .badge-row{display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap;}
 .badge{
   background:var(--surface); border:1px solid var(--line); padding:7px 13px; border-radius:100px;
-  font-size:0.76rem; font-weight:700; color:var(--muted); display:flex; align-items:center; gap:5px;
+  font-size:0.78rem; font-weight:700; color:var(--muted); display:flex; align-items:center; gap:5px;
 }
 .badge svg{width:14px; height:14px;}
 .badge.rating{color:var(--ink);}
 .badge.rating svg{fill:#F5A623; stroke:#F5A623;}
-.desc{font-size:0.88rem; color:var(--muted); line-height:1.6; margin-bottom:22px;}
+.desc{font-size:0.9rem; color:var(--muted); line-height:1.6; margin-bottom:22px;}
 
 .amenities{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:24px;}
 .amenity{
   background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:12px 14px;
-  font-size:0.82rem; font-weight:600; display:flex; align-items:center; gap:8px; color:var(--ink);
+  font-size:0.84rem; font-weight:600; display:flex; align-items:center; gap:8px; color:var(--ink);
 }
 .amenity svg{width:16px; height:16px; color:var(--green-dim); flex:0 0 auto;}
 html.dark .amenity svg{color:var(--green);}
@@ -225,11 +314,11 @@ html.dark .amenity svg{color:var(--green);}
 .date-scroll{display:flex; gap:10px; overflow-x:auto; margin-bottom:16px; padding-bottom:4px; scrollbar-width:none;}
 .date-scroll::-webkit-scrollbar{display:none;}
 .date-chip{
-  flex:0 0 auto; width:56px; padding:12px 0; text-align:center; border-radius:14px;
+  flex:0 0 auto; width:58px; padding:12px 0; text-align:center; border-radius:14px;
   background:var(--surface); border:1px solid var(--line); transition:all .2s; cursor:pointer;
 }
-.date-chip .d{font-size:0.68rem; color:var(--muted); font-weight:700;}
-.date-chip .n{font-size:1rem; font-weight:800; margin-top:4px;}
+.date-chip .d{font-size:0.7rem; color:var(--muted); font-weight:700;}
+.date-chip .n{font-size:1.05rem; font-weight:800; margin-top:4px;}
 .date-chip.active{background:var(--navy); border-color:var(--navy);}
 .date-chip.active .d, .date-chip.active .n{color:#fff;}
 html.dark .date-chip.active{background:var(--green); border-color:var(--green);}
@@ -238,7 +327,7 @@ html.dark .date-chip.active .d, html.dark .date-chip.active .n{color:var(--navy)
 .slot-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:100px;}
 .slot{
   padding:12px 0; text-align:center; border-radius:12px; background:var(--surface); border:1px solid var(--line);
-  font-size:0.85rem; font-weight:700; transition:all .18s; cursor:pointer;
+  font-size:0.88rem; font-weight:700; transition:all .18s; cursor:pointer;
 }
 .slot.taken{opacity:0.35; text-decoration:line-through; pointer-events:none;}
 .slot.active{background:var(--green); border-color:var(--green); color:var(--navy); transform:scale(1.03);}
@@ -250,19 +339,19 @@ html.dark .date-chip.active .d, html.dark .date-chip.active .n{color:var(--navy)
   margin-top:-90px;
 }
 .price-box{flex:0 0 auto;}
-.price-box .lbl{font-size:0.68rem; color:var(--muted);}
-.price-box .val{font-size:1.05rem; font-weight:800;}
+.price-box .lbl{font-size:0.7rem; color:var(--muted);}
+.price-box .val{font-size:1.1rem; font-weight:800;}
 .btn-book{
   flex:1; background:var(--green); color:var(--navy); border:none; padding:16px; border-radius:100px;
-  font-weight:800; font-size:0.95rem; box-shadow:0 12px 24px -10px rgba(34,224,122,0.55);
-  transition:transform .2s;
+  font-weight:800; font-size:0.96rem; box-shadow:0 12px 24px -10px rgba(34,224,122,0.55);
+  transition:transform .2s, opacity .2s;
 }
 .btn-book:active{transform:scale(0.97);}
 .btn-book:disabled{opacity:0.4; box-shadow:none; cursor:not-allowed;}
 
 /* ---- BOTTOM SHEET ---- */
 .sheet-overlay{
-  position:fixed; inset:0; background:rgba(7,17,25,0.55); z-index:90; opacity:0; pointer-events:none; transition:opacity .3s;
+  position:fixed; inset:0; background:rgba(7,17,25,0.6); z-index:90; opacity:0; pointer-events:none; transition:opacity .3s;
 }
 .sheet-overlay.show{opacity:1; pointer-events:auto;}
 .sheet{
@@ -273,14 +362,14 @@ html.dark .date-chip.active .d, html.dark .date-chip.active .n{color:var(--navy)
 }
 .sheet.show{transform:translateY(0);}
 .sheet .grabber{width:40px; height:5px; border-radius:100px; background:var(--line); margin:0 auto 18px;}
-.sheet h3{margin:0 0 6px; font-size:1.15rem; font-weight:800;}
-.sheet .sub{color:var(--muted); font-size:0.85rem; margin-bottom:20px;}
-.confirm-row{display:flex; justify-content:space-between; padding:11px 0; border-bottom:1px solid var(--line); font-size:0.86rem;}
+.sheet h3{margin:0 0 6px; font-size:1.2rem; font-weight:800;}
+.sheet .sub{color:var(--muted); font-size:0.86rem; margin-bottom:20px;}
+.confirm-row{display:flex; justify-content:space-between; padding:11px 0; border-bottom:1px solid var(--line); font-size:0.88rem;}
 .confirm-row span:first-child{color:var(--muted);}
 .confirm-row span:last-child{font-weight:700;}
 .pay-options{display:flex; gap:8px; margin:18px 0; flex-wrap:wrap;}
 .pay-chip{
-  padding:9px 14px; border-radius:12px; border:1px solid var(--line); font-size:0.78rem; font-weight:700; background:var(--bg);
+  padding:9px 14px; border-radius:12px; border:1px solid var(--line); font-size:0.8rem; font-weight:700; background:var(--bg);
   display:flex; align-items:center; gap:6px; color:var(--ink); cursor:pointer;
 }
 .pay-chip svg{width:15px; height:15px;}
@@ -288,7 +377,7 @@ html.dark .date-chip.active .d, html.dark .date-chip.active .n{color:var(--navy)
 html.dark .pay-chip.active{color:var(--green);}
 .btn-confirm{
   width:100%; background:var(--navy); color:#fff; border:none; padding:17px; border-radius:100px;
-  font-weight:800; font-size:0.96rem; margin-top:10px; transition:transform .2s;
+  font-weight:800; font-size:0.98rem; margin-top:10px; transition:transform .2s;
 }
 html.dark .btn-confirm{background:var(--green); color:var(--navy);}
 .btn-confirm:active{transform:scale(0.97);}
@@ -311,8 +400,8 @@ html.dark .btn-confirm{background:var(--green); color:var(--navy);}
   stroke-dasharray:48; stroke-dashoffset:48; animation:draw .5s ease-out .2s forwards;
 }
 @keyframes draw{ to{stroke-dashoffset:0;} }
-.confirm-wrap h1{font-size:1.35rem; margin:0 0 8px; font-weight:800;}
-.confirm-wrap p{color:var(--muted); font-size:0.9rem; margin:0 0 26px;}
+.confirm-wrap h1{font-size:1.4rem; margin:0 0 8px; font-weight:800;}
+.confirm-wrap p{color:var(--muted); font-size:0.92rem; margin:0 0 26px;}
 .ticket{
   background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:24px;
   text-align:left; box-shadow:var(--shadow); position:relative; margin-bottom:20px;
@@ -325,7 +414,7 @@ html.dark .btn-confirm{background:var(--green); color:var(--navy);}
   background-blend-mode:multiply; background-color:var(--surface);
   border:1px solid var(--line);
 }
-.ticket-row{display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px dashed var(--line); font-size:0.85rem;}
+.ticket-row{display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px dashed var(--line); font-size:0.88rem;}
 .ticket-row:last-child{border-bottom:none;}
 .ticket-row span:first-child{color:var(--muted);}
 .ticket-row span:last-child{font-weight:700;}
@@ -342,7 +431,7 @@ html.dark .btn-home{background:var(--green); color:var(--navy);}
   display:flex; justify-content:space-around; align-items:center; padding:10px 6px 14px;
   backdrop-filter:blur(14px);
 }
-.nav-item{display:flex; flex-direction:column; align-items:center; gap:4px; color:var(--muted); font-size:0.66rem; font-weight:700; padding:6px 10px; border-radius:12px; transition:color .2s; cursor:pointer;}
+.nav-item{display:flex; flex-direction:column; align-items:center; gap:4px; color:var(--muted); font-size:0.68rem; font-weight:700; padding:6px 10px; border-radius:12px; transition:color .2s; cursor:pointer;}
 .nav-item.active{color:var(--ink);}
 .nav-item .ic{width:20px; height:20px;}
 .nav-item.active .ic{color:var(--green-dim);}
@@ -364,22 +453,22 @@ html.dark .nav-item.active .ic{color:var(--green);}
 }
 .list-item .ic-box svg{width:20px; height:20px;}
 .list-item .info{flex:1;}
-.list-item .info h4{margin:0 0 3px; font-size:0.88rem; font-weight:700;}
-.list-item .info p{margin:0; font-size:0.76rem; color:var(--muted);}
-.status-pill{font-size:0.68rem; font-weight:800; padding:5px 10px; border-radius:100px; background:rgba(34,224,122,0.14); color:var(--green-dim);}
+.list-item .info h4{margin:0 0 3px; font-size:0.9rem; font-weight:700;}
+.list-item .info p{margin:0; font-size:0.78rem; color:var(--muted);}
+.status-pill{font-size:0.7rem; font-weight:800; padding:5px 10px; border-radius:100px; background:rgba(34,224,122,0.14); color:var(--green-dim);}
 html.dark .status-pill{color:var(--green);}
 
 .profile-head{display:flex; align-items:center; gap:14px; margin-bottom:26px; padding-top:6px;}
 .avatar{width:58px;height:58px;border-radius:50%; background:linear-gradient(135deg,var(--navy),var(--navy-3)); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:1.2rem;}
-.profile-head h2{margin:0 0 2px; font-size:1.1rem;}
-.profile-head p{margin:0; color:var(--muted); font-size:0.82rem;}
+.profile-head h2{margin:0 0 2px; font-size:1.15rem;}
+.profile-head p{margin:0; color:var(--muted); font-size:0.84rem;}
 .menu-item{
-  display:flex; align-items:center; justify-content:space-between; padding:16px 4px; border-bottom:1px solid var(--line); font-size:0.88rem; font-weight:600; cursor:pointer;
+  display:flex; align-items:center; justify-content:space-between; padding:16px 4px; border-bottom:1px solid var(--line); font-size:0.9rem; font-weight:600; cursor:pointer;
 }
 .menu-item .left{display:flex; align-items:center; gap:12px; color:var(--ink);}
 .menu-item .left svg{width:18px; height:18px; color:var(--muted);}
 .menu-item .arrow{color:var(--muted);}
-.empty-state{text-align:center; padding:40px 20px; color:var(--muted); font-size:0.9rem;}
+.empty-state{text-align:center; padding:40px 20px; color:var(--muted); font-size:0.92rem;}
 </style>
 </head>
 <body>
@@ -388,56 +477,72 @@ html.dark .status-pill{color:var(--green);}
 <div class="phone" id="phone">
 
   <div class="topbar">
-    <div class="brand-mini">
-      <svg viewBox="0 0 100 100" fill="none">
-        <path d="M50 10C31 10 16 23 16 40C16 52 23 61.5 34 66.5L34 66.5L27 82L44 68.5C46 68.8 48 69 50 69C69 69 84 56 84 40C84 23 69 10 50 10Z" fill="#0D1B2A"/>
-        <path d="M30 41L45 56L72 26" stroke="#22E07A" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      Gaplashib Qoydim
+    <div class="brand-mini" onclick="goTo('home')">
+      <img src="logo.jpg" alt="Gaplashib Qoydim Logo" class="brand-logo-img">
+      <span class="brand-text">Gaplashib Qoydim</span>
     </div>
-    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn"></button>
+
+    <!-- Desktop Navigation Links -->
+    <div class="desktop-nav">
+      <div class="desktop-nav-link active" data-dnav="home" onclick="goTo('home')">Bosh sahifa</div>
+      <div class="desktop-nav-link" data-dnav="search" onclick="goTo('search')">Qidiruv</div>
+      <div class="desktop-nav-link" data-dnav="bookings" onclick="goTo('bookings')">Bronlarim</div>
+      <div class="desktop-nav-link" data-dnav="favorites" onclick="goTo('favorites')">Sevimlilar</div>
+      <div class="desktop-nav-link" data-dnav="profile" onclick="goTo('profile')">Profil</div>
+    </div>
+
+    <div class="topbar-controls">
+      <!-- Language Selector -->
+      <div class="lang-selector">
+        <button class="lang-btn active" id="lang-uz" onclick="setLanguage('uz')">UZ</button>
+        <button class="lang-btn" id="lang-ru" onclick="setLanguage('ru')">RU</button>
+        <button class="lang-btn" id="lang-en" onclick="setLanguage('en')">EN</button>
+      </div>
+
+      <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn"></button>
+    </div>
   </div>
 
   <!-- HOME SCREEN -->
   <section class="screen active" id="screen-home">
     <div class="greeting">
-      <h1>Salom, Firdavsbek</h1>
-      <p>Sevimli joyingizni oson bron qiling</p>
+      <h1 id="txtGreeting">Salom, Firdavsbek</h1>
+      <p id="txtSubGreeting">Sevimli joyingizni oson bron qiling</p>
     </div>
 
     <div class="search-bar" onclick="goTo('search')">
       <span class="icon" id="searchHomeIcon"></span>
-      <input placeholder="Futbol maydoni, barber, restoran..." readonly>
+      <input id="txtSearchPlaceholder" placeholder="Futbol maydoni, barber, restoran..." readonly>
     </div>
 
     <div class="cat-scroll" id="catScroll"></div>
 
     <div class="promo">
-      <span class="tag">YANGI</span>
-      <h3>Birinchi bronga −20%</h3>
-      <p>Qo'qondagi barcha hamkor joylarda amal qiladi</p>
+      <span class="tag" id="txtPromoTag">YANGI</span>
+      <h3 id="txtPromoTitle">Birinchi bronga −20%</h3>
+      <p id="txtPromoText">Qo'qondagi barcha hamkor joylarda amal qiladi</p>
     </div>
 
-    <div class="section-title"><h2>Yaqin atrofda</h2><a class="see-all" onclick="goTo('search')">Barchasi</a></div>
+    <div class="section-title"><h2 id="txtSecNearby">Yaqin atrofda</h2><a class="see-all txtSeeAll" onclick="goTo('search')">Barchasi</a></div>
     <div class="venue-row" id="rowNearby"></div>
 
-    <div class="section-title"><h2>Bugun bo'sh joylar</h2><a class="see-all" onclick="goTo('search')">Barchasi</a></div>
+    <div class="section-title"><h2 id="txtSecToday">Bugun bo'sh joylar</h2><a class="see-all txtSeeAll" onclick="goTo('search')">Barchasi</a></div>
     <div class="venue-row" id="rowToday"></div>
 
-    <div class="section-title"><h2>Ommabop</h2><a class="see-all" onclick="goTo('search')">Barchasi</a></div>
+    <div class="section-title"><h2 id="txtSecPopular">Ommabop</h2><a class="see-all txtSeeAll" onclick="goTo('search')">Barchasi</a></div>
     <div class="venue-row" id="rowPopular"></div>
   </section>
 
   <!-- SEARCH SCREEN -->
   <section class="screen" id="screen-search">
-    <div class="subheader"><button class="back-btn" onclick="goTo('home')" id="backBtn1"></button><h2>Qidiruv</h2></div>
+    <div class="subheader"><button class="back-btn" onclick="goTo('home')" id="backBtn1"></button><h2 id="txtSearchHeader">Qidiruv</h2></div>
     <div style="padding:14px 0 0;">
       <div class="search-bar" style="margin-bottom:14px;">
         <span class="icon" id="searchIcon2"></span>
         <input id="searchInput" placeholder="Nima izlayapsiz?" oninput="filterVenues()">
       </div>
       <div class="cat-scroll" id="catScroll2"></div>
-      <div class="section-title"><h2 id="searchCount">24 ta joy topildi</h2></div>
+      <div class="section-title"><h2 id="searchCount">8 ta joy topildi</h2></div>
       <div id="searchList"></div>
     </div>
   </section>
@@ -446,40 +551,45 @@ html.dark .status-pill{color:var(--green);}
   <section class="screen" id="screen-venue">
     <div class="subheader"><button class="back-btn" onclick="goTo('search')" id="backBtn2"></button><h2 id="venueHeaderTitle">Joy</h2></div>
     <div style="padding-top:14px;">
-      <div class="venue-hero" id="venueHero">
-        <div class="fav" id="venueFav" onclick="toggleVenueFav(event)"></div>
-      </div>
-      <div class="venue-title">
-        <h1 id="venueName">Chempion Arena</h1>
-        <div class="loc" id="venueLoc">Qo'qon, Farg'ona ko'chasi — 1.2 km</div>
-      </div>
-      <div class="badge-row" id="badgeRow"></div>
-      <p class="desc">Zamonaviy sun'iy gazonli futbol maydoni, yoritish va dush xonalari bilan. Do'stlar bilan o'ynash yoki kichik turnir uchun ideal joy.</p>
+      <div class="venue-desktop-layout">
+        <div>
+          <div class="venue-hero" id="venueHero">
+            <div class="fav" id="venueFav" onclick="toggleFavCurrent(event)"></div>
+          </div>
+          <div class="venue-title">
+            <h1 id="venueName">Chempion Arena</h1>
+            <div class="loc" id="venueLoc">Qo'qon, Farg'ona ko'chasi — 1.2 km</div>
+          </div>
+          <div class="badge-row" id="badgeRow"></div>
+          <p class="desc" id="venueDesc">Zamonaviy sun'iy gazonli futbol maydoni, yoritish va dush xonalari bilan. Do'stlar bilan o'ynash yoki kichik turnir uchun ideal joy.</p>
+          <div class="amenities" id="amenitiesGrid"></div>
+        </div>
 
-      <div class="amenities" id="amenitiesGrid"></div>
+        <div>
+          <div class="section-title"><h2 id="txtSelectDate">Sanani tanlang</h2></div>
+          <div class="date-scroll" id="dateScroll"></div>
 
-      <div class="section-title"><h2>Sanani tanlang</h2></div>
-      <div class="date-scroll" id="dateScroll"></div>
+          <div class="section-title"><h2 id="txtSelectTime">Bo'sh vaqtlar</h2></div>
+          <div class="slot-grid" id="slotGrid"></div>
 
-      <div class="section-title"><h2>Bo'sh vaqtlar</h2></div>
-      <div class="slot-grid" id="slotGrid"></div>
-
-      <div class="sticky-cta">
-        <div class="price-box"><div class="lbl">Narxi</div><div class="val" id="venuePriceDisplay">120,000 so'm</div></div>
-        <button class="btn-book" id="bookBtn" disabled onclick="openSheet()">Bron qilish</button>
+          <div class="sticky-cta">
+            <div class="price-box"><div class="lbl" id="txtPriceLbl">Narxi</div><div class="val" id="venuePriceDisplay">120,000 so'm</div></div>
+            <button class="btn-book" id="bookBtn" disabled onclick="openSheet()">Bron qilish</button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- BOOKINGS SCREEN -->
   <section class="screen" id="screen-bookings">
-    <div class="subheader" style="position:static;"><h2 style="padding-top:8px;">Bronlarim</h2></div>
+    <div class="subheader" style="position:static;"><h2 style="padding-top:8px;" id="txtMyBookingsHeader">Bronlarim</h2></div>
     <div style="padding-top:14px;" id="bookingsList"></div>
   </section>
 
   <!-- FAVORITES SCREEN -->
   <section class="screen" id="screen-favorites">
-    <div class="subheader" style="position:static;"><h2 style="padding-top:8px;">Sevimlilar</h2></div>
+    <div class="subheader" style="position:static;"><h2 style="padding-top:8px;" id="txtFavoritesHeader">Sevimlilar</h2></div>
     <div style="padding-top:14px;" id="favList"></div>
   </section>
 
@@ -499,17 +609,17 @@ html.dark .status-pill{color:var(--green);}
       <div class="check-circle">
         <svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>
       </div>
-      <h1>Bron tasdiqlandi!</h1>
-      <p>Joyingiz tayyor turibdi. Vaqtida boring</p>
+      <h1 id="txtConfirmTitle">Bron tasdiqlandi!</h1>
+      <p id="txtConfirmSub">Joyingiz tayyor turibdi. Vaqtida boring</p>
       <div class="ticket">
         <div class="qr"></div>
-        <div class="ticket-row"><span>Bron raqami</span><span id="tBookingId">#GQ-48213</span></div>
-        <div class="ticket-row"><span>Joy</span><span id="tVenue">Chempion Arena</span></div>
-        <div class="ticket-row"><span>Sana</span><span id="tDate">14-avgust</span></div>
-        <div class="ticket-row"><span>Vaqt</span><span id="tTime">19:00</span></div>
-        <div class="ticket-row"><span>Narxi</span><span id="tPrice">120,000 so'm</span></div>
+        <div class="ticket-row"><span id="lblTicketId">Bron raqami</span><span id="tBookingId">#GQ-48213</span></div>
+        <div class="ticket-row"><span id="lblTicketVenue">Joy</span><span id="tVenue">Chempion Arena</span></div>
+        <div class="ticket-row"><span id="lblTicketDate">Sana</span><span id="tDate">14-avgust</span></div>
+        <div class="ticket-row"><span id="lblTicketTime">Vaqt</span><span id="tTime">19:00</span></div>
+        <div class="ticket-row"><span id="lblTicketPrice">Narxi</span><span id="tPrice">120,000 so'm</span></div>
       </div>
-      <button class="btn-home" onclick="goTo('home')">Bosh sahifaga qaytish</button>
+      <button class="btn-home" id="btnBackHome" onclick="goTo('home')">Bosh sahifaga qaytish</button>
     </div>
   </section>
 
@@ -529,17 +639,158 @@ html.dark .status-pill{color:var(--green);}
 <div class="sheet-overlay" id="overlay" onclick="closeSheet()"></div>
 <div class="sheet" id="sheet">
   <div class="grabber"></div>
-  <h3>Bronni tasdiqlash</h3>
-  <div class="sub">Ma'lumotlarni tekshirib, to'lov usulini tanlang</div>
-  <div class="confirm-row"><span>Joy</span><span id="sVenue">Chempion Arena</span></div>
-  <div class="confirm-row"><span>Sana</span><span id="sDate">14-avgust, Juma</span></div>
-  <div class="confirm-row"><span>Vaqt</span><span id="sTime">19:00 – 20:00</span></div>
-  <div class="confirm-row"><span>Jami</span><span id="sPrice">120,000 so'm</span></div>
+  <h3 id="txtSheetTitle">Bronni tasdiqlash</h3>
+  <div class="sub" id="txtSheetSub">Ma'lumotlarni tekshirib, to'lov usulini tanlang</div>
+  <div class="confirm-row"><span id="lblSheetVenue">Joy</span><span id="sVenue">Chempion Arena</span></div>
+  <div class="confirm-row"><span id="lblSheetDate">Sana</span><span id="sDate">14-avgust</span></div>
+  <div class="confirm-row"><span id="lblSheetTime">Vaqt</span><span id="sTime">19:00 – 20:00</span></div>
+  <div class="confirm-row"><span id="lblSheetPrice">Jami</span><span id="sPrice">120,000 so'm</span></div>
   <div class="pay-options" id="payOptions"></div>
   <button class="btn-confirm" id="confirmBtn" onclick="confirmBooking()">Bronni tasdiqlash</button>
 </div>
 
 <script>
+/* ---------------- MULTILINGUAL DICTIONARY ---------------- */
+const DICT = {
+  uz: {
+    greeting: "Salom, Firdavsbek",
+    subGreeting: "Sevimli joyingizni oson bron qiling",
+    searchPlaceholder: "Futbol maydoni, barber, restoran...",
+    searchHeader: "Qidiruv",
+    searchBoxPlaceholder: "Nima izlayapsiz?",
+    promoTag: "YANGI",
+    promoTitle: "Birinchi bronga −20%",
+    promoText: "Qo'qondagi barcha hamkor joylarda amal qiladi",
+    secNearby: "Yaqin atrofda",
+    secToday: "Bugun bo'sh joylar",
+    secPopular: "Ommabop",
+    seeAll: "Barchasi",
+    selectDate: "Sanani tanlang",
+    selectTime: "Bo'sh vaqtlar",
+    priceLbl: "Narxi",
+    bookBtn: "Bron qilish",
+    myBookings: "Bronlarim",
+    favorites: "Sevimlilar",
+    profile: "Profil",
+    confirmTitle: "Bron tasdiqlandi!",
+    confirmSub: "Joyingiz tayyor turibdi. Vaqtida boring",
+    ticketId: "Bron raqami",
+    ticketVenue: "Joy",
+    ticketDate: "Sana",
+    ticketTime: "Vaqt",
+    ticketPrice: "Narxi",
+    btnBackHome: "Bosh sahifaga qaytish",
+    sheetTitle: "Bronni tasdiqlash",
+    sheetSub: "Ma'lumotlarni tekshirib, to'lov usulini tanlang",
+    sheetConfirmBtn: "Bronni tasdiqlash",
+    sheetConfirming: "Tasdiqlanmoqda...",
+    navHome: "Bosh sahifa",
+    navBookings: "Bronlarim",
+    navFav: "Sevimlilar",
+    navProfile: "Profil",
+    emptySearch: "Hech narsa topilmadi. Qidiruv so'zini o'zgartirib ko'ring.",
+    emptyBookings: "Hali bronlaringiz yo'q.",
+    emptyFavs: "Sevimlilar ro'yxati bo'sh. Yurakcha tugmasini bosib qo'shing.",
+    payCash: "Naqd (joyida)",
+    confirmed: "Tasdiqlangan",
+    pending: "Kutilmoqda",
+    days: ['Bug','Ert','Chor','Pay','Jum','Shan','Yak'],
+    monthName: 'avgust'
+  },
+  ru: {
+    greeting: "Привет, Фирдавсбек",
+    subGreeting: "Легко бронируйте любимые места",
+    searchPlaceholder: "Футбольное поле, барбер, ресторан...",
+    searchHeader: "Поиск",
+    searchBoxPlaceholder: "Что вы ищете?",
+    promoTag: "АКЦИЯ",
+    promoTitle: "Скидка −20% на 1-е бронирование",
+    promoText: "Действует во всех партнерских местах Коканда",
+    secNearby: "Рядом с вами",
+    secToday: "Свободно сегодня",
+    secPopular: "Популярные",
+    seeAll: "Все",
+    selectDate: "Выберите дату",
+    selectTime: "Свободное время",
+    priceLbl: "Цена",
+    bookBtn: "Забронировать",
+    myBookings: "Мои брони",
+    favorites: "Избранное",
+    profile: "Профиль",
+    confirmTitle: "Бронирование подтверждено!",
+    confirmSub: "Ваше место готово. Пожалуйста, приходите вовремя",
+    ticketId: "Номер брони",
+    ticketVenue: "Место",
+    ticketDate: "Дата",
+    ticketTime: "Время",
+    ticketPrice: "Цена",
+    btnBackHome: "На главную",
+    sheetTitle: "Подтверждение брони",
+    sheetSub: "Проверьте данные и выберите способ оплаты",
+    sheetConfirmBtn: "Подтвердить бронь",
+    sheetConfirming: "Подтверждение...",
+    navHome: "Главная",
+    navBookings: "Мои брони",
+    navFav: "Избранное",
+    navProfile: "Профиль",
+    emptySearch: "Ничего не найдено. Попробуйте другой запрос.",
+    emptyBookings: "У вас пока нет бронирований.",
+    emptyFavs: "Список избранного пуст. Нажмите сердечко, чтобы добавить.",
+    payCash: "Наличными на месте",
+    confirmed: "Подтверждено",
+    pending: "В ожидании",
+    days: ['Сгд','Завт','Ср','Чт','Пт','Сб','Вск'],
+    monthName: 'августа'
+  },
+  en: {
+    greeting: "Hello, Firdavsbek",
+    subGreeting: "Easily book your favorite spots",
+    searchPlaceholder: "Football arena, barber, restaurant...",
+    searchHeader: "Search",
+    searchBoxPlaceholder: "What are you looking for?",
+    promoTag: "NEW",
+    promoTitle: "−20% Off First Booking",
+    promoText: "Valid across all partner venues in Kokand",
+    secNearby: "Nearby",
+    secToday: "Available Today",
+    secPopular: "Popular",
+    seeAll: "See all",
+    selectDate: "Select Date",
+    selectTime: "Available Slots",
+    priceLbl: "Price",
+    bookBtn: "Book Now",
+    myBookings: "My Bookings",
+    favorites: "Favorites",
+    profile: "Profile",
+    confirmTitle: "Booking Confirmed!",
+    confirmSub: "Your spot is reserved. Please arrive on time",
+    ticketId: "Booking ID",
+    ticketVenue: "Venue",
+    ticketDate: "Date",
+    ticketTime: "Time",
+    ticketPrice: "Price",
+    btnBackHome: "Back to Home",
+    sheetTitle: "Confirm Booking",
+    sheetSub: "Verify details and select payment method",
+    sheetConfirmBtn: "Confirm Booking",
+    sheetConfirming: "Confirming...",
+    navHome: "Home",
+    navBookings: "Bookings",
+    navFav: "Favorites",
+    navProfile: "Profile",
+    emptySearch: "No results found. Try a different search term.",
+    emptyBookings: "You have no bookings yet.",
+    emptyFavs: "Your favorites list is empty. Click the heart icon to add.",
+    payCash: "Cash on spot",
+    confirmed: "Confirmed",
+    pending: "Pending",
+    days: ['Today','Tomorrow','Wed','Thu','Fri','Sat','Sun'],
+    monthName: 'August'
+  }
+};
+
+let currentLang = localStorage.getItem('gq_lang') || 'uz';
+
 /* ---------------- ICON LIBRARY ---------------- */
 const I = {
   search: `<svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>`,
@@ -576,33 +827,33 @@ const I = {
   wrench: `<svg class="ic" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 00-5.6 5.1L3 17.5 6.5 21l6.1-6.1a4 4 0 005.1-5.6l-2.8 2.8-2.2-.6-.6-2.2z"/></svg>`,
 };
 
-const CATEGORY_IMG = {
-  football: 'https://images.pexels.com/photos/15203/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=800',
-  tennis: 'https://images.pexels.com/photos/3026/pexels-photo-3026.jpeg?auto=compress&cs=tinysrgb&w=800',
-  billiard: 'https://images.pexels.com/photos/19680649/pexels-photo-19680649.jpeg?auto=compress&cs=tinysrgb&w=800',
-  computer: 'https://images.pexels.com/photos/6125337/pexels-photo-6125337.jpeg?auto=compress&cs=tinysrgb&w=800',
-  ps: 'https://images.pexels.com/photos/807330/pexels-photo-807330.jpeg?auto=compress&cs=tinysrgb&w=800',
-  gym: 'https://images.pexels.com/photos/28636776/pexels-photo-28636776.jpeg?auto=compress&cs=tinysrgb&w=800',
-  barber: 'https://images.pexels.com/photos/14034429/pexels-photo-14034429.jpeg?auto=compress&cs=tinysrgb&w=800',
-  restaurant: 'https://images.pexels.com/photos/776538/pexels-photo-776538.jpeg?auto=compress&cs=tinysrgb&w=800',
-  repair: 'https://images.pexels.com/photos/162553/pexels-photo-162553.jpeg?auto=compress&cs=tinysrgb&w=800',
+// High resolution, reliable image URLs for every venue
+const VENUE_IMAGES = {
+  1: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80',
+  2: 'https://images.unsplash.com/photo-1529900748604-07564a03e7a6?auto=format&fit=crop&w=800&q=80',
+  3: 'https://images.unsplash.com/photo-1511193311914-0346f16efe90?auto=format&fit=crop&w=800&q=80',
+  4: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80',
+  5: 'https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&w=800&q=80',
+  6: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80',
+  7: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80',
+  8: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80'
 };
 
 function fav(active){
   return `<svg class="ic ${active?'ic-fill':''}" viewBox="0 0 24 24"><path d="M20.8 7.6c0-2.6-2.1-4.6-4.7-4.6-1.7 0-3.2.9-4.1 2.3-.9-1.4-2.4-2.3-4.1-2.3-2.6 0-4.7 2-4.7 4.6 0 5.1 8.8 10.9 8.8 10.9s8.8-5.8 8.8-10.9z"/></svg>`;
 }
 
-const categories = [
-  {id:'all', ic:I.globe, name:'Barchasi'},
-  {id:'football', ic:I.football, name:'Futbol'},
-  {id:'tennis', ic:I.tennis, name:'Stol tennis'},
-  {id:'billiard', ic:I.billiard, name:'Bilyard'},
-  {id:'computer', ic:I.computer, name:'Kompyuter'},
-  {id:'ps', ic:I.gamepad, name:'PlayStation'},
-  {id:'gym', ic:I.dumbbell, name:'Sport zal'},
-  {id:'barber', ic:I.scissors, name:'Barber'},
-  {id:'restaurant', ic:I.restaurant, name:'Restoran'},
-  {id:'repair', ic:I.wrench, name:'Usta'},
+const categoriesData = [
+  {id:'all', ic:I.globe, name:{uz:'Barchasi', ru:'Все', en:'All'}},
+  {id:'football', ic:I.football, name:{uz:'Futbol', ru:'Футбол', en:'Football'}},
+  {id:'tennis', ic:I.tennis, name:{uz:'Stol tennis', ru:'Наст. теннис', en:'Table tennis'}},
+  {id:'billiard', ic:I.billiard, name:{uz:'Bilyard', ru:'Бильярд', en:'Billiards'}},
+  {id:'computer', ic:I.computer, name:{uz:'Kompyuter', ru:'Компьютеры', en:'PC Gaming'}},
+  {id:'ps', ic:I.gamepad, name:{uz:'PlayStation', ru:'PlayStation', en:'PlayStation'}},
+  {id:'gym', ic:I.dumbbell, name:{uz:'Sport zal', ru:'Фитнес', en:'Gym & Fitness'}},
+  {id:'barber', ic:I.scissors, name:{uz:'Barber', ru:'Барбер', en:'Barbershop'}},
+  {id:'restaurant', ic:I.restaurant, name:{uz:'Restoran', ru:'Ресторан', en:'Restaurant'}},
+  {id:'repair', ic:I.wrench, name:{uz:'Usta', ru:'Мастер', en:'Services'}},
 ];
 
 const venues = [
@@ -617,29 +868,96 @@ const venues = [
 ];
 
 // Favorites state saved in localStorage
-let favoriteIds = JSON.parse(localStorage.getItem('gq_favorites') || '[1,3,7]');
+let favoriteIds = JSON.parse(localStorage.getItem('gq_favorites') || '[1,3,6,7]');
 let activeCategoryFilter = 'all';
 
 // Bookings state saved in localStorage
 let bookingsData = JSON.parse(localStorage.getItem('gq_bookings') || JSON.stringify([
   {id: 'GQ-48213', name:'Chempion Arena', ic:I.football, date:'14-avgust, 19:00', price:'120,000 so\'m', status:'Tasdiqlangan'},
-  {id: 'GQ-39102', name:'Aziz Barbershop', ic:I.scissors, date:'16-avgust, 11:00', price:'35,000 so\'m', status:'Kutilmoqda'},
+  {id: 'GQ-39102', name:'FitLine Gym', ic:I.dumbbell, date:'15-avgust, 10:00', price:'50,000 so\'m', status:'Tasdiqlangan'},
 ]));
+
+function setLanguage(lang){
+  currentLang = lang;
+  localStorage.setItem('gq_lang', lang);
+  
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+  const activeBtn = document.getElementById('lang-' + lang);
+  if(activeBtn) activeBtn.classList.add('active');
+
+  applyTranslations();
+  renderCats('catScroll');
+  renderCats('catScroll2');
+  renderHomeRows();
+  filterVenues();
+  renderBookings();
+  renderFavorites();
+  renderProfileMenu();
+}
+
+function applyTranslations(){
+  const t = DICT[currentLang] || DICT.uz;
+
+  document.getElementById('txtGreeting').textContent = t.greeting;
+  document.getElementById('txtSubGreeting').textContent = t.subGreeting;
+  document.getElementById('txtSearchPlaceholder').placeholder = t.searchPlaceholder;
+  document.getElementById('txtSearchHeader').textContent = t.searchHeader;
+  document.getElementById('searchInput').placeholder = t.searchBoxPlaceholder;
+
+  document.getElementById('txtPromoTag').textContent = t.promoTag;
+  document.getElementById('txtPromoTitle').textContent = t.promoTitle;
+  document.getElementById('txtPromoText').textContent = t.promoText;
+
+  document.getElementById('txtSecNearby').textContent = t.secNearby;
+  document.getElementById('txtSecToday').textContent = t.secToday;
+  document.getElementById('txtSecPopular').textContent = t.secPopular;
+  document.querySelectorAll('.txtSeeAll').forEach(el => el.textContent = t.seeAll);
+
+  document.getElementById('txtSelectDate').textContent = t.selectDate;
+  document.getElementById('txtSelectTime').textContent = t.selectTime;
+  document.getElementById('txtPriceLbl').textContent = t.priceLbl;
+  document.getElementById('bookBtn').textContent = t.bookBtn;
+
+  document.getElementById('txtMyBookingsHeader').textContent = t.myBookings;
+  document.getElementById('txtFavoritesHeader').textContent = t.favorites;
+
+  document.getElementById('txtConfirmTitle').textContent = t.confirmTitle;
+  document.getElementById('txtConfirmSub').textContent = t.confirmSub;
+  document.getElementById('lblTicketId').textContent = t.ticketId;
+  document.getElementById('lblTicketVenue').textContent = t.ticketVenue;
+  document.getElementById('lblTicketDate').textContent = t.ticketDate;
+  document.getElementById('lblTicketTime').textContent = t.ticketTime;
+  document.getElementById('lblTicketPrice').textContent = t.ticketPrice;
+  document.getElementById('btnBackHome').textContent = t.btnBackHome;
+
+  document.getElementById('txtSheetTitle').textContent = t.sheetTitle;
+  document.getElementById('txtSheetSub').textContent = t.sheetSub;
+  document.getElementById('lblSheetVenue').textContent = t.ticketVenue;
+  document.getElementById('lblSheetDate').textContent = t.ticketDate;
+  document.getElementById('lblSheetTime').textContent = t.ticketTime;
+  document.getElementById('lblSheetPrice').textContent = t.priceLbl;
+  document.getElementById('confirmBtn').textContent = t.sheetConfirmBtn;
+
+  // Bottom Nav
+  document.getElementById('navHome').innerHTML = `<span class="ic">${I.home}</span>${t.navHome}`;
+  document.getElementById('navBookings').innerHTML = `<span class="ic">${I.calendar}</span>${t.navBookings}`;
+  document.getElementById('navFab').innerHTML = I.plus;
+  document.getElementById('navFav').innerHTML = `<span class="ic">${I.heart}</span>${t.navFav}`;
+  document.getElementById('navProfile').innerHTML = `<span class="ic">${I.user}</span>${t.navProfile}`;
+}
 
 function renderCats(containerId){
   const el = document.getElementById(containerId);
   if(!el) return;
-  el.innerHTML = categories.map((c)=>`
+  el.innerHTML = categoriesData.map((c)=>`
     <div class="cat-pill ${activeCategoryFilter===c.id?'active':''}" onclick="selectCat(this, '${c.id}')">
-      <div class="cicon">${c.ic}</div><span>${c.name}</span>
+      <div class="cicon">${c.ic}</div><span>${c.name[currentLang] || c.name.uz}</span>
     </div>`).join('');
 }
 
 function selectCat(node, catId){
   activeCategoryFilter = catId;
-  document.querySelectorAll('.cat-pill').forEach(n => {
-    n.classList.remove('active');
-  });
+  document.querySelectorAll('.cat-pill').forEach(n => n.classList.remove('active'));
   node.classList.add('active');
   filterVenues();
 }
@@ -666,10 +984,17 @@ function toggleFav(vId, event){
   }
 }
 
+function toggleFavCurrent(e){
+  if(currentVenue){
+    toggleFav(currentVenue.id, e);
+  }
+}
+
 function venueCard(v){
   const isFav = favoriteIds.includes(v.id);
+  const imgUrl = VENUE_IMAGES[v.id] || VENUE_IMAGES[1];
   return `<div class="vcard" onclick="openVenue(${v.id})">
-    <div class="thumb" style="background-image:url('${CATEGORY_IMG[v.cat]}')">
+    <div class="thumb" style="background-image:url('${imgUrl}')">
       <div class="cbadge">${v.ic}</div>
       <div class="fav ${isFav?'active':''}" onclick="toggleFav(${v.id}, event)">${fav(isFav)}</div>
     </div>
@@ -684,7 +1009,7 @@ function venueCard(v){
 function renderHomeRows(){
   document.getElementById('rowNearby').innerHTML = venues.slice(0,4).map(venueCard).join('');
   document.getElementById('rowToday').innerHTML = venues.slice(2,6).map(venueCard).join('');
-  document.getElementById('rowPopular').innerHTML = venues.slice(4,8).map(venueCard).join('');
+  document.getElementById('rowPopular').innerHTML = [venues[5], venues[6], venues[0], venues[2]].map(venueCard).join('');
 }
 
 function filterVenues(){
@@ -697,6 +1022,7 @@ function filterVenues(){
     return matchesCat && matchesQuery;
   });
 
+  const t = DICT[currentLang] || DICT.uz;
   const countEl = document.getElementById('searchCount');
   if(countEl) countEl.textContent = `${filtered.length} ta joy topildi`;
 
@@ -704,7 +1030,7 @@ function filterVenues(){
   if(!listEl) return;
 
   if(filtered.length === 0){
-    listEl.innerHTML = `<div class="empty-state">Hech narsa topilmadi. Qidiruv so'zini o'zgartirib ko'ring.</div>`;
+    listEl.innerHTML = `<div class="empty-state">${t.emptySearch}</div>`;
     return;
   }
 
@@ -720,12 +1046,12 @@ let selectedDay = '14-avgust';
 let selectedTime = '19:00';
 
 function renderDates(){
-  const days = ['Bug','Ert','Chor','Pay','Jum','Shan','Yak'];
-  const months = ['avgust', 'avgust', 'avgust', 'avgust', 'avgust', 'avgust', 'avgust'];
+  const t = DICT[currentLang] || DICT.uz;
+  const days = t.days;
   const el = document.getElementById('dateScroll');
   el.innerHTML = Array.from({length:7}).map((_,i)=>{
     const dateNum = 14 + i;
-    const fullDateStr = `${dateNum}-${months[i]}`;
+    const fullDateStr = `${dateNum}-${t.monthName}`;
     return `<div class="date-chip ${i===0?'active':''}" onclick="selectDate(this, '${fullDateStr}')">
       <div class="d">${days[i]}</div><div class="n">${dateNum}</div>
     </div>`;
@@ -744,8 +1070,8 @@ function renderSlots(){
   const times = ['09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00'];
   const taken = ['11:00','15:00','20:00'];
   const el = document.getElementById('slotGrid');
-  el.innerHTML = times.map(t=>`
-    <div class="slot ${taken.includes(t)?'taken':''}" onclick="selectSlot(this, '${t}')">${t}</div>`).join('');
+  el.innerHTML = times.map(tm=>`
+    <div class="slot ${taken.includes(tm)?'taken':''}" onclick="selectSlot(this, '${tm}')">${tm}</div>`).join('');
 }
 
 function selectSlot(node, timeStr){
@@ -762,9 +1088,9 @@ function renderBadgesAndAmenities(){
     <span class="badge">${I.car} Parking</span>`;
   document.getElementById('amenitiesGrid').innerHTML = `
     <div class="amenity">${I.shower} Dush xona</div>
-    <div class="amenity">${I.bulb} Yoritish</div>
+    <div class="amenity">${I.bulb} Yoritish / Yoritilgan</div>
     <div class="amenity">${I.car} Bepul parking</div>
-    <div class="amenity">${I.drink} Avtomat</div>`;
+    <div class="amenity">${I.drink} Ichimliklar avtomati</div>`;
   document.getElementById('venueLoc').innerHTML = `${I.location} Qo'qon, Farg'ona ko'chasi — 1.2 km`;
 }
 
@@ -774,12 +1100,13 @@ function openVenue(id){
   const v = venues.find(x=>x.id===id) || venues[0];
   currentVenue = v;
   const isFav = favoriteIds.includes(v.id);
+  const imgUrl = VENUE_IMAGES[v.id] || VENUE_IMAGES[1];
 
   document.getElementById('venueName').textContent = v.name;
   document.getElementById('venueHeaderTitle').textContent = v.name;
   document.getElementById('venuePriceDisplay').textContent = v.price;
-  document.getElementById('venueHero').style.backgroundImage = `url('${CATEGORY_IMG[v.cat]}')`;
-  document.getElementById('venueHero').innerHTML = `<div class="cbadge">${v.ic}</div><div class="fav ${isFav?'active':''}" id="venueFav" onclick="toggleFav(${v.id}, event)">${fav(isFav)}</div>`;
+  document.getElementById('venueHero').style.backgroundImage = `url('${imgUrl}')`;
+  document.getElementById('venueHero').innerHTML = `<div class="cbadge">${v.ic}</div><div class="fav ${isFav?'active':''}" id="venueFav" onclick="toggleFavCurrent(event)">${fav(isFav)}</div>`;
   document.getElementById('bookBtn').disabled = true;
   
   goTo('venue');
@@ -809,12 +1136,13 @@ function closeSheet(){
 }
 
 function confirmBooking(){
+  const t = DICT[currentLang] || DICT.uz;
   const btn = document.getElementById('confirmBtn');
   btn.classList.add('loading');
-  btn.textContent = 'Tasdiqlanmoqda...';
+  btn.textContent = t.sheetConfirming;
   setTimeout(()=>{
     btn.classList.remove('loading');
-    btn.textContent = 'Bronni tasdiqlash';
+    btn.textContent = t.sheetConfirmBtn;
     closeSheet();
 
     const newId = '#GQ-' + Math.floor(10000+Math.random()*89999);
@@ -826,7 +1154,7 @@ function confirmBooking(){
       ic: currentVenue.ic,
       date: `${selectedDay}, ${selectedTime}`,
       price: currentVenue.price,
-      status: 'Tasdiqlangan'
+      status: t.confirmed
     });
     localStorage.setItem('gq_bookings', JSON.stringify(bookingsData));
 
@@ -842,10 +1170,11 @@ function confirmBooking(){
 }
 
 function renderBookings(){
+  const t = DICT[currentLang] || DICT.uz;
   const listEl = document.getElementById('bookingsList');
   if(!listEl) return;
   if(bookingsData.length === 0){
-    listEl.innerHTML = `<div class="empty-state">Hali bronlaringiz yo'q.</div>`;
+    listEl.innerHTML = `<div class="empty-state">${t.emptyBookings}</div>`;
     return;
   }
   listEl.innerHTML = bookingsData.map(b=>`
@@ -857,29 +1186,31 @@ function renderBookings(){
 }
 
 function renderFavorites(){
+  const t = DICT[currentLang] || DICT.uz;
   const el = document.getElementById('favList');
   if(!el) return;
   const favVenues = venues.filter(v => favoriteIds.includes(v.id));
   if(favVenues.length === 0){
     el.style.display = 'block';
-    el.innerHTML = `<div class="empty-state">Sevimlilar ro'yxati bo'sh. Yurakcha tugmasini bosib qo'shing.</div>`;
+    el.innerHTML = `<div class="empty-state">${t.emptyFavs}</div>`;
     return;
   }
   el.style.display = 'grid';
-  el.style.gridTemplateColumns = '1fr 1fr';
-  el.style.gap = '14px';
+  el.style.gridTemplateColumns = window.innerWidth >= 900 ? 'repeat(4, 1fr)' : '1fr 1fr';
+  el.style.gap = '16px';
   el.innerHTML = favVenues.map(venueCard).join('');
 }
 
 function renderProfileMenu(){
+  const t = DICT[currentLang] || DICT.uz;
   const items = [
-    [I.calendar, 'Bronlarim', ()=>goTo('bookings')],
-    [I.heart, 'Sevimlilar', ()=>goTo('favorites')],
-    [I.wallet, "To'lov usullari", ()=>alert("Hozirda Naqd, Click va Payme to'lovlari faol!")],
-    [I.bell, 'Bildirishnomalar', ()=>alert("Yangi bildirishnomalar yo'q")],
-    [I.globe, "Til — O'zbekcha", ()=>alert("Platforma til: O'zbekcha")],
+    [I.calendar, t.myBookings, ()=>goTo('bookings')],
+    [I.heart, t.favorites, ()=>goTo('favorites')],
+    [I.wallet, "To'lov usullari / Способы оплаты", ()=>alert("Naqd, Click, Payme & UzCard!")],
+    [I.bell, 'Bildirishnomalar / Уведомления', ()=>alert("Yangi bildirishnomalar yo'q / Нет новых уведомлений")],
+    [I.globe, "Til / Язык / Language", ()=>setLanguage(currentLang === 'uz' ? 'ru' : (currentLang === 'ru' ? 'en' : 'uz'))],
     [I.palette, 'Mavzu (Tungi/Kungi)', ()=>toggleTheme()],
-    [I.settings, 'Sozlamalar', ()=>alert("Gaplashib Qo'ydim v1.0.0 — Barcha huquqlar himoyalangan")]
+    [I.settings, 'Sozlamalar / Настройки', ()=>alert("Gaplashib Qo'ydim v1.1.0 — Web & Mobile Edition")]
   ];
   document.getElementById('profileMenu').innerHTML = items.map((it,i)=>`
     <div class="menu-item" style="${i===items.length-1?'border-bottom:none;':''}" onclick="profileActions[${i}]()">
@@ -894,17 +1225,13 @@ function renderStaticIcons(){
   document.getElementById('searchIcon2').innerHTML = I.search;
   document.getElementById('backBtn1').innerHTML = I.back;
   document.getElementById('backBtn2').innerHTML = I.back;
-  document.getElementById('navHome').innerHTML = `<span class="ic">${I.home}</span>Bosh sahifa`;
-  document.getElementById('navBookings').innerHTML = `<span class="ic">${I.calendar}</span>Bronlarim`;
-  document.getElementById('navFab').innerHTML = I.plus;
-  document.getElementById('navFav').innerHTML = `<span class="ic">${I.heart}</span>Sevimlilar`;
-  document.getElementById('navProfile').innerHTML = `<span class="ic">${I.user}</span>Profil`;
   
   const isDark = document.documentElement.classList.contains('dark');
   document.getElementById('themeBtn').innerHTML = isDark ? I.sun : I.moon;
 
+  const t = DICT[currentLang] || DICT.uz;
   document.getElementById('payOptions').innerHTML = `
-    <div class="pay-chip active" onclick="selectPay(this)">${I.wallet} Naqd (joyida)</div>
+    <div class="pay-chip active" onclick="selectPay(this)">${I.wallet} ${t.payCash}</div>
     <div class="pay-chip" onclick="selectPay(this)">${I.card} Click</div>
     <div class="pay-chip" onclick="selectPay(this)">${I.card} Payme</div>
     <div class="pay-chip" onclick="selectPay(this)">${I.card} UzCard</div>`;
@@ -918,6 +1245,10 @@ function goTo(screen){
   document.querySelectorAll('.nav-item[data-nav]').forEach(n=>n.classList.remove('active'));
   const navEl = document.querySelector(`.nav-item[data-nav="${screen}"]`);
   if(navEl) navEl.classList.add('active');
+
+  document.querySelectorAll('.desktop-nav-link[data-dnav]').forEach(n=>n.classList.remove('active'));
+  const dNavEl = document.querySelector(`.desktop-nav-link[data-dnav="${screen}"]`);
+  if(dNavEl) dNavEl.classList.add('active');
 
   document.getElementById('phone').scrollTop = 0;
   window.scrollTo(0,0);
@@ -934,14 +1265,9 @@ if(localStorage.getItem('gq_theme') === 'dark' || (!localStorage.getItem('gq_the
   document.documentElement.classList.add('dark');
 }
 
+// Init language
+setLanguage(currentLang);
 renderStaticIcons();
-renderCats('catScroll');
-renderCats('catScroll2');
-renderHomeRows();
-filterVenues();
-renderBookings();
-renderFavorites();
-renderProfileMenu();
 </script>
 </body>
 </html>
