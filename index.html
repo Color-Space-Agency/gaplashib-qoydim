@@ -484,11 +484,11 @@ html.dark .status-pill{color:var(--green);}
 
     <!-- Desktop Navigation Links -->
     <div class="desktop-nav">
-      <div class="desktop-nav-link active" data-dnav="home" onclick="goTo('home')">Bosh sahifa</div>
-      <div class="desktop-nav-link" data-dnav="search" onclick="goTo('search')">Qidiruv</div>
-      <div class="desktop-nav-link" data-dnav="bookings" onclick="goTo('bookings')">Bronlarim</div>
-      <div class="desktop-nav-link" data-dnav="favorites" onclick="goTo('favorites')">Sevimlilar</div>
-      <div class="desktop-nav-link" data-dnav="profile" onclick="goTo('profile')">Profil</div>
+      <div class="desktop-nav-link active" id="dnav-home" data-dnav="home" onclick="goTo('home')">Bosh sahifa</div>
+      <div class="desktop-nav-link" id="dnav-search" data-dnav="search" onclick="goTo('search')">Qidiruv</div>
+      <div class="desktop-nav-link" id="dnav-bookings" data-dnav="bookings" onclick="goTo('bookings')">Bronlarim</div>
+      <div class="desktop-nav-link" id="dnav-favorites" data-dnav="favorites" onclick="goTo('favorites')">Sevimlilar</div>
+      <div class="desktop-nav-link" id="dnav-profile" data-dnav="profile" onclick="goTo('profile')">Profil</div>
     </div>
 
     <div class="topbar-controls">
@@ -688,6 +688,11 @@ const DICT = {
     navBookings: "Bronlarim",
     navFav: "Sevimlilar",
     navProfile: "Profil",
+    dnavHome: "Bosh sahifa",
+    dnavSearch: "Qidiruv",
+    dnavBookings: "Bronlarim",
+    dnavFav: "Sevimlilar",
+    dnavProfile: "Profil",
     emptySearch: "Hech narsa topilmadi. Qidiruv so'zini o'zgartirib ko'ring.",
     emptyBookings: "Hali bronlaringiz yo'q.",
     emptyFavs: "Sevimlilar ro'yxati bo'sh. Yurakcha tugmasini bosib qo'shing.",
@@ -733,6 +738,11 @@ const DICT = {
     navBookings: "Мои брони",
     navFav: "Избранное",
     navProfile: "Профиль",
+    dnavHome: "Главная",
+    dnavSearch: "Поиск",
+    dnavBookings: "Мои брони",
+    dnavFav: "Избранное",
+    dnavProfile: "Профиль",
     emptySearch: "Ничего не найдено. Попробуйте другой запрос.",
     emptyBookings: "У вас пока нет бронирований.",
     emptyFavs: "Список избранного пуст. Нажмите сердечко, чтобы добавить.",
@@ -778,6 +788,11 @@ const DICT = {
     navBookings: "Bookings",
     navFav: "Favorites",
     navProfile: "Profile",
+    dnavHome: "Home",
+    dnavSearch: "Search",
+    dnavBookings: "Bookings",
+    dnavFav: "Favorites",
+    dnavProfile: "Profile",
     emptySearch: "No results found. Try a different search term.",
     emptyBookings: "You have no bookings yet.",
     emptyFavs: "Your favorites list is empty. Click the heart icon to add.",
@@ -829,7 +844,7 @@ const I = {
   cake: `<svg class="ic" viewBox="0 0 24 24"><path d="M20 21v-8a2 2 0 00-2-2H6a2 2 0 00-2 2v8"/><path d="M4 16h16M12 3v3M12 6a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/></svg>`,
 };
 
-// High resolution, reliable image URLs for every venue
+// High resolution, accurate image URLs for every venue
 const VENUE_IMAGES = {
   1: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80',
   2: 'https://images.unsplash.com/photo-1529900748604-07564a03e7a6?auto=format&fit=crop&w=800&q=80',
@@ -839,9 +854,9 @@ const VENUE_IMAGES = {
   6: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80',
   7: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80',
   8: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80',
-  9: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=800&q=80',
+  9: 'https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=800&q=80',
   10: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80',
-  11: 'https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=800&q=80',
+  11: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=800&q=80',
   12: 'https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&w=800&q=80'
 };
 
@@ -950,6 +965,13 @@ function applyTranslations(){
   document.getElementById('lblSheetPrice').textContent = t.priceLbl;
   document.getElementById('confirmBtn').textContent = t.sheetConfirmBtn;
 
+  // Top Desktop Nav Translations
+  document.getElementById('dnav-home').textContent = t.dnavHome;
+  document.getElementById('dnav-search').textContent = t.dnavSearch;
+  document.getElementById('dnav-bookings').textContent = t.dnavBookings;
+  document.getElementById('dnav-favorites').textContent = t.dnavFav;
+  document.getElementById('dnav-profile').textContent = t.dnavProfile;
+
   // Bottom Nav
   document.getElementById('navHome').innerHTML = `<span class="ic">${I.home}</span>${t.navHome}`;
   document.getElementById('navBookings').innerHTML = `<span class="ic">${I.calendar}</span>${t.navBookings}`;
@@ -962,15 +984,16 @@ function renderCats(containerId){
   const el = document.getElementById(containerId);
   if(!el) return;
   el.innerHTML = categoriesData.map((c)=>`
-    <div class="cat-pill ${activeCategoryFilter===c.id?'active':''}" onclick="selectCat(this, '${c.id}')">
+    <div class="cat-pill ${activeCategoryFilter===c.id?'active':''}" onclick="selectCat('${c.id}')">
       <div class="cicon">${c.ic}</div><span>${c.name[currentLang] || c.name.uz}</span>
     </div>`).join('');
 }
 
-function selectCat(node, catId){
+function selectCat(catId){
   activeCategoryFilter = catId;
-  document.querySelectorAll('.cat-pill').forEach(n => n.classList.remove('active'));
-  node.classList.add('active');
+  renderCats('catScroll');
+  renderCats('catScroll2');
+  renderHomeRows();
   filterVenues();
 }
 
@@ -1019,9 +1042,36 @@ function venueCard(v){
 }
 
 function renderHomeRows(){
-  document.getElementById('rowNearby').innerHTML = [venues[2], venues[3], venues[0], venues[6]].map(venueCard).join('');
-  document.getElementById('rowToday').innerHTML = [venues[8], venues[9], venues[4], venues[7]].map(venueCard).join('');
-  document.getElementById('rowPopular').innerHTML = [venues[2], venues[3], venues[7], venues[5]].map(venueCard).join('');
+  const getFilteredList = () => {
+    if(activeCategoryFilter === 'all') return venues;
+    return venues.filter(v => v.cat === activeCategoryFilter);
+  };
+
+  const list = getFilteredList();
+
+  const nearbyEl = document.getElementById('rowNearby');
+  const todayEl = document.getElementById('rowToday');
+  const popularEl = document.getElementById('rowPopular');
+
+  if(!nearbyEl || !todayEl || !popularEl) return;
+
+  if(list.length === 0){
+    const t = DICT[currentLang] || DICT.uz;
+    nearbyEl.innerHTML = `<div class="empty-state">${t.emptySearch}</div>`;
+    todayEl.innerHTML = '';
+    popularEl.innerHTML = '';
+    return;
+  }
+
+  if(activeCategoryFilter !== 'all'){
+    nearbyEl.innerHTML = list.map(venueCard).join('');
+    todayEl.innerHTML = list.map(venueCard).join('');
+    popularEl.innerHTML = list.map(venueCard).join('');
+  } else {
+    nearbyEl.innerHTML = [venues[2], venues[3], venues[0], venues[6]].map(venueCard).join('');
+    todayEl.innerHTML = [venues[8], venues[9], venues[4], venues[7]].map(venueCard).join('');
+    popularEl.innerHTML = [venues[2], venues[3], venues[10], venues[11]].map(venueCard).join('');
+  }
 }
 
 function filterVenues(){
@@ -1218,11 +1268,11 @@ function renderProfileMenu(){
   const items = [
     [I.calendar, t.myBookings, ()=>goTo('bookings')],
     [I.heart, t.favorites, ()=>goTo('favorites')],
-    [I.wallet, "To'lov usullari / Способы оплаты", ()=>alert("Naqd, Click, Payme & UzCard!")],
-    [I.bell, 'Bildirishnomalar / Уведомления', ()=>alert("Yangi bildirishnomalar yo'q / Нет новых уведомлений")],
-    [I.globe, "Til / Язык / Language", ()=>setLanguage(currentLang === 'uz' ? 'ru' : (currentLang === 'ru' ? 'en' : 'uz'))],
-    [I.palette, 'Mavzu (Tungi/Kungi)', ()=>toggleTheme()],
-    [I.settings, 'Sozlamalar / Настройки', ()=>alert("Gaplashib Qo'ydim v1.2.0 — Flowers & Bakery Edition")]
+    [I.wallet, currentLang === 'ru' ? "Способы оплаты" : (currentLang === 'en' ? "Payment Methods" : "To'lov usullari"), ()=>alert("Naqd, Click, Payme & UzCard!")],
+    [I.bell, currentLang === 'ru' ? "Уведомления" : (currentLang === 'en' ? "Notifications" : "Bildirishnomalar"), ()=>alert(currentLang === 'ru' ? "Нет новых уведомлений" : (currentLang === 'en' ? "No new notifications" : "Yangi bildirishnomalar yo'q"))],
+    [I.globe, currentLang === 'ru' ? "Язык — Русский" : (currentLang === 'en' ? "Language — English" : "Til — O'zbekcha"), ()=>setLanguage(currentLang === 'uz' ? 'ru' : (currentLang === 'ru' ? 'en' : 'uz'))],
+    [I.palette, currentLang === 'ru' ? "Тема" : (currentLang === 'en' ? "Theme" : "Mavzu"), ()=>toggleTheme()],
+    [I.settings, currentLang === 'ru' ? "Настройки" : (currentLang === 'en' ? "Settings" : "Sozlamalar"), ()=>alert("Gaplashib Qo'ydim v1.3.0")]
   ];
   document.getElementById('profileMenu').innerHTML = items.map((it,i)=>`
     <div class="menu-item" style="${i===items.length-1?'border-bottom:none;':''}" onclick="profileActions[${i}]()">
