@@ -358,11 +358,7 @@ html.dark .desktop-nav-link.active{
 
 /* ONBOARDING & GOOGLE AUTH SCREEN (`#screen-auth`) */
 .auth-hero{
-  text-align: center; padding: 20px 10px 10px;
-}
-.auth-logo-img{
-  width: 76px; height: 76px; border-radius: 50%; object-fit: contain;
-  box-shadow: 0 10px 24px rgba(0,0,0,0.15); margin-bottom: 14px;
+  text-align: center; padding: 10px 4px;
 }
 .btn-google-auth{
   width: 100%; display: flex; align-items: center; justify-content: center; gap: 12px;
@@ -373,6 +369,16 @@ html.dark .desktop-nav-link.active{
 }
 .btn-google-auth:hover{ border-color: var(--green); transform: translateY(-2px); }
 .btn-google-auth:active{ transform: scale(0.97); }
+
+/* ROLE SELECTION CARDS (FOYDALANUVCHI / BIZNES EGASI) */
+.role-card{
+  background: var(--surface); border: 2px solid var(--line); border-radius: 18px;
+  padding: 14px; text-align: center; cursor: pointer; transition: all 0.2s ease;
+  box-shadow: var(--shadow);
+}
+.role-card.active{
+  border-color: var(--green); background: rgba(34,224,122,0.08); box-shadow: 0 0 0 3px rgba(34,224,122,0.2);
+}
 
 .search-bar{
   display:flex; align-items:center; gap:10px;
@@ -825,12 +831,36 @@ html.dark .status-pill{color:var(--green);}
     </div>
   </div>
 
-  <!-- ONBOARDING & GOOGLE AUTH SCREEN -->
+  <!-- ONBOARDING & GOOGLE AUTH SCREEN WITH ROLE FRAMES -->
   <section class="screen" id="screen-auth">
     <div class="auth-hero">
-      <img src="logo.jpg" alt="Gaplashib Qoydim Logo" class="auth-logo-img">
-      <h2 style="font-size:1.4rem; margin:0 0 6px; font-weight:800;" id="txtAuthTitle">Gaplashib Qo'ydim ga Xush Kelibsiz!</h2>
-      <p style="font-size:0.86rem; color:var(--muted); margin:0 0 24px;" id="txtAuthSub">Qo'qon shahrining barcha futbol maydonlari, gul do'konlari, tort va xizmatlarini 1-klifda oson bron qiling</p>
+      
+      <!-- HIGH-IMPACT HERO ADVERTISING BANNER -->
+      <div style="background-image:url('hero_banner.jpg'); background-size:cover; background-position:center; height:180px; border-radius:20px; position:relative; overflow:hidden; display:flex; align-items:flex-end; padding:16px; margin-bottom:18px; box-shadow:0 10px 24px rgba(0,0,0,0.18);">
+        <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(13,27,42,0.2) 0%, rgba(13,27,42,0.85) 100%); z-index:1;"></div>
+        <div style="position:relative; z-index:2; color:#fff; text-align:left;">
+          <span style="background:var(--green); color:var(--navy); font-weight:800; font-size:0.68rem; padding:3px 10px; border-radius:100px;">QO'QON SHAHRI</span>
+          <h3 style="margin:6px 0 2px; font-size:1.1rem; font-weight:800; text-shadow:0 2px 8px rgba(0,0,0,0.5);" id="txtAuthHeadline">Biz Sizning Qimmatli Vaqtingizni Tejashga Yordam Beramiz!</h3>
+          <p style="margin:0; font-size:0.78rem; opacity:0.9;" id="txtAuthSub">Barcha futbol maydonlari, gullar, tortlar va xizmatlarni 1-klifda oson bron qiling</p>
+        </div>
+      </div>
+
+      <!-- INTERACTIVE ROLE SELECTION FRAMES (FOYDALANUVCHI / BIZNES EGASI) -->
+      <div style="text-align:left; margin-bottom:16px;">
+        <label style="font-size:0.84rem; font-weight:800; color:var(--ink); margin-bottom:8px; display:block;" id="lblRoleTitle">Ro'yhatdan o'tish maqsadini tanlang:</label>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div class="role-card active" id="roleUserCard" onclick="selectRole('user')">
+            <div style="font-size:1.4rem; margin-bottom:4px;">👤</div>
+            <div style="font-weight:800; font-size:0.86rem; color:var(--ink);" id="txtRoleUserTitle">Foydalanuvchi</div>
+            <div style="font-size:0.72rem; color:var(--muted);" id="txtRoleUserSub">Joy bron qilish uchun</div>
+          </div>
+          <div class="role-card" id="roleVendorCard" onclick="selectRole('vendor')">
+            <div style="font-size:1.4rem; margin-bottom:4px;">🏢</div>
+            <div style="font-weight:800; font-size:0.86rem; color:var(--ink);" id="txtRoleVendorTitle">Biznes Egasi</div>
+            <div style="font-size:0.72rem; color:var(--muted);" id="txtRoleVendorSub">Joy joylashtirish uchun</div>
+          </div>
+        </div>
+      </div>
 
       <!-- GOOGLE ONE-TAP REGISTRATION / SIGN IN BUTTON -->
       <button class="btn-google-auth" onclick="loginWithGoogle()">
@@ -843,13 +873,29 @@ html.dark .status-pill{color:var(--green);}
         <span id="txtGoogleAuthBtn">Google orqali ro'yhatdan o'tish</span>
       </button>
 
-      <button class="btn-primary" style="background:var(--surface); border:1px solid var(--line); color:var(--ink); margin-bottom:14px;" onclick="continueAsGuest()" id="txtGuestAuthBtn">
+      <button class="btn-primary" style="background:var(--surface); border:1px solid var(--line); color:var(--ink); margin-bottom:18px;" onclick="continueAsGuest()" id="txtGuestAuthBtn">
         Mehmon bo'lib ko'rib chiqish →
       </button>
 
-      <div style="font-size:0.75rem; color:var(--muted); margin-top:16px;">
-        Ro'yhatdan o'tish orqali foydalanish shartlariga rozilik bildirasiz.
+      <!-- TECHNICAL SUPPORT & PARTNERSHIP CONTACT BLOCK -->
+      <div style="background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:16px; text-align:left; font-size:0.82rem; box-shadow:var(--shadow);">
+        <div style="font-weight:800; font-size:0.88rem; margin-bottom:8px; color:var(--ink);" id="txtSupportTitle">📞 Texnik muammolar va Hamkorlik uchun:</div>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <a href="tel:+998770077645" style="display:flex; align-items:center; gap:8px; font-weight:700; color:var(--green-dim);">
+            <svg class="ic" viewBox="0 0 24 24" style="width:16px;height:16px;"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            +998 77 007 76 45
+          </a>
+          <a href="https://instagram.com/Gaplashib_Qoydim" target="_blank" style="display:flex; align-items:center; gap:8px; font-weight:700; color:var(--ink);">
+            <svg class="ic" viewBox="0 0 24 24" style="width:16px;height:16px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            Instagram: @Gaplashib_Qoydim
+          </a>
+          <a href="https://t.me/Gaplashib_Qoydim" target="_blank" style="display:flex; align-items:center; gap:8px; font-weight:700; color:var(--ink);">
+            <svg class="ic" viewBox="0 0 24 24" style="width:16px;height:16px;"><path d="M21.198 2.433a2.242 2.242 0 00-1.022.215l-16.5 6.6a2.237 2.237 0 00.12 4.17l3.98 1.49 1.48 4.72a2.23 2.23 0 003.58 1.07l2.42-2.12 4.54 3.32a2.24 2.24 0 003.55-1.22l3.3-15.6a2.24 2.24 0 00-2.45-2.67z"/></svg>
+            Telegram: @Gaplashib_Qoydim
+          </a>
+        </div>
       </div>
+
     </div>
   </section>
 
@@ -1326,10 +1372,16 @@ const DICT = {
     installStep2: "<b>\"Bosh ekranga qo'shish\"</b> (Add to Home Screen) opsiyasini tanlang",
     installStep3: "Ilova smartfoningizda alohida icon bo'lib saqlanadi!",
     installAutoBtn: "📲 Ekraningizga avtomatik qo'shish",
-    authTitle: "Gaplashib Qo'ydim ga Xush Kelibsiz!",
-    authSub: "Qo'qon shahrining barcha futbol maydonlari, gul do'konlari, tort va xizmatlarini 1-klifda oson bron qiling",
+    authHeadline: "Biz Sizning Qimmatli Vaqtingizni Tejashga Yordam Beramiz!",
+    authSub: "Barcha futbol maydonlari, gullar, tortlar va xizmatlarni 1-klifda oson bron qiling",
+    roleTitle: "Ro'yhatdan o'tish maqsadini tanlang:",
+    roleUserTitle: "Foydalanuvchi",
+    roleUserSub: "Joy bron qilish uchun",
+    roleVendorTitle: "Biznes Egasi",
+    roleVendorSub: "Joy joylashtirish uchun",
     googleAuthBtn: "Google orqali ro'yhatdan o'tish",
     guestAuthBtn: "Mehmon bo'lib ko'rib chiqish →",
+    supportTitle: "📞 Texnik muammolar va Hamkorlik uchun:",
     s1Tag: "YANGI AKSIYA",
     s1Title: "Birinchi bronga −20% chegirma",
     s1Desc: "Qo'qondagi barcha futbol maydoni va sport komplekslarida amal qiladi",
@@ -1405,10 +1457,16 @@ const DICT = {
     installStep2: "Выберите опцию <b>«На экран «Домой»»</b> (Add to Home Screen)",
     installStep3: "Приложение появится как отдельная иконка на рабочем столе!",
     installAutoBtn: "📲 Автоматически добавить на экран",
-    authTitle: "Добро пожаловать в Gaplashib Qo'ydim!",
+    authHeadline: "Мы поможем сэкономить ваше ценное время!",
     authSub: "Бронируйте футбольные поля, букеты, торты и услуги Коканда в 1 клик",
-    googleAuthBtn: "Войти через Google",
+    roleTitle: "Выберите цель регистрации:",
+    roleUserTitle: "Пользователь",
+    roleUserSub: "Для бронирования",
+    roleVendorTitle: "Владелец бизнеса",
+    roleVendorSub: "Для размещения услуг",
+    googleAuthBtn: "Регистрация через Google",
     guestAuthBtn: "Продолжить как гость →",
+    supportTitle: "📞 Техническая поддержка и сотрудничество:",
     s1Tag: "НОВАЯ АКЦИЯ",
     s1Title: "Скидка −20% на 1-е бронирование",
     s1Desc: "Действует во всех спортивных комплексах Коканда",
@@ -1484,10 +1542,16 @@ const DICT = {
     installStep2: "Select <b>\"Add to Home Screen\"</b> option",
     installStep3: "App icon will appear on your phone home screen!",
     installAutoBtn: "📲 Add to Home Screen Automatically",
-    authTitle: "Welcome to Gaplashib Qo'ydim!",
-    authSub: "Book all football fields, flower shops, cakes & services in Kokand in 1 click",
+    authHeadline: "We Help You Save Your Valuable Time!",
+    authSub: "Book all football fields, flowers, cakes & services in 1 click",
+    roleTitle: "Select Registration Goal:",
+    roleUserTitle: "User",
+    roleUserSub: "For booking venues",
+    roleVendorTitle: "Business Owner",
+    roleVendorSub: "For listing services",
     googleAuthBtn: "Sign in with Google",
     guestAuthBtn: "Continue as Guest →",
+    supportTitle: "📞 Support & Partnership Contact:",
     s1Tag: "SPECIAL OFFER",
     s1Title: "−20% Off First Booking",
     s1Desc: "Valid across all partner sports complexes in Kokand",
@@ -1606,21 +1670,40 @@ const venues = [
   {id:12, name:'Safia Pastry', cat:'bakery', ic:I.cake, dist:'1.0 km', rating:5.0, price:'120,000 so\'m/tort'},
 ];
 
-// USER AUTHENTICATION STATE (STRICT AUTH GUARD)
+// USER AUTHENTICATION & ROLE SELECTION STATE
 let currentUser = JSON.parse(localStorage.getItem('gq_user_session') || 'null');
+let selectedRole = 'user'; // 'user' or 'vendor'
+
+function selectRole(role){
+  selectedRole = role;
+  const userCard = document.getElementById('roleUserCard');
+  const vendorCard = document.getElementById('roleVendorCard');
+  if(userCard && vendorCard){
+    userCard.classList.toggle('active', role === 'user');
+    vendorCard.classList.toggle('active', role === 'vendor');
+  }
+}
 
 function loginWithGoogle(){
+  const isVendor = selectedRole === 'vendor';
   currentUser = {
-    name: 'Firdavsbek Artikov',
+    name: isVendor ? 'Firdavsbek (Biznes Egasi)' : 'Firdavsbek Artikov',
     email: 'firdavsbek@gmail.com',
     phone: '+998 77 007 76 45',
     avatar: 'F',
+    role: selectedRole,
     provider: 'google'
   };
   localStorage.setItem('gq_user_session', JSON.stringify(currentUser));
   updateUserUI();
-  alert(`✅ Google orqali muvaffaqiyatli kirdingiz!\nXush kelibsiz, ${currentUser.name}`);
-  goTo('home');
+  
+  if(isVendor){
+    alert(`🎉 Tabriklaymiz!\n"${currentUser.name}" sifatida Google orqali kirdingiz. Siz endi Sotuvchi Kabinetidasiz!`);
+    goTo('vendor');
+  } else {
+    alert(`✅ Google orqali muvaffaqiyatli kirdingiz!\nXush kelibsiz, ${currentUser.name}`);
+    goTo('home');
+  }
 }
 
 function continueAsGuest(){
@@ -1629,6 +1712,7 @@ function continueAsGuest(){
     email: 'guest@gaplashib.uz',
     phone: '+998 90 000 00 00',
     avatar: 'M',
+    role: 'user',
     provider: 'guest'
   };
   localStorage.setItem('gq_user_session', JSON.stringify(currentUser));
@@ -1866,10 +1950,16 @@ function applyTranslations(){
   setTx('btnInstallAutoPrompt', t.installAutoBtn);
 
   // Auth Screen Multilingual
-  setTx('txtAuthTitle', t.authTitle);
+  setTx('txtAuthHeadline', t.authHeadline);
   setTx('txtAuthSub', t.authSub);
+  setTx('lblRoleTitle', t.roleTitle);
+  setTx('txtRoleUserTitle', t.roleUserTitle);
+  setTx('txtRoleUserSub', t.roleUserSub);
+  setTx('txtRoleVendorTitle', t.roleVendorTitle);
+  setTx('txtRoleVendorSub', t.roleVendorSub);
   setTx('txtGoogleAuthBtn', t.googleAuthBtn);
   setTx('txtGuestAuthBtn', t.guestAuthBtn);
+  setTx('txtSupportTitle', t.supportTitle);
 
   // Promo Slider translations
   setTx('slide1Tag', t.s1Tag);
