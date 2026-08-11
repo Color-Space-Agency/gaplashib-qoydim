@@ -2,7 +2,14 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Gaplashib Qo'ydim">
+<meta name="theme-color" content="#0D1B2A">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="logo.jpg">
 <title>Gaplashib Qo'ydim — Sevimli joyingizni oson bron qiling</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -29,11 +36,16 @@ html.dark{
   --muted:#8CA0B3;
   --shadow: 0 14px 34px -16px rgba(0,0,0,0.55);
 }
-*{box-sizing:border-box;}
-body{
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+
+html, body{
   margin:0; font-family:'Manrope',sans-serif; background:var(--bg); color:var(--ink);
   transition:background .35s ease, color .35s ease;
   min-height: 100vh;
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+  overscroll-behavior-y: none;
 }
 svg.ic{width:20px; height:20px; stroke:currentColor; stroke-width:1.8; fill:none; stroke-linecap:round; stroke-linejoin:round; display:block;}
 svg.ic-fill{fill:currentColor; stroke:none;}
@@ -58,6 +70,7 @@ svg.ic-fill{fill:currentColor; stroke:none;}
   padding-bottom: 92px;
   box-shadow: 0 0 40px rgba(0,0,0,0.06);
   transition: max-width 0.3s ease, padding 0.3s ease;
+  overflow-x: hidden;
 }
 
 @media (min-width: 900px) {
@@ -118,53 +131,57 @@ svg.ic-fill{fill:currentColor; stroke:none;}
 a{color:inherit; text-decoration:none;}
 button{font-family:inherit; cursor:pointer;}
 
-/* ---- 2026 ULTRA-MODERN TOPBAR ---- */
+/* ---- 2026 ULTRA-MODERN MOBILE APP TOPBAR ---- */
 .topbar{
   position:sticky; top:0; z-index:40;
-  background:rgba(243, 245, 247, 0.88); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
-  padding:12px 20px; display:flex; align-items:center; justify-content:space-between;
+  background:rgba(243, 245, 247, 0.92); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+  padding:10px 14px; display:flex; align-items:center; justify-content:space-between;
   border-bottom: 1px solid var(--line); transition: background 0.3s ease;
+  width: 100%; overflow: hidden; gap: 6px;
 }
 html.dark .topbar{
-  background:rgba(14, 29, 48, 0.88);
+  background:rgba(14, 29, 48, 0.92);
 }
-.brand-mini{display:flex; align-items:center; gap:10px; font-weight:800; font-size:1.1rem; cursor:pointer; flex-shrink:0;}
+.brand-mini{display:flex; align-items:center; gap:8px; font-weight:800; font-size:0.95rem; cursor:pointer; flex-shrink:1; min-width:0; overflow:hidden;}
 .brand-logo-img{
-  height: 38px; width: auto; object-fit: contain; border-radius: 50%;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  height: 34px; width: auto; object-fit: contain; border-radius: 50%;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.12); flex-shrink: 0;
+}
+.brand-mini .brand-text {
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 
 .topbar-controls{
-  display: flex; align-items: center; gap: 8px; position: relative; flex-shrink:0;
+  display: flex; align-items: center; gap: 6px; position: relative; flex-shrink:0;
 }
 
 /* User Greeting Chip / Single Profile Button */
 .user-greeting-chip{
-  display: flex; align-items: center; gap: 8px; background: var(--surface);
-  border: 1px solid var(--line); border-radius: 100px; padding: 4px 12px 4px 4px;
-  font-size: 0.82rem; font-weight: 700; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  transition: all 0.2s ease;
+  display: flex; align-items: center; gap: 6px; background: var(--surface);
+  border: 1px solid var(--line); border-radius: 100px; padding: 3px 8px 3px 3px;
+  font-size: 0.76rem; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  transition: all 0.2s ease; flex-shrink: 0;
 }
 .user-greeting-chip:hover, .user-greeting-chip.active{
   border-color: var(--green); background: rgba(34,224,122,0.1);
 }
 .user-greeting-chip .avatar-mini{
-  width: 28px; height: 28px; border-radius: 50%; background: var(--green); color: var(--navy);
-  display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.8rem;
+  width: 26px; height: 26px; border-radius: 50%; background: var(--green); color: var(--navy);
+  display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.75rem;
 }
 
-/* Compact Popover Language Selector (2026 Trend) */
+/* Compact Popover Language Selector Dropdown */
 .lang-dropdown-wrapper{
-  position: relative;
+  position: relative; flex-shrink: 0;
 }
 .lang-dropdown-pill{
-  display: flex; align-items: center; gap: 5px; background: var(--surface);
-  border: 1px solid var(--line); border-radius: 100px; padding: 6px 11px;
-  font-weight: 700; font-size: 0.8rem; color: var(--ink); cursor: pointer;
-  transition: all 0.2s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.04); white-space: nowrap;
+  display: flex; align-items: center; gap: 4px; background: var(--surface);
+  border: 1px solid var(--line); border-radius: 100px; padding: 5px 9px;
+  font-weight: 700; font-size: 0.76rem; color: var(--ink); cursor: pointer;
+  transition: all 0.2s ease; box-shadow: 0 2px 6px rgba(0,0,0,0.04); white-space: nowrap;
 }
 .lang-dropdown-pill:hover{ border-color: var(--green); }
-.lang-dropdown-pill svg{ width: 13px; height: 13px; color: var(--muted); }
+.lang-dropdown-pill svg{ width: 11px; height: 11px; color: var(--muted); }
 
 .lang-menu-popover{
   position: absolute; top: calc(100% + 8px); right: 0; z-index: 100;
@@ -183,14 +200,15 @@ html.dark .topbar{
 .lang-option.active{ color: var(--green-dim); }
 html.dark .lang-option.active{ color: var(--green); }
 
+/* Theme Toggle Frame Fix */
 .theme-toggle{
-  width:36px;height:36px;border-radius:50%; border:1px solid var(--line);
+  width:34px; height:34px; border-radius:50%; border:1px solid var(--line);
   background:var(--surface); display:flex; align-items:center; justify-content:center;
   color:var(--ink); transition:transform .2s, background-color .3s; flex-shrink:0;
 }
 .theme-toggle:active{transform:scale(0.9);}
 
-/* Desktop 2026 Navigation Pills (STRICT SINGLE LINE) */
+/* Desktop 2026 Navigation Pills */
 .desktop-nav{
   display: none; align-items: center; gap: 4px; font-weight: 700; font-size: 0.85rem;
   margin: 0 10px; background: rgba(13,27,42,0.04); padding: 4px; border-radius: 100px;
@@ -222,12 +240,12 @@ html.dark .desktop-nav-link.active{
   width: 100%; height: 100%;
 }
 .promo-slide{
-  min-width: 100%; box-sizing: border-box; padding: 28px 26px; color: #fff;
+  min-width: 100%; box-sizing: border-box; padding: 28px 24px; color: #fff;
   position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end;
   min-height: 230px; background-size: cover; background-position: center;
 }
 
-/* Slide Overlay Gradients for maximum text readability */
+/* Slide Overlay Gradients */
 .promo-slide::before{
   content:""; position:absolute; inset:0; z-index:1;
   background: linear-gradient(180deg, rgba(13,27,42,0.15) 0%, rgba(13,27,42,0.85) 75%, rgba(13,27,42,0.95) 100%);
@@ -239,56 +257,56 @@ html.dark .desktop-nav-link.active{
 .promo-slide-4{ background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80'); }
 
 .promo-slide .tag{
-  display:inline-block; background:var(--green); color:var(--navy); font-weight:800; font-size:0.75rem;
-  padding:5px 14px; border-radius:100px; margin-bottom:10px; position:relative; align-self: flex-start; z-index:2;
+  display:inline-block; background:var(--green); color:var(--navy); font-weight:800; font-size:0.72rem;
+  padding:5px 13px; border-radius:100px; margin-bottom:8px; position:relative; align-self: flex-start; z-index:2;
   box-shadow: 0 4px 12px rgba(34,224,122,0.4);
 }
 .promo-slide h3{
-  margin:0 0 6px; font-size:1.45rem; position:relative; font-weight:800; z-index:2; text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  margin:0 0 6px; font-size:1.35rem; position:relative; font-weight:800; z-index:2; text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 .promo-slide p{
-  margin:0 0 14px; font-size:0.92rem; color:rgba(255,255,255,0.9); position:relative; z-index:2; max-width: 85%;
+  margin:0 0 12px; font-size:0.88rem; color:rgba(255,255,255,0.9); position:relative; z-index:2; max-width: 90%;
   line-height: 1.4;
 }
 .promo-slide .banner-btn{
   position: relative; z-index:2; align-self: flex-start; background: rgba(255,255,255,0.22);
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); color: #fff; border: 1px solid rgba(255,255,255,0.4);
-  padding: 8px 18px; border-radius: 100px; font-weight: 700; font-size: 0.82rem; transition: transform 0.2s, background 0.2s;
+  padding: 7px 16px; border-radius: 100px; font-weight: 700; font-size: 0.8rem; transition: transform 0.2s, background 0.2s;
   cursor: pointer; display: flex; align-items: center; gap: 6px;
 }
 .promo-slide .banner-btn:hover{ background: var(--green); color: var(--navy); border-color: var(--green); }
 
 .carousel-dots{
-  position: absolute; top: 20px; right: 20px; display: flex; gap: 6px; z-index: 5;
+  position: absolute; top: 18px; right: 18px; display: flex; gap: 6px; z-index: 5;
 }
 .dot{
-  width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4);
+  width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.4);
   transition: all 0.3s ease; cursor: pointer;
 }
-.dot.active{ width: 24px; border-radius: 100px; background: var(--green); box-shadow: 0 0 10px var(--green); }
+.dot.active{ width: 22px; border-radius: 100px; background: var(--green); box-shadow: 0 0 10px var(--green); }
 
 /* ---- SCREENS ---- */
-.screen{display:none; padding:16px 20px; animation:fadeIn .35s ease;}
+.screen{display:none; padding:16px 16px; animation:fadeIn .35s ease;}
 .screen.active{display:block;}
 @keyframes fadeIn{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
 
 .search-bar{
   display:flex; align-items:center; gap:10px;
   background:var(--surface); border:1px solid var(--line); border-radius:100px;
-  padding:14px 18px; box-shadow:var(--shadow); margin-bottom:22px;
+  padding:13px 16px; box-shadow:var(--shadow); margin-bottom:20px;
   cursor: pointer;
 }
 .search-bar input{
-  border:none; background:transparent; outline:none; flex:1; font-size:0.94rem; color:var(--ink); font-family:inherit;
+  border:none; background:transparent; outline:none; flex:1; font-size:0.92rem; color:var(--ink); font-family:inherit;
 }
 .search-bar .icon{color:var(--muted); display:flex;}
 
-.cat-scroll{display:flex; gap:12px; overflow-x:auto; padding-bottom:6px; margin-bottom:24px; scrollbar-width:none;}
+.cat-scroll{display:flex; gap:10px; overflow-x:auto; padding-bottom:6px; margin-bottom:24px; scrollbar-width:none;}
 .cat-scroll::-webkit-scrollbar{display:none;}
 .cat-pill{
   flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:8px;
-  padding:14px 16px; background:var(--surface); border:1px solid var(--line); border-radius:16px;
-  min-width:86px; transition:transform .2s, border-color .2s, box-shadow .2s;
+  padding:12px 14px; background:var(--surface); border:1px solid var(--line); border-radius:16px;
+  min-width:82px; transition:transform .2s, border-color .2s, box-shadow .2s;
   cursor: pointer;
 }
 .cat-pill:active{transform:scale(0.94);}
@@ -300,20 +318,20 @@ html.dark .cat-pill.active .cicon{color:var(--green);}
 .cat-pill.active span{color:var(--ink);}
 
 .section-title{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
-.section-title h2{font-size:1.1rem; font-weight:800; margin:0;}
+.section-title h2{font-size:1.05rem; font-weight:800; margin:0;}
 .section-title .see-all{font-size:0.82rem; color:var(--green-dim); font-weight:700; cursor:pointer;}
 html.dark .section-title .see-all{color:var(--green);}
 
-.venue-row{display:flex; gap:16px; overflow-x:auto; padding-bottom:6px; margin-bottom:30px; scrollbar-width:none;}
+.venue-row{display:flex; gap:14px; overflow-x:auto; padding-bottom:6px; margin-bottom:28px; scrollbar-width:none;}
 .venue-row::-webkit-scrollbar{display:none;}
 .vcard{
-  flex:0 0 auto; width:210px; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+  flex:0 0 auto; width:200px; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
   overflow:hidden; box-shadow:var(--shadow); transition:transform .25s ease, box-shadow .25s ease; cursor:pointer;
 }
 .vcard:hover{transform:translateY(-3px); box-shadow:0 18px 36px -16px rgba(0,0,0,0.2);}
 .vcard:active{transform:scale(0.97);}
 .vcard .thumb{
-  height:130px; display:flex; align-items:flex-end; justify-content:flex-start; color:#fff;
+  height:125px; display:flex; align-items:flex-end; justify-content:flex-start; color:#fff;
   background-size:cover; background-position:center; position:relative; overflow:hidden;
   background-color: var(--navy-3);
 }
@@ -336,23 +354,23 @@ html.dark .section-title .see-all{color:var(--green);}
 .vcard .fav svg{width:16px; height:16px;}
 .vcard .fav.active{color:#FF5A6E; transform:scale(1.15);}
 .vcard .fav.active svg{fill:#FF5A6E; stroke:#FF5A6E;}
-.vcard .body{padding:14px 14px 16px;}
-.vcard h3{font-size:0.95rem; margin:0 0 4px; font-weight:700;}
+.vcard .body{padding:12px 12px 14px;}
+.vcard h3{font-size:0.92rem; margin:0 0 4px; font-weight:700;}
 .vcard .meta{display:flex; align-items:center; justify-content:space-between; font-size:0.78rem; color:var(--muted);}
 .vcard .rating{display:flex; align-items:center; gap:4px; font-weight:700; color:var(--ink);}
 .vcard .rating svg{width:13px; height:13px; fill:#F5A623; stroke:#F5A623;}
-.vcard .price{font-size:0.85rem; font-weight:800; color:var(--green-dim); margin-top:8px;}
+.vcard .price{font-size:0.84rem; font-weight:800; color:var(--green-dim); margin-top:6px;}
 html.dark .vcard .price{color:var(--green);}
 
 /* ---- BACK HEADER ---- */
-.subheader{display:flex; align-items:center; gap:14px; padding:14px 0 10px; position:sticky; top:0; background:var(--bg); z-index:30;}
+.subheader{display:flex; align-items:center; gap:14px; padding:12px 0 8px; position:sticky; top:0; background:var(--bg); z-index:30;}
 .back-btn{
-  width:40px;height:40px;border-radius:50%; background:var(--surface); border:1px solid var(--line);
+  width:38px; height:38px; border-radius:50%; background:var(--surface); border:1px solid var(--line);
   display:flex; align-items:center; justify-content:center; color:var(--ink); flex:0 0 auto;
   transition:transform .15s;
 }
 .back-btn:active{transform:scale(0.9);}
-.subheader h2{font-size:1.1rem; margin:0; font-weight:800;}
+.subheader h2{font-size:1.05rem; margin:0; font-weight:800;}
 
 /* ---- VENUE PAGE ---- */
 .venue-hero{
@@ -440,7 +458,7 @@ html.dark .date-chip.active .d, html.dark .date-chip.active .n{color:var(--navy)
 /* ---- FORM & TARIFF STYLES ---- */
 .form-card{
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
-  padding: 22px; margin-bottom: 20px; box-shadow: var(--shadow);
+  padding: 20px; margin-bottom: 20px; box-shadow: var(--shadow);
 }
 .form-group{ margin-bottom: 16px; }
 .form-group label{ display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 6px; color: var(--ink); }
@@ -486,23 +504,23 @@ html.dark .badge-tag.approved{ color: var(--green); }
 
 /* ---- FOOTER & PARTNERSHIP CONTACT ---- */
 .app-footer{
-  background: var(--navy); color: #fff; border-radius: var(--radius); padding: 24px;
-  margin-top: 36px; margin-bottom: 20px; box-shadow: var(--shadow); position: relative; overflow: hidden;
+  background: var(--navy); color: #fff; border-radius: var(--radius); padding: 22px;
+  margin-top: 32px; margin-bottom: 20px; box-shadow: var(--shadow); position: relative; overflow: hidden;
 }
 .app-footer::before{
   content: ""; position: absolute; width: 180px; height: 180px; border-radius: 50%;
   background: radial-gradient(circle, rgba(34,224,122,0.25), transparent 70%); bottom: -60px; right: -50px;
 }
-.footer-title{ font-size: 1.1rem; font-weight: 800; margin: 0 0 8px; position: relative; z-index: 2; }
-.footer-sub{ font-size: 0.84rem; color: rgba(255,255,255,0.75); margin-bottom: 16px; position: relative; z-index: 2; }
+.footer-title{ font-size: 1.05rem; font-weight: 800; margin: 0 0 8px; position: relative; z-index: 2; }
+.footer-sub{ font-size: 0.82rem; color: rgba(255,255,255,0.75); margin-bottom: 16px; position: relative; z-index: 2; }
 .footer-links{ display: flex; flex-direction: column; gap: 10px; position: relative; z-index: 2; }
 .footer-link-item{
   display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.08);
-  padding: 12px 16px; border-radius: 14px; font-weight: 700; font-size: 0.88rem; color: #fff;
+  padding: 12px 16px; border-radius: 14px; font-weight: 700; font-size: 0.86rem; color: #fff;
   transition: background 0.2s; text-decoration: none;
 }
 .footer-link-item:hover{ background: rgba(34,224,122,0.2); }
-.footer-link-item svg{ width: 20px; height: 20px; color: var(--green); flex: 0 0 auto; }
+.footer-link-item svg{ width: 18px; height: 18px; color: var(--green); flex: 0 0 auto; }
 
 /* ---- REWARDS & PROMO CODES ---- */
 .reward-card{
@@ -589,13 +607,16 @@ html.dark .btn-confirm{background:var(--green); color:var(--navy);}
 }
 html.dark .btn-home{background:var(--green); color:var(--navy);}
 
-/* ---- BOTTOM NAV ---- */
+/* ---- NATIVE BOTTOM NAV ---- */
 .bottomnav{
   position:fixed; bottom:0; left:0; right:0; z-index:60;
   max-width:430px; margin:0 auto;
-  background:var(--surface); border-top:1px solid var(--line);
-  display:flex; justify-content:space-around; align-items:center; padding:10px 6px 14px;
-  backdrop-filter:blur(14px);
+  background:rgba(255, 255, 255, 0.92); border-top:1px solid var(--line);
+  display:flex; justify-content:space-around; align-items:center; padding:8px 4px 12px;
+  backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+}
+html.dark .bottomnav{
+  background:rgba(14, 29, 48, 0.92);
 }
 .nav-item{display:flex; flex-direction:column; align-items:center; gap:4px; color:var(--muted); font-size:0.68rem; font-weight:700; padding:6px 10px; border-radius:12px; transition:color .2s; cursor:pointer;}
 .nav-item.active{color:var(--ink);}
@@ -603,11 +624,11 @@ html.dark .btn-home{background:var(--green); color:var(--navy);}
 .nav-item.active .ic{color:var(--green-dim);}
 html.dark .nav-item.active .ic{color:var(--green);}
 .nav-item.fab{
-  width:50px; height:50px; border-radius:50%; background:var(--green); color:var(--navy);
-  display:flex; align-items:center; justify-content:center; margin-top:-30px;
+  width:48px; height:48px; border-radius:50%; background:var(--green); color:var(--navy);
+  display:flex; align-items:center; justify-content:center; margin-top:-26px;
   box-shadow:0 10px 22px -8px rgba(34,224,122,0.6);
 }
-.nav-item.fab svg{width:24px; height:24px; stroke-width:2.4;}
+.nav-item.fab svg{width:22px; height:22px; stroke-width:2.4;}
 
 /* ---- PROFILE / LIST ITEMS ---- */
 .list-item{
@@ -648,7 +669,7 @@ html.dark .status-pill{color:var(--green);}
       <span class="brand-text">Gaplashib Qoydim</span>
     </div>
 
-    <!-- 2026 Desktop Navigation Links (CLEAN SINGLE-LINE & NO DUPLICATE PROFILES) -->
+    <!-- 2026 Desktop Navigation Links -->
     <div class="desktop-nav">
       <div class="desktop-nav-link active" id="dnav-home" data-dnav="home" onclick="goTo('home')">Bosh sahifa</div>
       <div class="desktop-nav-link" id="dnav-search" data-dnav="search" onclick="goTo('search')">Qidiruv</div>
@@ -670,7 +691,7 @@ html.dark .status-pill{color:var(--green);}
         <div class="lang-dropdown-pill" onclick="toggleLangMenu(event)">
           <span id="langIconSlot"></span>
           <span id="currentLangCode">UZ</span>
-          <svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.5;"><path d="M6 9l6 6 6-6"/></svg>
+          <svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.5;"><path d="M6 9l6 6 6-6"/></svg>
         </div>
 
         <div class="lang-menu-popover" id="langPopoverMenu">
@@ -680,6 +701,7 @@ html.dark .status-pill{color:var(--green);}
         </div>
       </div>
 
+      <!-- Sized Theme Toggle (Guaranteed No Frame Overflow) -->
       <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn"></button>
     </div>
   </div>
@@ -687,7 +709,7 @@ html.dark .status-pill{color:var(--green);}
   <!-- HOME SCREEN -->
   <section class="screen active" id="screen-home">
     
-    <!-- LARGE HIGH-IMPACT ROTATING REKLAMA PROMO CAROUSEL (POSITIONED AT TOP) -->
+    <!-- LARGE HIGH-IMPACT ROTATING REKLAMA PROMO CAROUSEL -->
     <div class="promo-carousel">
       <div class="promo-slider" id="promoSlider">
         
