@@ -75,7 +75,7 @@ svg.ic-fill{fill:currentColor; stroke:none;}
 
 @media (min-width: 900px) {
   .phone {
-    max-width: 1160px;
+    max-width: 1180px;
     padding-bottom: 40px;
     margin: 20px auto;
     border-radius: 28px;
@@ -85,9 +85,6 @@ svg.ic-fill{fill:currentColor; stroke:none;}
   }
   .bottomnav {
     display: none !important;
-  }
-  .desktop-nav {
-    display: flex !important;
   }
   .venue-row {
     display: grid !important;
@@ -236,11 +233,30 @@ html.dark .lang-option.active{ color: var(--green); }
 }
 .theme-toggle:active{transform:scale(0.9);}
 
-/* Desktop 2026 Navigation Pills */
+/* Desktop 2026 Navigation Wrapper with Arrow Controls */
+.desktop-nav-wrapper {
+  display: none; align-items: center; gap: 4px; position: relative; flex-shrink: 1; min-width: 0;
+}
+@media (min-width: 900px) {
+  .desktop-nav-wrapper { display: flex !important; }
+}
+
+.nav-arrow-btn {
+  width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--line);
+  background: var(--surface); color: var(--ink); display: flex; align-items: center;
+  justify-content: center; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  transition: all 0.2s ease; flex-shrink: 0; z-index: 2;
+}
+.nav-arrow-btn:hover {
+  background: var(--green); color: var(--navy); border-color: var(--green); transform: scale(1.1);
+}
+.nav-arrow-btn:active { transform: scale(0.9); }
+
 .desktop-nav{
-  display: none; align-items: center; gap: 2px; font-weight: 700; font-size: 0.82rem;
-  margin: 0 6px; background: rgba(13,27,42,0.04); padding: 4px; border-radius: 100px;
+  display: flex; align-items: center; gap: 2px; font-weight: 700; font-size: 0.82rem;
+  margin: 0; background: rgba(13,27,42,0.04); padding: 4px; border-radius: 100px;
   border: 1px solid var(--line); flex-shrink: 1; overflow-x: auto; scrollbar-width: none;
+  scroll-behavior: smooth;
 }
 html.dark .desktop-nav{ background: rgba(255,255,255,0.04); }
 .desktop-nav::-webkit-scrollbar{ display:none; }
@@ -641,7 +657,7 @@ html.dark .btn-home{background:var(--green); color:var(--navy);}
   position:fixed; bottom:0; left:0; right:0; z-index:60;
   max-width:430px; margin:0 auto;
   background:rgba(255, 255, 255, 0.92); border-top:1px solid var(--line);
-  display:flex; justify-style:space-around; align-items:center; padding:8px 4px 12px;
+  display:flex; justify-content:space-around; align-items:center; padding:8px 4px 12px;
   backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
 }
 html.dark .bottomnav{
@@ -698,14 +714,24 @@ html.dark .status-pill{color:var(--green);}
       <span class="brand-text">Gaplashib Qoydim</span>
     </div>
 
-    <!-- 2026 Desktop Navigation Links -->
-    <div class="desktop-nav">
-      <div class="desktop-nav-link active" id="dnav-home" data-dnav="home" onclick="goTo('home')">Bosh sahifa</div>
-      <div class="desktop-nav-link" id="dnav-search" data-dnav="search" onclick="goTo('search')">Qidiruv</div>
-      <div class="desktop-nav-link" id="dnav-rewards" data-dnav="rewards" onclick="goTo('rewards')">Promokodlar</div>
-      <div class="desktop-nav-link" id="dnav-vendor" data-dnav="vendor" onclick="goTo('vendor')">Biznes & Tariflar</div>
-      <div class="desktop-nav-link" id="dnav-bookings" data-dnav="bookings" onclick="goTo('bookings')">Bronlarim</div>
-      <div class="desktop-nav-link" id="dnav-favorites" data-dnav="favorites" onclick="goTo('favorites')">Sevimlilar</div>
+    <!-- 2026 Desktop Navigation Links Wrapper with Scroll Arrow Controls -->
+    <div class="desktop-nav-wrapper">
+      <button class="nav-arrow-btn" onclick="scrollNav(-140)" title="Chapga scroll">
+        <svg class="ic" viewBox="0 0 24 24" style="width:13px;height:13px;stroke-width:2.5;"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+
+      <div class="desktop-nav" id="desktopNav">
+        <div class="desktop-nav-link active" id="dnav-home" data-dnav="home" onclick="goTo('home')">Bosh sahifa</div>
+        <div class="desktop-nav-link" id="dnav-search" data-dnav="search" onclick="goTo('search')">Qidiruv</div>
+        <div class="desktop-nav-link" id="dnav-rewards" data-dnav="rewards" onclick="goTo('rewards')">Promokodlar</div>
+        <div class="desktop-nav-link" id="dnav-vendor" data-dnav="vendor" onclick="goTo('vendor')">Biznes & Tariflar</div>
+        <div class="desktop-nav-link" id="dnav-bookings" data-dnav="bookings" onclick="goTo('bookings')">Bronlarim</div>
+        <div class="desktop-nav-link" id="dnav-favorites" data-dnav="favorites" onclick="goTo('favorites')">Sevimlilar</div>
+      </div>
+
+      <button class="nav-arrow-btn" onclick="scrollNav(140)" title="O'ngga scroll">
+        <svg class="ic" viewBox="0 0 24 24" style="width:13px;height:13px;stroke-width:2.5;"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
     </div>
 
     <div class="topbar-controls">
@@ -1444,6 +1470,14 @@ let bookingsData = JSON.parse(localStorage.getItem('gq_bookings') || JSON.string
   {id: 'GQ-48213', name:'Liliya Flowers', ic:I.flower, date:'14-avgust, 15:00', price:'50,000 so\'m', status:'Tasdiqlangan'},
   {id: 'GQ-39102', name:'Sweet House Bakery', ic:I.cake, date:'15-avgust, 12:00', price:'150,000 so\'m', status:'Tasdiqlangan'},
 ]));
+
+// Smooth Desktop Nav Arrow Scrolling
+function scrollNav(amount) {
+  const nav = document.getElementById('desktopNav');
+  if (nav) {
+    nav.scrollBy({ left: amount, behavior: 'smooth' });
+  }
+}
 
 // PWA Deferred Installation Prompt
 let deferredPrompt;
