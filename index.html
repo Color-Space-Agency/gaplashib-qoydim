@@ -97,6 +97,9 @@ svg.ic-fill{fill:currentColor; stroke:none;}
   .slot-grid {
     margin-bottom: 20px !important;
   }
+  .tariff-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
 }
 
 a{color:inherit; text-decoration:none;}
@@ -172,7 +175,7 @@ html.dark .desktop-nav-link.active{
   color: var(--green);
 }
 
-/* ---- PROMO BANNER CAROUSEL (REPLACED AT TOP) ---- */
+/* ---- PROMO BANNER CAROUSEL ---- */
 .promo-carousel{
   position: relative; overflow: hidden; border-radius: var(--radius);
   margin-bottom: 22px; box-shadow: var(--shadow); background: var(--navy);
@@ -381,7 +384,7 @@ html.dark .date-chip.active .d, html.dark .date-chip.active .n{color:var(--navy)
 .btn-book:active{transform:scale(0.97);}
 .btn-book:disabled{opacity:0.4; box-shadow:none; cursor:not-allowed;}
 
-/* ---- FORM STYLES ---- */
+/* ---- FORM & TARIFF STYLES ---- */
 .form-card{
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
   padding: 22px; margin-bottom: 20px; box-shadow: var(--shadow);
@@ -394,7 +397,6 @@ html.dark .date-chip.active .d, html.dark .date-chip.active .n{color:var(--navy)
   outline: none; transition: border-color 0.2s;
 }
 .form-control:focus{ border-color: var(--green); }
-.form-hint{ font-size: 0.76rem; color: var(--muted); margin-top: 4px; }
 .btn-primary{
   width: 100%; background: var(--green); color: var(--navy); border: none; padding: 15px;
   border-radius: 100px; font-weight: 800; font-size: 0.95rem; box-shadow: 0 10px 20px -8px rgba(34,224,122,0.5);
@@ -402,12 +404,52 @@ html.dark .date-chip.active .d, html.dark .date-chip.active .n{color:var(--navy)
 }
 .btn-primary:active{ transform: scale(0.97); }
 
+.tariff-grid{ display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 24px; }
+.tariff-card{
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 20px; position: relative; transition: transform 0.25s ease, border-color 0.25s ease;
+  box-shadow: var(--shadow); display: flex; flex-direction: column; justify-content: space-between;
+}
+.tariff-card.popular{ border: 2px solid var(--green); }
+.tariff-card.popular::before{
+  content: "⭐️ ENG TAVSIYA ETILADI"; position: absolute; top: -12px; right: 16px;
+  background: var(--green); color: var(--navy); font-weight: 800; font-size: 0.65rem;
+  padding: 3px 10px; border-radius: 100px;
+}
+.tariff-title{ font-size: 1.15rem; font-weight: 800; margin: 0 0 4px; }
+.tariff-price{ font-size: 1.4rem; font-weight: 800; color: var(--green-dim); margin-bottom: 12px; }
+html.dark .tariff-price{ color: var(--green); }
+.tariff-features{ list-style: none; padding: 0; margin: 0 0 18px; font-size: 0.84rem; color: var(--muted); }
+.tariff-features li{ margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.tariff-features li::before{ content: "✓"; color: var(--green-dim); font-weight: 800; }
+html.dark .tariff-features li::before{ color: var(--green); }
+
 .badge-tag{
   display: inline-block; padding: 4px 10px; border-radius: 100px; font-weight: 800; font-size: 0.72rem;
 }
 .badge-tag.pending{ background: rgba(245,166,35,0.18); color: #F5A623; }
 .badge-tag.approved{ background: rgba(34,224,122,0.18); color: var(--green-dim); }
 html.dark .badge-tag.approved{ color: var(--green); }
+
+/* ---- FOOTER & PARTNERSHIP CONTACT ---- */
+.app-footer{
+  background: var(--navy); color: #fff; border-radius: var(--radius); padding: 24px;
+  margin-top: 36px; margin-bottom: 20px; box-shadow: var(--shadow); position: relative; overflow: hidden;
+}
+.app-footer::before{
+  content: ""; position: absolute; width: 180px; height: 180px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(34,224,122,0.25), transparent 70%); bottom: -60px; right: -50px;
+}
+.footer-title{ font-size: 1.1rem; font-weight: 800; margin: 0 0 8px; position: relative; z-index: 2; }
+.footer-sub{ font-size: 0.84rem; color: rgba(255,255,255,0.75); margin-bottom: 16px; position: relative; z-index: 2; }
+.footer-links{ display: flex; flex-direction: column; gap: 10px; position: relative; z-index: 2; }
+.footer-link-item{
+  display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.08);
+  padding: 12px 16px; border-radius: 14px; font-weight: 700; font-size: 0.88rem; color: #fff;
+  transition: background 0.2s; text-decoration: none;
+}
+.footer-link-item:hover{ background: rgba(34,224,122,0.2); }
+.footer-link-item svg{ width: 20px; height: 20px; color: var(--green); flex: 0 0 auto; }
 
 /* ---- REWARDS & PROMO CODES ---- */
 .reward-card{
@@ -558,6 +600,7 @@ html.dark .status-pill{color:var(--green);}
       <div class="desktop-nav-link active" id="dnav-home" data-dnav="home" onclick="goTo('home')">Bosh sahifa</div>
       <div class="desktop-nav-link" id="dnav-search" data-dnav="search" onclick="goTo('search')">Qidiruv</div>
       <div class="desktop-nav-link" id="dnav-rewards" data-dnav="rewards" onclick="goTo('rewards')">Promokodlar</div>
+      <div class="desktop-nav-link" id="dnav-vendor" data-dnav="vendor" onclick="goTo('vendor')">Tariflar & Biznes</div>
       <div class="desktop-nav-link" id="dnav-bookings" data-dnav="bookings" onclick="goTo('bookings')">Bronlarim</div>
       <div class="desktop-nav-link" id="dnav-favorites" data-dnav="favorites" onclick="goTo('favorites')">Sevimlilar</div>
       <div class="desktop-nav-link" id="dnav-profile" data-dnav="profile" onclick="goTo('profile')">Profil</div>
@@ -631,6 +674,26 @@ html.dark .status-pill{color:var(--green);}
 
     <div class="section-title"><h2 id="txtSecPopular">Ommabop</h2><a class="see-all txtSeeAll" onclick="goTo('search')">Barchasi</a></div>
     <div class="venue-row" id="rowPopular"></div>
+
+    <!-- REKLAMA VA HAMKORLIK FOOTER SECTION -->
+    <div class="app-footer">
+      <div class="footer-title" id="txtFooterTitle">Reklama va Hamkorlik uchun</div>
+      <div class="footer-sub" id="txtFooterSub">O'z biznesingizni va joyingizni joylashtiring va mijozlar oqimini oshiring!</div>
+      <div class="footer-links">
+        <a href="tel:+998770077645" class="footer-link-item">
+          <svg class="ic" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          +998 77 007 76 45
+        </a>
+        <a href="https://instagram.com/Gaplashib_Qoydim" target="_blank" class="footer-link-item">
+          <svg class="ic" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          Instagram: @Gaplashib_Qoydim
+        </a>
+        <a href="https://t.me/Gaplashib_Qoydim" target="_blank" class="footer-link-item">
+          <svg class="ic" viewBox="0 0 24 24"><path d="M21.198 2.433a2.242 2.242 0 00-1.022.215l-16.5 6.6a2.237 2.237 0 00.12 4.17l3.98 1.49 1.48 4.72a2.23 2.23 0 003.58 1.07l2.42-2.12 4.54 3.32a2.24 2.24 0 003.55-1.22l3.3-15.6a2.24 2.24 0 00-2.45-2.67z"/></svg>
+          Telegram: @Gaplashib_Qoydim
+        </a>
+      </div>
+    </div>
   </section>
 
   <!-- SEARCH SCREEN -->
@@ -725,6 +788,69 @@ html.dark .status-pill{color:var(--green);}
     <div class="subheader" style="position:static;"><h2 style="padding-top:8px;" id="txtVendorCabinetTitle">Sotuvchi (Biznes Egasi) Kabineti</h2></div>
     <div style="padding-top:14px;">
       
+      <!-- FREE TRIAL BANNER -->
+      <div style="background:linear-gradient(135deg, rgba(34,224,122,0.15) 0%, rgba(13,27,42,0.1) 100%); border:1px solid var(--green); border-radius:var(--radius); padding:16px 20px; margin-bottom:24px; display:flex; align-items:center; gap:14px;">
+        <div style="font-size:1.8rem;">🎁</div>
+        <div>
+          <div style="font-weight:800; font-size:0.98rem; color:var(--green-dim);" id="txtTrialStatus">14 Kunlik BEPUL Sinov Davri Aktiv</div>
+          <div style="font-size:0.8rem; color:var(--muted);" id="txtTrialInfo">Sinov muddati tugagandan so'ng quyidagi qulay tariflardan biriga o'tishingiz mumkin:</div>
+        </div>
+      </div>
+
+      <!-- BUSINESS TARIFF PRICING CARDS (STANDART / PRO / PREMIUM) -->
+      <div class="section-title"><h3 style="font-size:1.05rem; margin:0;" id="txtTariffsSectionTitle">Biznes Egalari uchun Tariflar</h3></div>
+      <div class="tariff-grid">
+        
+        <!-- STANDART TARIFF -->
+        <div class="tariff-card">
+          <div>
+            <div class="tariff-title">Standart</div>
+            <div class="tariff-price">99,000 so'm <span style="font-size:0.75rem; font-weight:600; color:var(--muted);">/ oy</span></div>
+            <ul class="tariff-features">
+              <li>1 ta joy yoki xizmat qo'shish</li>
+              <li>Oylik 50 ta bron boshqaruvi</li>
+              <li>Asosiy statistika paneli</li>
+              <li>Standart moderatsiya</li>
+            </ul>
+          </div>
+          <button class="btn-primary" style="background:var(--surface); border:1px solid var(--line); color:var(--ink);" onclick="selectTariff('Standart')">Tanlash</button>
+        </div>
+
+        <!-- PRO TARIFF (POPULAR) -->
+        <div class="tariff-card popular">
+          <div>
+            <div class="tariff-title">Pro</div>
+            <div class="tariff-price">199,000 so'm <span style="font-size:0.75rem; font-weight:600; color:var(--muted);">/ oy</span></div>
+            <ul class="tariff-features">
+              <li>3 ta joy va xizmat joylash</li>
+              <li>Cheksiz bronlar qabuli</li>
+              <li>Reklama carouselida 1 ta baner</li>
+              <li>Keshbek bonus dasturi</li>
+              <li>Ustuvor admin moderatsiyasi</li>
+            </ul>
+          </div>
+          <button class="btn-primary" onclick="selectTariff('Pro')">Pro'ga o'tish</button>
+        </div>
+
+        <!-- PREMIUM TARIFF -->
+        <div class="tariff-card">
+          <div>
+            <div class="tariff-title">Premium</div>
+            <div class="tariff-price">349,000 so'm <span style="font-size:0.75rem; font-weight:600; color:var(--muted);">/ oy</span></div>
+            <ul class="tariff-features">
+              <li>Cheksiz joylar va xizmatlar</li>
+              <li>Reklama carouselida TOP o'rin</li>
+              <li>Shaxsiy menejer va VIP badge</li>
+              <li>To'liq analitika va daromad hisoboti</li>
+              <li>Maxsus promokod yaratish</li>
+            </ul>
+          </div>
+          <button class="btn-primary" style="background:var(--navy); color:#fff;" onclick="selectTariff('Premium')">Premium Tanlash</button>
+        </div>
+
+      </div>
+
+      <!-- ADD NEW VENUE FORM -->
       <div class="form-card">
         <h3 style="margin:0 0 14px; font-size:1.05rem;" id="txtAddVenueTitle">Yangi joy / xizmat qo'shish</h3>
         <p style="font-size:0.8rem; color:var(--muted); margin-bottom:16px;" id="txtVendorRulesWarning">
@@ -911,9 +1037,12 @@ const DICT = {
     dnavHome: "Bosh sahifa",
     dnavSearch: "Qidiruv",
     dnavRewards: "Promokodlar",
+    dnavVendor: "Tariflar & Biznes",
     dnavBookings: "Bronlarim",
     dnavFav: "Sevimlilar",
     dnavProfile: "Profil",
+    footerTitle: "Reklama va Hamkorlik uchun",
+    footerSub: "O'z biznesingizni joylashtiring va mijozlar oqimini oshiring!",
     emptySearch: "Hech narsa topilmadi. Qidiruv so'zini o'zgartirib ko'ring.",
     emptyBookings: "Hali bronlaringiz yo'q.",
     emptyFavs: "Sevimlilar ro'yxati bo'sh. Yurakcha tugmasini bosib qo'shing.",
@@ -962,9 +1091,12 @@ const DICT = {
     dnavHome: "Главная",
     dnavSearch: "Поиск",
     dnavRewards: "Промокоды",
+    dnavVendor: "Тарифы и Бизнес",
     dnavBookings: "Мои брони",
     dnavFav: "Избранное",
     dnavProfile: "Профиль",
+    footerTitle: "Для рекламы и сотрудничества",
+    footerSub: "Разместите ваш бизнес и увеличьте поток клиентов!",
     emptySearch: "Ничего не найдено. Попробуйте другой запрос.",
     emptyBookings: "У вас пока нет бронирований.",
     emptyFavs: "Список избранного пуст. Нажмите сердечко, чтобы добавить.",
@@ -1013,9 +1145,12 @@ const DICT = {
     dnavHome: "Home",
     dnavSearch: "Search",
     dnavRewards: "Promos",
+    dnavVendor: "Tariffs & Business",
     dnavBookings: "Bookings",
     dnavFav: "Favorites",
     dnavProfile: "Profile",
+    footerTitle: "For Advertising & Partnership",
+    footerSub: "List your business and boost your customer flow!",
     emptySearch: "No results found. Try a different search term.",
     emptyBookings: "You have no bookings yet.",
     emptyFavs: "Your favorites list is empty. Click the heart icon to add.",
@@ -1220,10 +1355,14 @@ function applyTranslations(){
   document.getElementById('lblSheetPrice').textContent = t.priceLbl;
   document.getElementById('confirmBtn').textContent = t.sheetConfirmBtn;
 
+  document.getElementById('txtFooterTitle').textContent = t.footerTitle;
+  document.getElementById('txtFooterSub').textContent = t.footerSub;
+
   // Top Desktop Nav Translations
   document.getElementById('dnav-home').textContent = t.dnavHome;
   document.getElementById('dnav-search').textContent = t.dnavSearch;
   document.getElementById('dnav-rewards').textContent = t.dnavRewards;
+  document.getElementById('dnav-vendor').textContent = t.dnavVendor;
   document.getElementById('dnav-bookings').textContent = t.dnavBookings;
   document.getElementById('dnav-favorites').textContent = t.dnavFav;
   document.getElementById('dnav-profile').textContent = t.dnavProfile;
@@ -1492,7 +1631,11 @@ function confirmBooking(){
   }, 1000);
 }
 
-/* ---------------- VENDOR (SOTUVCHI) & ADMIN SYSTEM ---------------- */
+/* ---------------- VENDOR (SOTUVCHI), TARIFFS & ADMIN SYSTEM ---------------- */
+function selectTariff(name){
+  alert(`💳 "${name}" tarifi tanlandi!\n14 kunlik BEPUL trial tugagandan so'ng tarif faollashtiriladi. Reklama va hamkorlik uchun: +998 77 007 76 45`);
+}
+
 function submitVendorVenue(){
   const name = document.getElementById('vNameInput').value.trim();
   const cat = document.getElementById('vCatSelect').value;
@@ -1508,7 +1651,7 @@ function submitVendorVenue(){
   // ANTI-SOCIAL MEDIA LINK CHECKER (STRICT SOCIAL LINK POLICY)
   const fullText = (name + " " + dist + " " + photo).toLowerCase();
   if(fullText.includes("t.me") || fullText.includes("instagram") || fullText.includes("facebook") || fullText.includes("http://t.me") || fullText.includes("https://t.me")){
-    alert("❌ Taqiqlangan harakat!\nSotuvchilarga ijtimoiy tarmoq havolalari (Telegram, Instagram) qo'shish qat'iyan man etiladi. Barcha aloqalar platforma orqali amalga oshirilishi shart!");
+    alert("❌ Taqiqlangan harakat!\nSotuvchilarga ijtimoiy tarmoq havolalarini (Telegram, Instagram) joylash qat'iyan man etiladi. Barcha aloqalar platforma orqali amalga oshirilishi shart!");
     return;
   }
 
