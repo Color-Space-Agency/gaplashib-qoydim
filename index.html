@@ -468,8 +468,11 @@ html.dark .contact-pill-btn.phone-glow{ color: var(--green); }
 }
 .search-bar .icon{color:var(--muted); display:flex;}
 
-/* 2026 TREND CATEGORY PILLS WITH GLASSMOPHIC SQUIRCLE ICON CONTAINERS */
-.cat-scroll{display:flex; gap:12px; overflow-x:auto; padding-bottom:6px; margin-bottom:24px; scrollbar-width:none;}
+/* 2026 TREND CATEGORY PILLS WITH CLEAN SPACING & HIGH-CONTRAST DARK MODE STYLES */
+.cat-scroll{
+  display:flex; gap:12px; overflow-x:auto; padding:4px 4px 8px 4px; margin-top:4px; margin-bottom:22px;
+  scrollbar-width:none; position:relative; z-index:2; clear:both;
+}
 .cat-scroll::-webkit-scrollbar{display:none;}
 .cat-pill{
   flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:8px;
@@ -479,18 +482,27 @@ html.dark .contact-pill-btn.phone-glow{ color: var(--green); }
 }
 .cat-pill:hover{ transform:translateY(-2px); border-color:var(--green); }
 .cat-pill:active{ transform:scale(0.94); }
-.cat-pill.active{ border-color:var(--green); box-shadow:0 8px 24px -6px rgba(34,224,122,0.35); background:rgba(34,224,122,0.1); }
+
+/* LIGHT & DARK MODE VIVID ACTIVE CATEGORY STYLES */
+.cat-pill.active{ border-color:var(--green); box-shadow:0 8px 24px -6px rgba(34,224,122,0.35); background:rgba(34,224,122,0.12); }
+html.dark .cat-pill.active{ background:rgba(34,224,122,0.18); border-color:var(--green); box-shadow:0 8px 24px -4px rgba(34,224,122,0.45); }
+
 .cat-pill .cicon{
-  width:42px; height:42px; border-radius:14px; background:rgba(13,27,42,0.05);
+  width:42px; height:42px; border-radius:14px; background:rgba(13,27,42,0.06);
   display:flex; align-items:center; justify-content:center; color:var(--ink);
   transition:all 0.25s ease;
 }
-html.dark .cat-pill .cicon{ background:rgba(255,255,255,0.07); color:var(--ink); }
+html.dark .cat-pill .cicon{ background:rgba(255,255,255,0.08); color:var(--ink); }
 .cat-pill .cicon svg{ width:24px; height:24px; stroke-width:2.3; }
-.cat-pill.active .cicon{ background:var(--green); color:var(--navy); box-shadow:0 6px 16px rgba(34,224,122,0.4); }
+
+.cat-pill.active .cicon{ background:var(--green); color:var(--navy); box-shadow:0 6px 16px rgba(34,224,122,0.45); }
 .cat-pill.active .cicon svg{ stroke:var(--navy) !important; stroke-width:2.5 !important; }
+html.dark .cat-pill.active .cicon{ background:var(--green); color:#0D1B2A; }
+html.dark .cat-pill.active .cicon svg{ stroke:#0D1B2A !important; stroke-width:2.5 !important; }
+
 .cat-pill span{ font-size:0.78rem; font-weight:800; color:var(--muted); white-space:nowrap; transition:color 0.2s; }
 .cat-pill.active span{ color:var(--ink); }
+html.dark .cat-pill.active span{ color:#FFFFFF !important; }
 
 .section-title{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
 .section-title h2{font-size:1.05rem; font-weight:800; margin:0;}
