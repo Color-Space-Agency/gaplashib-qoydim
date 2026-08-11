@@ -175,10 +175,14 @@ html.dark .desktop-nav-link.active{
   color: var(--green);
 }
 
+/* ---- HOME GREETING ---- */
+.greeting h1{font-size:1.5rem; margin:6px 0 2px; font-weight:800;}
+.greeting p{color:var(--muted); margin:0 0 18px; font-size:0.92rem;}
+
 /* ---- PROMO BANNER CAROUSEL ---- */
 .promo-carousel{
   position: relative; overflow: hidden; border-radius: var(--radius);
-  margin-bottom: 22px; box-shadow: var(--shadow); background: var(--navy);
+  margin-bottom: 24px; box-shadow: var(--shadow); background: var(--navy);
 }
 .promo-slider{
   display: flex; transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
@@ -230,7 +234,7 @@ html.dark .desktop-nav-link.active{
 }
 .search-bar .icon{color:var(--muted); display:flex;}
 
-.cat-scroll{display:flex; gap:12px; overflow-x:auto; padding-bottom:6px; margin-bottom:26px; scrollbar-width:none;}
+.cat-scroll{display:flex; gap:12px; overflow-x:auto; padding-bottom:6px; margin-bottom:24px; scrollbar-width:none;}
 .cat-scroll::-webkit-scrollbar{display:none;}
 .cat-pill{
   flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:8px;
@@ -626,8 +630,14 @@ html.dark .status-pill{color:var(--green);}
 
   <!-- HOME SCREEN -->
   <section class="screen active" id="screen-home">
+
+    <!-- HOME GREETING HEADER -->
+    <div class="greeting">
+      <h1 id="txtGreeting">Salom, Firdavsbek</h1>
+      <p id="txtSubGreeting">Sevimli joyingizni oson bron qiling</p>
+    </div>
     
-    <!-- ROTATING REKLAMA PROMO CAROUSEL (POSITIONED AT TOP) -->
+    <!-- ROTATING REKLAMA PROMO CAROUSEL SLIDER -->
     <div class="promo-carousel">
       <div class="promo-slider" id="promoSlider">
         <div class="promo-slide promo-slide-1">
@@ -659,11 +669,13 @@ html.dark .status-pill{color:var(--green);}
       </div>
     </div>
 
+    <!-- SEARCH BAR -->
     <div class="search-bar" onclick="goTo('search')">
       <span class="icon" id="searchHomeIcon"></span>
       <input id="txtSearchPlaceholder" placeholder="Futbol maydoni, gul do'koni, tort, barber..." readonly>
     </div>
 
+    <!-- CATEGORY PILLS BAR (EXPLICIT & PROMINENT) -->
     <div class="cat-scroll" id="catScroll"></div>
 
     <div class="section-title"><h2 id="txtSecNearby">Yaqin atrofda</h2><a class="see-all txtSeeAll" onclick="goTo('search')">Barchasi</a></div>
@@ -1042,7 +1054,19 @@ const DICT = {
     dnavFav: "Sevimlilar",
     dnavProfile: "Profil",
     footerTitle: "Reklama va Hamkorlik uchun",
-    footerSub: "O'z biznesingizni joylashtiring va mijozlar oqimini oshiring!",
+    footerSub: "O'z biznesingizni va joyingizni joylashtiring va mijozlar oqimini oshiring!",
+    s1Tag: "YANGI",
+    s1Title: "Birinchi bronga −20% chegirma",
+    s1Desc: "Qo'qondagi barcha hamkor futbol maydoni va sport komplekslarida amal qiladi",
+    s2Tag: "AKSIYA",
+    s2Title: "Liliya Flowers — Bepul yetkazish",
+    s2Desc: "Guldasta buyurtma qiling va bayramingizni unutilmas qiling",
+    s3Tag: "TORT & PISHIRIQ",
+    s3Title: "Sweet House — Maxsus Tortlar",
+    s3Desc: "Tug'ilgan kun uchun 15% bonus keshbek bilan buyurtma bering",
+    s4Tag: "VIP GAMING",
+    s4Title: "Pro Gamer Club — 3+1 Soat",
+    s4Desc: "3 soat kompyuter bron qiling va 1 soat bonusga ega bo'ling",
     emptySearch: "Hech narsa topilmadi. Qidiruv so'zini o'zgartirib ko'ring.",
     emptyBookings: "Hali bronlaringiz yo'q.",
     emptyFavs: "Sevimlilar ro'yxati bo'sh. Yurakcha tugmasini bosib qo'shing.",
@@ -1097,6 +1121,18 @@ const DICT = {
     dnavProfile: "Профиль",
     footerTitle: "Для рекламы и сотрудничества",
     footerSub: "Разместите ваш бизнес и увеличьте поток клиентов!",
+    s1Tag: "АКЦИЯ",
+    s1Title: "Скидка −20% на 1-е бронирование",
+    s1Desc: "Действует во всех спортивных комплексах Коканда",
+    s2Tag: "АКЦИЯ",
+    s2Title: "Liliya Flowers — Бесплатная доставка",
+    s2Desc: "Закажите букет и сделайте ваш праздник незабываемым",
+    s3Tag: "ТОРТЫ И ВЫПЕЧКА",
+    s3Title: "Sweet House — Авторские торты",
+    s3Desc: "Закажите на день рождения с кэшбэком 15%",
+    s4Tag: "VIP GAMING",
+    s4Title: "Pro Gamer Club — 3+1 Час",
+    s4Desc: "Забронируйте 3 часа ПК и получите 1 час в подарок",
     emptySearch: "Ничего не найдено. Попробуйте другой запрос.",
     emptyBookings: "У вас пока нет бронирований.",
     emptyFavs: "Список избранного пуст. Нажмите сердечко, чтобы добавить.",
@@ -1151,6 +1187,18 @@ const DICT = {
     dnavProfile: "Profile",
     footerTitle: "For Advertising & Partnership",
     footerSub: "List your business and boost your customer flow!",
+    s1Tag: "NEW",
+    s1Title: "−20% Off First Booking",
+    s1Desc: "Valid across all partner sports complexes in Kokand",
+    s2Tag: "OFFER",
+    s2Title: "Liliya Flowers — Free Delivery",
+    s2Desc: "Order fresh flower bouquets for your special occasions",
+    s3Tag: "CAKES & PASTRIES",
+    s3Title: "Sweet House — Custom Cakes",
+    s3Desc: "Order birthday cakes with 15% bonus cashback",
+    s4Tag: "VIP GAMING",
+    s4Title: "Pro Gamer Club — 3+1 Hours",
+    s4Desc: "Book 3 PC gaming hours and get 1 bonus hour free",
     emptySearch: "No results found. Try a different search term.",
     emptyBookings: "You have no bookings yet.",
     emptyFavs: "Your favorites list is empty. Click the heart icon to add.",
@@ -1319,60 +1367,88 @@ function setLanguage(lang){
 function applyTranslations(){
   const t = DICT[currentLang] || DICT.uz;
 
-  document.getElementById('txtGreeting').textContent = t.greeting;
-  document.getElementById('txtSubGreeting').textContent = t.subGreeting;
-  document.getElementById('txtSearchPlaceholder').placeholder = t.searchPlaceholder;
-  document.getElementById('txtSearchHeader').textContent = t.searchHeader;
-  document.getElementById('searchInput').placeholder = t.searchBoxPlaceholder;
+  const setTx = (id, text) => {
+    const el = document.getElementById(id);
+    if(el) el.textContent = text;
+  };
+  const setPl = (id, text) => {
+    const el = document.getElementById(id);
+    if(el) el.placeholder = text;
+  };
 
-  document.getElementById('txtSecNearby').textContent = t.secNearby;
-  document.getElementById('txtSecToday').textContent = t.secToday;
-  document.getElementById('txtSecPopular').textContent = t.secPopular;
+  setTx('txtGreeting', t.greeting);
+  setTx('txtSubGreeting', t.subGreeting);
+  setPl('txtSearchPlaceholder', t.searchPlaceholder);
+  setTx('txtSearchHeader', t.searchHeader);
+  setPl('searchInput', t.searchBoxPlaceholder);
+
+  setTx('txtSecNearby', t.secNearby);
+  setTx('txtSecToday', t.secToday);
+  setTx('txtSecPopular', t.secPopular);
   document.querySelectorAll('.txtSeeAll').forEach(el => el.textContent = t.seeAll);
 
-  document.getElementById('txtSelectDate').textContent = t.selectDate;
-  document.getElementById('txtSelectTime').textContent = t.selectTime;
-  document.getElementById('txtPriceLbl').textContent = t.priceLbl;
-  document.getElementById('bookBtn').textContent = t.bookBtn;
+  setTx('txtSelectDate', t.selectDate);
+  setTx('txtSelectTime', t.selectTime);
+  setTx('txtPriceLbl', t.priceLbl);
+  setTx('bookBtn', t.bookBtn);
 
-  document.getElementById('txtMyBookingsHeader').textContent = t.myBookings;
-  document.getElementById('txtFavoritesHeader').textContent = t.favorites;
+  setTx('txtMyBookingsHeader', t.myBookings);
+  setTx('txtFavoritesHeader', t.favorites);
 
-  document.getElementById('txtConfirmTitle').textContent = t.confirmTitle;
-  document.getElementById('txtConfirmSub').textContent = t.confirmSub;
-  document.getElementById('lblTicketId').textContent = t.ticketId;
-  document.getElementById('lblTicketVenue').textContent = t.ticketVenue;
-  document.getElementById('lblTicketDate').textContent = t.ticketDate;
-  document.getElementById('lblTicketTime').textContent = t.ticketTime;
-  document.getElementById('lblTicketPrice').textContent = t.ticketPrice;
-  document.getElementById('btnBackHome').textContent = t.btnBackHome;
+  setTx('txtConfirmTitle', t.confirmTitle);
+  setTx('txtConfirmSub', t.confirmSub);
+  setTx('lblTicketId', t.ticketId);
+  setTx('lblTicketVenue', t.ticketVenue);
+  setTx('lblTicketDate', t.ticketDate);
+  setTx('lblTicketTime', t.ticketTime);
+  setTx('lblTicketPrice', t.ticketPrice);
+  setTx('btnBackHome', t.btnBackHome);
 
-  document.getElementById('txtSheetTitle').textContent = t.sheetTitle;
-  document.getElementById('txtSheetSub').textContent = t.sheetSub;
-  document.getElementById('lblSheetVenue').textContent = t.ticketVenue;
-  document.getElementById('lblSheetDate').textContent = t.ticketDate;
-  document.getElementById('lblSheetTime').textContent = t.ticketTime;
-  document.getElementById('lblSheetPrice').textContent = t.priceLbl;
-  document.getElementById('confirmBtn').textContent = t.sheetConfirmBtn;
+  setTx('txtSheetTitle', t.sheetTitle);
+  setTx('txtSheetSub', t.sheetSub);
+  setTx('lblSheetVenue', t.ticketVenue);
+  setTx('lblSheetDate', t.ticketDate);
+  setTx('lblSheetTime', t.ticketTime);
+  setTx('lblSheetPrice', t.priceLbl);
+  setTx('confirmBtn', t.sheetConfirmBtn);
 
-  document.getElementById('txtFooterTitle').textContent = t.footerTitle;
-  document.getElementById('txtFooterSub').textContent = t.footerSub;
+  setTx('txtFooterTitle', t.footerTitle);
+  setTx('txtFooterSub', t.footerSub);
+
+  // Promo Slider translations
+  setTx('slide1Tag', t.s1Tag);
+  setTx('slide1Title', t.s1Title);
+  setTx('slide1Desc', t.s1Desc);
+  setTx('slide2Tag', t.s2Tag);
+  setTx('slide2Title', t.s2Title);
+  setTx('slide2Desc', t.s2Desc);
+  setTx('slide3Tag', t.s3Tag);
+  setTx('slide3Title', t.s3Title);
+  setTx('slide3Desc', t.s3Desc);
+  setTx('slide4Tag', t.s4Tag);
+  setTx('slide4Title', t.s4Title);
+  setTx('slide4Desc', t.s4Desc);
 
   // Top Desktop Nav Translations
-  document.getElementById('dnav-home').textContent = t.dnavHome;
-  document.getElementById('dnav-search').textContent = t.dnavSearch;
-  document.getElementById('dnav-rewards').textContent = t.dnavRewards;
-  document.getElementById('dnav-vendor').textContent = t.dnavVendor;
-  document.getElementById('dnav-bookings').textContent = t.dnavBookings;
-  document.getElementById('dnav-favorites').textContent = t.dnavFav;
-  document.getElementById('dnav-profile').textContent = t.dnavProfile;
+  setTx('dnav-home', t.dnavHome);
+  setTx('dnav-search', t.dnavSearch);
+  setTx('dnav-rewards', t.dnavRewards);
+  setTx('dnav-vendor', t.dnavVendor);
+  setTx('dnav-bookings', t.dnavBookings);
+  setTx('dnav-favorites', t.dnavFav);
+  setTx('dnav-profile', t.dnavProfile);
 
   // Bottom Nav
-  document.getElementById('navHome').innerHTML = `<span class="ic">${I.home}</span>${t.navHome}`;
-  document.getElementById('navRewards').innerHTML = `<span class="ic">${I.wallet}</span>${t.navRewards}`;
-  document.getElementById('navFab').innerHTML = I.plus;
-  document.getElementById('navBookings').innerHTML = `<span class="ic">${I.calendar}</span>${t.navBookings}`;
-  document.getElementById('navProfile').innerHTML = `<span class="ic">${I.user}</span>${t.navProfile}`;
+  const navH = document.getElementById('navHome');
+  if(navH) navH.innerHTML = `<span class="ic">${I.home}</span>${t.navHome}`;
+  const navR = document.getElementById('navRewards');
+  if(navR) navR.innerHTML = `<span class="ic">${I.wallet}</span>${t.navRewards}`;
+  const navF = document.getElementById('navFab');
+  if(navF) navF.innerHTML = I.plus;
+  const navB = document.getElementById('navBookings');
+  if(navB) navB.innerHTML = `<span class="ic">${I.calendar}</span>${t.navBookings}`;
+  const navP = document.getElementById('navProfile');
+  if(navP) navP.innerHTML = `<span class="ic">${I.user}</span>${t.navProfile}`;
 }
 
 function renderCats(containerId){
