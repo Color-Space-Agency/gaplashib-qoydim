@@ -155,6 +155,30 @@ html.dark .topbar{
   display: flex; align-items: center; gap: 6px; position: relative; flex-shrink:0;
 }
 
+/* Pulsing Green Blinking Install App Button */
+.btn-install-app{
+  display: flex; align-items: center; gap: 5px; background: var(--green);
+  color: var(--navy); font-weight: 800; font-size: 0.75rem; padding: 5px 11px;
+  border-radius: 100px; border: none; cursor: pointer; white-space: nowrap;
+  animation: pulseGreen 1.8s infinite cubic-bezier(0.66, 0, 0, 1);
+  transition: transform 0.2s; flex-shrink: 0;
+}
+@keyframes pulseGreen {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 224, 122, 0.7);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(34, 224, 122, 0);
+    transform: scale(1.03);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 224, 122, 0);
+    transform: scale(1);
+  }
+}
+.btn-install-app:active{ transform: scale(0.95); }
+
 /* User Greeting Chip / Single Profile Button */
 .user-greeting-chip{
   display: flex; align-items: center; gap: 6px; background: var(--surface);
@@ -680,6 +704,12 @@ html.dark .status-pill{color:var(--green);}
     </div>
 
     <div class="topbar-controls">
+      <!-- Pulsing Green Blinking Install App Button -->
+      <button class="btn-install-app" id="btnInstallApp" onclick="installPWAApp()">
+        <svg class="ic" viewBox="0 0 24 24" style="width:13px;height:13px;stroke-width:2.5;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        <span id="txtInstallBtn">Ilovani yuklab olish</span>
+      </button>
+
       <!-- Single Profile Button (User Chip) -->
       <div class="user-greeting-chip" onclick="goTo('profile')">
         <div class="avatar-mini">F</div>
@@ -701,7 +731,7 @@ html.dark .status-pill{color:var(--green);}
         </div>
       </div>
 
-      <!-- Sized Theme Toggle (Guaranteed No Frame Overflow) -->
+      <!-- Sized Theme Toggle -->
       <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn"></button>
     </div>
   </div>
@@ -1137,6 +1167,7 @@ const DICT = {
     dnavFav: "Sevimlilar",
     footerTitle: "Reklama va Hamkorlik uchun",
     footerSub: "O'z biznesingizni va joyingizni joylashtiring va mijozlar oqimini oshiring!",
+    installBtn: "Ilovani yuklab olish",
     s1Tag: "YANGI AKSIYA",
     s1Title: "Birinchi bronga −20% chegirma",
     s1Desc: "Qo'qondagi barcha futbol maydoni va sport komplekslarida amal qiladi",
@@ -1204,6 +1235,7 @@ const DICT = {
     dnavFav: "Избранное",
     footerTitle: "Для рекламы и сотрудничества",
     footerSub: "Разместите ваш бизнес и увеличьте поток клиентов!",
+    installBtn: "Скачать приложение",
     s1Tag: "НОВАЯ АКЦИЯ",
     s1Title: "Скидка −20% на 1-е бронирование",
     s1Desc: "Действует во всех спортивных комплексах Коканда",
@@ -1271,6 +1303,7 @@ const DICT = {
     dnavFav: "Favorites",
     footerTitle: "For Advertising & Partnership",
     footerSub: "List your business and boost your customer flow!",
+    installBtn: "Install App",
     s1Tag: "SPECIAL OFFER",
     s1Title: "−20% Off First Booking",
     s1Desc: "Valid across all partner sports complexes in Kokand",
@@ -1407,6 +1440,27 @@ let bookingsData = JSON.parse(localStorage.getItem('gq_bookings') || JSON.string
   {id: 'GQ-39102', name:'Sweet House Bakery', ic:I.cake, date:'15-avgust, 12:00', price:'150,000 so\'m', status:'Tasdiqlangan'},
 ]));
 
+// PWA Deferred Installation Prompt
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+});
+
+function installPWAApp(){
+  if(deferredPrompt){
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('User accepted the PWA install prompt');
+      }
+      deferredPrompt = null;
+    });
+  } else {
+    alert("📱 Gaplashib Qo'ydim ilovasini o'rnatish:\n\n1. Brauzeringiz menyusini (Share / Boshqalar) bosing.\n2. 'Bosh ekranga qo'shish' (Add to Home Screen) tugmasini tanlang.\n3. Smartfoningizda ilova kabi saqlanadi!");
+  }
+}
+
 // Auto Carousel rotation
 let currentSlide = 0;
 let carouselTimer = setInterval(nextSlide, 4000);
@@ -1529,6 +1583,7 @@ function applyTranslations(){
 
   setTx('txtFooterTitle', t.footerTitle);
   setTx('txtFooterSub', t.footerSub);
+  setTx('txtInstallBtn', t.installBtn);
 
   // Promo Slider translations
   setTx('slide1Tag', t.s1Tag);
