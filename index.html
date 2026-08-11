@@ -105,18 +105,29 @@ button{font-family:inherit; cursor:pointer;}
 /* ---- TOPBAR ---- */
 .topbar{
   position:sticky; top:0; z-index:40;
-  background:var(--bg); padding:16px 20px 12px;
+  background:var(--bg); padding:14px 20px;
   display:flex; align-items:center; justify-content:space-between;
   border-bottom: 1px solid var(--line);
 }
 .brand-mini{display:flex; align-items:center; gap:12px; font-weight:800; font-size:1.1rem; cursor:pointer;}
 .brand-logo-img{
-  height: 42px; width: auto; object-fit: contain; border-radius: 50%;
+  height: 40px; width: auto; object-fit: contain; border-radius: 50%;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .topbar-controls{
   display: flex; align-items: center; gap: 10px;
+}
+
+/* User Greeting Chip */
+.user-greeting-chip{
+  display: flex; align-items: center; gap: 8px; background: var(--surface);
+  border: 1px solid var(--line); border-radius: 100px; padding: 4px 12px 4px 4px;
+  font-size: 0.8rem; font-weight: 700; cursor: pointer;
+}
+.user-greeting-chip .avatar-mini{
+  width: 28px; height: 28px; border-radius: 50%; background: var(--green); color: var(--navy);
+  display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.8rem;
 }
 
 /* Language selector */
@@ -137,7 +148,7 @@ html.dark .lang-btn.active{
 }
 
 .theme-toggle{
-  width:40px;height:40px;border-radius:50%; border:1px solid var(--line);
+  width:38px;height:38px;border-radius:50%; border:1px solid var(--line);
   background:var(--surface); display:flex; align-items:center; justify-content:center;
   color:var(--ink); transition:transform .2s, background-color .3s;
 }
@@ -145,8 +156,8 @@ html.dark .lang-btn.active{
 
 /* Desktop Nav Items */
 .desktop-nav{
-  display: none; align-items: center; gap: 24px; font-weight: 700; font-size: 0.92rem;
-  margin-left: 20px;
+  display: none; align-items: center; gap: 20px; font-weight: 700; font-size: 0.9rem;
+  margin-left: 14px;
 }
 .desktop-nav-link{
   color: var(--muted); transition: color 0.2s; cursor: pointer; display: flex; align-items: center; gap: 6px;
@@ -161,14 +172,49 @@ html.dark .desktop-nav-link.active{
   color: var(--green);
 }
 
+/* ---- PROMO BANNER CAROUSEL (REPLACED AT TOP) ---- */
+.promo-carousel{
+  position: relative; overflow: hidden; border-radius: var(--radius);
+  margin-bottom: 22px; box-shadow: var(--shadow); background: var(--navy);
+}
+.promo-slider{
+  display: flex; transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+  width: 100%;
+}
+.promo-slide{
+  min-width: 100%; box-sizing: border-box; padding: 26px 24px; color: #fff;
+  position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center;
+  min-height: 160px;
+}
+.promo-slide-1{ background: linear-gradient(135deg, #0D1B2A 0%, #1C3350 100%); }
+.promo-slide-2{ background: linear-gradient(135deg, #1AA85E 0%, #0D1B2A 100%); }
+.promo-slide-3{ background: linear-gradient(135deg, #4A0E17 0%, #0D1B2A 100%); }
+.promo-slide-4{ background: linear-gradient(135deg, #2D1B4E 0%, #0D1B2A 100%); }
+
+.promo-slide::before{
+  content:""; position:absolute; width:240px; height:240px; border-radius:50%;
+  background:radial-gradient(circle, rgba(34,224,122,0.3), transparent 70%); top:-90px; right:-70px;
+}
+.promo-slide h3{margin:0 0 6px; font-size:1.25rem; position:relative; font-weight:800; z-index:2;}
+.promo-slide p{margin:0; font-size:0.88rem; color:rgba(255,255,255,0.85); position:relative; z-index:2; max-width: 85%;}
+.promo-slide .tag{
+  display:inline-block; background:var(--green); color:var(--navy); font-weight:800; font-size:0.72rem;
+  padding:4px 12px; border-radius:100px; margin-bottom:10px; position:relative; align-self: flex-start; z-index:2;
+}
+
+.carousel-dots{
+  position: absolute; bottom: 12px; right: 20px; display: flex; gap: 6px; z-index: 5;
+}
+.dot{
+  width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.35);
+  transition: all 0.3s ease; cursor: pointer;
+}
+.dot.active{ width: 22px; border-radius: 100px; background: var(--green); }
+
 /* ---- SCREENS ---- */
 .screen{display:none; padding:16px 20px; animation:fadeIn .35s ease;}
 .screen.active{display:block;}
 @keyframes fadeIn{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
-
-/* ---- HOME ---- */
-.greeting h1{font-size:1.5rem; margin:6px 0 2px; font-weight:800;}
-.greeting p{color:var(--muted); margin:0 0 18px; font-size:0.92rem;}
 
 .search-bar{
   display:flex; align-items:center; gap:10px;
@@ -241,20 +287,6 @@ html.dark .section-title .see-all{color:var(--green);}
 .vcard .rating svg{width:13px; height:13px; fill:#F5A623; stroke:#F5A623;}
 .vcard .price{font-size:0.85rem; font-weight:800; color:var(--green-dim); margin-top:8px;}
 html.dark .vcard .price{color:var(--green);}
-
-.promo{
-  background:linear-gradient(135deg, var(--navy) 0%, var(--navy-3) 100%);
-  border-radius:var(--radius); padding:24px; color:#fff; margin-bottom:30px; position:relative; overflow:hidden;
-  display: flex; flex-direction: column; justify-content: center;
-}
-.promo::before{content:""; position:absolute; width:220px; height:220px; border-radius:50%;
-  background:radial-gradient(circle, rgba(34,224,122,0.35), transparent 70%); top:-80px; right:-60px;}
-.promo h3{margin:0 0 6px; font-size:1.15rem; position:relative; font-weight:800;}
-.promo p{margin:0; font-size:0.86rem; color:rgba(255,255,255,0.75); position:relative;}
-.promo .tag{
-  display:inline-block; background:var(--green); color:var(--navy); font-weight:800; font-size:0.72rem;
-  padding:5px 12px; border-radius:100px; margin-bottom:12px; position:relative; align-self: flex-start;
-}
 
 /* ---- BACK HEADER ---- */
 .subheader{display:flex; align-items:center; gap:14px; padding:14px 0 10px; position:sticky; top:0; background:var(--bg); z-index:30;}
@@ -348,6 +380,45 @@ html.dark .date-chip.active .d, html.dark .date-chip.active .n{color:var(--navy)
 }
 .btn-book:active{transform:scale(0.97);}
 .btn-book:disabled{opacity:0.4; box-shadow:none; cursor:not-allowed;}
+
+/* ---- FORM STYLES ---- */
+.form-card{
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 22px; margin-bottom: 20px; box-shadow: var(--shadow);
+}
+.form-group{ margin-bottom: 16px; }
+.form-group label{ display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 6px; color: var(--ink); }
+.form-control{
+  width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--line);
+  background: var(--bg); color: var(--ink); font-family: inherit; font-size: 0.9rem;
+  outline: none; transition: border-color 0.2s;
+}
+.form-control:focus{ border-color: var(--green); }
+.form-hint{ font-size: 0.76rem; color: var(--muted); margin-top: 4px; }
+.btn-primary{
+  width: 100%; background: var(--green); color: var(--navy); border: none; padding: 15px;
+  border-radius: 100px; font-weight: 800; font-size: 0.95rem; box-shadow: 0 10px 20px -8px rgba(34,224,122,0.5);
+  transition: transform 0.18s; cursor: pointer;
+}
+.btn-primary:active{ transform: scale(0.97); }
+
+.badge-tag{
+  display: inline-block; padding: 4px 10px; border-radius: 100px; font-weight: 800; font-size: 0.72rem;
+}
+.badge-tag.pending{ background: rgba(245,166,35,0.18); color: #F5A623; }
+.badge-tag.approved{ background: rgba(34,224,122,0.18); color: var(--green-dim); }
+html.dark .badge-tag.approved{ color: var(--green); }
+
+/* ---- REWARDS & PROMO CODES ---- */
+.reward-card{
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-3) 100%); color: #fff;
+  border-radius: var(--radius); padding: 24px; margin-bottom: 22px; position: relative; overflow: hidden;
+}
+.reward-card::after{
+  content: ""; position: absolute; width: 180px; height: 180px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(34,224,122,0.3), transparent 70%); top: -50px; right: -40px;
+}
+.reward-val{ font-size: 2rem; font-weight: 800; color: var(--green); margin: 6px 0 2px; }
 
 /* ---- BOTTOM SHEET ---- */
 .sheet-overlay{
@@ -443,7 +514,7 @@ html.dark .nav-item.active .ic{color:var(--green);}
 }
 .nav-item.fab svg{width:24px; height:24px; stroke-width:2.4;}
 
-/* ---- PROFILE / BOOKINGS ---- */
+/* ---- PROFILE / LIST ITEMS ---- */
 .list-item{
   display:flex; align-items:center; gap:14px; background:var(--surface); border:1px solid var(--line);
   border-radius:16px; padding:14px; margin-bottom:12px; cursor:pointer;
@@ -486,12 +557,19 @@ html.dark .status-pill{color:var(--green);}
     <div class="desktop-nav">
       <div class="desktop-nav-link active" id="dnav-home" data-dnav="home" onclick="goTo('home')">Bosh sahifa</div>
       <div class="desktop-nav-link" id="dnav-search" data-dnav="search" onclick="goTo('search')">Qidiruv</div>
+      <div class="desktop-nav-link" id="dnav-rewards" data-dnav="rewards" onclick="goTo('rewards')">Promokodlar</div>
       <div class="desktop-nav-link" id="dnav-bookings" data-dnav="bookings" onclick="goTo('bookings')">Bronlarim</div>
       <div class="desktop-nav-link" id="dnav-favorites" data-dnav="favorites" onclick="goTo('favorites')">Sevimlilar</div>
       <div class="desktop-nav-link" id="dnav-profile" data-dnav="profile" onclick="goTo('profile')">Profil</div>
     </div>
 
     <div class="topbar-controls">
+      <!-- User Greeting Badge -->
+      <div class="user-greeting-chip" onclick="goTo('profile')">
+        <div class="avatar-mini">F</div>
+        <span id="txtUserGreetingBadge">Firdavsbek</span>
+      </div>
+
       <!-- Language Selector -->
       <div class="lang-selector">
         <button class="lang-btn active" id="lang-uz" onclick="setLanguage('uz')">UZ</button>
@@ -505,9 +583,37 @@ html.dark .status-pill{color:var(--green);}
 
   <!-- HOME SCREEN -->
   <section class="screen active" id="screen-home">
-    <div class="greeting">
-      <h1 id="txtGreeting">Salom, Firdavsbek</h1>
-      <p id="txtSubGreeting">Sevimli joyingizni oson bron qiling</p>
+    
+    <!-- ROTATING REKLAMA PROMO CAROUSEL (POSITIONED AT TOP) -->
+    <div class="promo-carousel">
+      <div class="promo-slider" id="promoSlider">
+        <div class="promo-slide promo-slide-1">
+          <span class="tag" id="slide1Tag">YANGI</span>
+          <h3 id="slide1Title">Birinchi bronga −20% chegirma</h3>
+          <p id="slide1Desc">Qo'qondagi barcha hamkor futbol maydoni va sport komplekslarida amal qiladi</p>
+        </div>
+        <div class="promo-slide promo-slide-2">
+          <span class="tag" id="slide2Tag">AKSIYA</span>
+          <h3 id="slide2Title">Liliya Flowers — Bepul yetkazish</h3>
+          <p id="slide2Desc">Guldasta buyurtma qiling va bayramingizni unutilmas qiling</p>
+        </div>
+        <div class="promo-slide promo-slide-3">
+          <span class="tag" id="slide3Tag">TORT & PISHIRIQ</span>
+          <h3 id="slide3Title">Sweet House — Maxsus Tortlar</h3>
+          <p id="slide3Desc">Tug'ilgan kun uchun 15% bonus keshbek bilan buyurtma bering</p>
+        </div>
+        <div class="promo-slide promo-slide-4">
+          <span class="tag" id="slide4Tag">VIP GAMING</span>
+          <h3 id="slide4Title">Pro Gamer Club — 3+1 Soat</h3>
+          <p id="slide4Desc">3 soat kompyuter bron qiling va 1 soat bonusga ega bo'ling</p>
+        </div>
+      </div>
+      <div class="carousel-dots" id="carouselDots">
+        <div class="dot active" onclick="goToSlide(0)"></div>
+        <div class="dot" onclick="goToSlide(1)"></div>
+        <div class="dot" onclick="goToSlide(2)"></div>
+        <div class="dot" onclick="goToSlide(3)"></div>
+      </div>
     </div>
 
     <div class="search-bar" onclick="goTo('search')">
@@ -516,12 +622,6 @@ html.dark .status-pill{color:var(--green);}
     </div>
 
     <div class="cat-scroll" id="catScroll"></div>
-
-    <div class="promo">
-      <span class="tag" id="txtPromoTag">YANGI</span>
-      <h3 id="txtPromoTitle">Birinchi bronga −20%</h3>
-      <p id="txtPromoText">Qo'qondagi barcha hamkor joylarda amal qiladi</p>
-    </div>
 
     <div class="section-title"><h2 id="txtSecNearby">Yaqin atrofda</h2><a class="see-all txtSeeAll" onclick="goTo('search')">Barchasi</a></div>
     <div class="venue-row" id="rowNearby"></div>
@@ -581,6 +681,126 @@ html.dark .status-pill{color:var(--green);}
     </div>
   </section>
 
+  <!-- REWARDS & PROMO CODES SCREEN -->
+  <section class="screen" id="screen-rewards">
+    <div class="subheader" style="position:static;"><h2 style="padding-top:8px;" id="txtRewardsHeader">Bonuslar va Promokodlar</h2></div>
+    <div style="padding-top:14px;">
+      
+      <div class="reward-card">
+        <div style="font-size:0.86rem; color:rgba(255,255,255,0.8);" id="lblBonusBalance">Sizning keshbek bonus balansingiz</div>
+        <div class="reward-val" id="userBonusBalance">35,000 so'm</div>
+        <div style="font-size:0.78rem; opacity:0.85;" id="lblBonusInfo">Keyingi bronlar uchun to'lovda ishlatishingiz mumkin</div>
+      </div>
+
+      <div class="form-card">
+        <h3 style="margin:0 0 12px; font-size:1rem;" id="txtRedeemPromoTitle">Promokodni faollashtirish</h3>
+        <div class="form-group" style="margin-bottom:12px;">
+          <input class="form-control" id="promoInputCode" placeholder="Masalan: GAPLASHIB20, KOKAND50" style="text-transform:uppercase;">
+        </div>
+        <button class="btn-primary" onclick="redeemPromoCode()" id="btnRedeemPromo">Promokodni qo'llash</button>
+      </div>
+
+      <div class="section-title"><h3 style="font-size:1rem; margin:0;" id="txtActivePromosTitle">Mavjud chegirma promokodlari</h3></div>
+      <div class="list-item" onclick="applyPromoQuick('GAPLASHIB20')">
+        <div class="ic-box">${I.wallet}</div>
+        <div class="info"><h4>GAPLASHIB20</h4><p>Birinchi bronga −20% chegirma keshbek</p></div>
+        <span class="status-pill">FAOL</span>
+      </div>
+      <div class="list-item" onclick="applyPromoQuick('KOKAND50')">
+        <div class="ic-box">${I.star}</div>
+        <div class="info"><h4>KOKAND50</h4><p>50,000 so'm maxsus bayram bonusi</p></div>
+        <span class="status-pill">FAOL</span>
+      </div>
+      <div class="list-item" onclick="applyPromoQuick('GULLAR15')">
+        <div class="ic-box">${I.flower}</div>
+        <div class="info"><h4>GULLAR15</h4><p>Gul va tort buyurtmalariga −15% chegirma</p></div>
+        <span class="status-pill">FAOL</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BUSINESS VENDOR / SELLER CABINET SCREEN -->
+  <section class="screen" id="screen-vendor">
+    <div class="subheader" style="position:static;"><h2 style="padding-top:8px;" id="txtVendorCabinetTitle">Sotuvchi (Biznes Egasi) Kabineti</h2></div>
+    <div style="padding-top:14px;">
+      
+      <div class="form-card">
+        <h3 style="margin:0 0 14px; font-size:1.05rem;" id="txtAddVenueTitle">Yangi joy / xizmat qo'shish</h3>
+        <p style="font-size:0.8rem; color:var(--muted); margin-bottom:16px;" id="txtVendorRulesWarning">
+          ⚠️ <b>Eslatma:</b> Administratsiya moderatsiyasidan tekshiriladi. Ijtimoiy tarmoq havolalarini (Telegram, Instagram) kiritish taqiqlanadi!
+        </p>
+
+        <div class="form-group">
+          <label id="lblVenueName">Joy yoki xizmat nomi</label>
+          <input class="form-control" id="vNameInput" placeholder="Masalan: Star Arena / Royal Barber">
+        </div>
+
+        <div class="form-group">
+          <label id="lblVenueCat">Kategoriya</label>
+          <select class="form-control" id="vCatSelect">
+            <option value="football">Futbol maydoni</option>
+            <option value="flowers">Gul do'koni</option>
+            <option value="bakery">Tort va pishiriq</option>
+            <option value="barber">Barbershop</option>
+            <option value="billiard">Bilyard xonasi</option>
+            <option value="computer">Kompyuter klubi</option>
+            <option value="ps">PlayStation Zone</option>
+            <option value="gym">Sport zal / Gym</option>
+            <option value="restaurant">Restoran / Kafe</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label id="lblVenuePrice">Narxi (so'mda)</label>
+          <input class="form-control" id="vPriceInput" placeholder="Masalan: 100,000 so'm/soat">
+        </div>
+
+        <div class="form-group">
+          <label id="lblVenueDist">Manzil va Mo'ljal</label>
+          <input class="form-control" id="vDistInput" placeholder="Qo'qon shahar, Navoiy ko'chasi 14">
+        </div>
+
+        <div class="form-group">
+          <label id="lblVenuePhoto">Rasm havolasi (Photo URL)</label>
+          <input class="form-control" id="vPhotoInput" placeholder="https://images.unsplash.com/...">
+        </div>
+
+        <button class="btn-primary" onclick="submitVendorVenue()" id="btnSubmitVenue">Moderatsiyaga yuborish</button>
+      </div>
+
+      <div class="section-title"><h3 style="font-size:1rem; margin:0;" id="txtMySubmittedVenues">Mening e'lonlarim va moderatsiya</h3></div>
+      <div id="vendorVenuesList"></div>
+
+    </div>
+  </section>
+
+  <!-- ADMIN MODERATION SCREEN -->
+  <section class="screen" id="screen-admin">
+    <div class="subheader" style="position:static;"><h2 style="padding-top:8px;" id="txtAdminPanelTitle">Admin Moderatsiya Paneli</h2></div>
+    <div style="padding-top:14px;">
+      
+      <div class="form-card" style="background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 100%); color:#fff;">
+        <h3 style="margin:0 0 6px;" id="txtAdminStatsTitle">Platforma Statistikasi</h3>
+        <p style="font-size:0.84rem; opacity:0.8; margin-bottom:14px;">Qo'qon shahrining barcha aktiv bron va biznes ko'rsatkichlari</p>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <div style="background:rgba(255,255,255,0.1); padding:12px; border-radius:12px;">
+            <div style="font-size:0.75rem; opacity:0.8;">Faol joylar</div>
+            <div style="font-size:1.3rem; font-weight:800; color:var(--green);" id="cntActiveVenues">12 ta</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.1); padding:12px; border-radius:12px;">
+            <div style="font-size:0.75rem; opacity:0.8;">Moderatsiyada</div>
+            <div style="font-size:1.3rem; font-weight:800; color:#F5A623;" id="cntPendingVenues">2 ta</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title"><h3 style="font-size:1rem; margin:0;" id="txtPendingModerationHeader">Moderatsiya kutilayotgan bizneslar</h3></div>
+      <div id="adminModerationList"></div>
+
+    </div>
+  </section>
+
   <!-- BOOKINGS SCREEN -->
   <section class="screen" id="screen-bookings">
     <div class="subheader" style="position:static;"><h2 style="padding-top:8px;" id="txtMyBookingsHeader">Bronlarim</h2></div>
@@ -629,9 +849,9 @@ html.dark .status-pill{color:var(--green);}
 <!-- BOTTOM NAV -->
 <div class="bottomnav">
   <div class="nav-item active" data-nav="home" onclick="goTo('home')" id="navHome"></div>
-  <div class="nav-item" data-nav="bookings" onclick="goTo('bookings')" id="navBookings"></div>
+  <div class="nav-item" data-nav="rewards" onclick="goTo('rewards')" id="navRewards"></div>
   <div class="nav-item fab" onclick="goTo('search')" id="navFab"></div>
-  <div class="nav-item" data-nav="favorites" onclick="goTo('favorites')" id="navFav"></div>
+  <div class="nav-item" data-nav="bookings" onclick="goTo('bookings')" id="navBookings"></div>
   <div class="nav-item" data-nav="profile" onclick="goTo('profile')" id="navProfile"></div>
 </div>
 
@@ -658,9 +878,6 @@ const DICT = {
     searchPlaceholder: "Futbol maydoni, gul do'koni, tort, barber...",
     searchHeader: "Qidiruv",
     searchBoxPlaceholder: "Nima izlayapsiz?",
-    promoTag: "YANGI",
-    promoTitle: "Birinchi bronga −20%",
-    promoText: "Qo'qondagi barcha hamkor joylarda amal qiladi",
     secNearby: "Yaqin atrofda",
     secToday: "Bugun bo'sh joylar",
     secPopular: "Ommabop",
@@ -672,6 +889,9 @@ const DICT = {
     myBookings: "Bronlarim",
     favorites: "Sevimlilar",
     profile: "Profil",
+    rewards: "Promokodlar",
+    vendorCabinet: "Sotuvchi Kabineti",
+    adminPanel: "Admin Moderatsiya",
     confirmTitle: "Bron tasdiqlandi!",
     confirmSub: "Joyingiz tayyor turibdi. Vaqtida boring",
     ticketId: "Bron raqami",
@@ -685,11 +905,12 @@ const DICT = {
     sheetConfirmBtn: "Bronni tasdiqlash",
     sheetConfirming: "Tasdiqlanmoqda...",
     navHome: "Bosh sahifa",
+    navRewards: "Bonuslar",
     navBookings: "Bronlarim",
-    navFav: "Sevimlilar",
     navProfile: "Profil",
     dnavHome: "Bosh sahifa",
     dnavSearch: "Qidiruv",
+    dnavRewards: "Promokodlar",
     dnavBookings: "Bronlarim",
     dnavFav: "Sevimlilar",
     dnavProfile: "Profil",
@@ -708,9 +929,6 @@ const DICT = {
     searchPlaceholder: "Футбольное поле, цветы, торты, барбер...",
     searchHeader: "Поиск",
     searchBoxPlaceholder: "Что вы ищете?",
-    promoTag: "АКЦИЯ",
-    promoTitle: "Скидка −20% на 1-е бронирование",
-    promoText: "Действует во всех партнерских местах Коканда",
     secNearby: "Рядом с вами",
     secToday: "Свободно сегодня",
     secPopular: "Популярные",
@@ -722,6 +940,9 @@ const DICT = {
     myBookings: "Мои брони",
     favorites: "Избранное",
     profile: "Профиль",
+    rewards: "Промокоды",
+    vendorCabinet: "Кабинет продавца",
+    adminPanel: "Админ модерация",
     confirmTitle: "Бронирование подтверждено!",
     confirmSub: "Ваше место готово. Пожалуйста, приходите вовремя",
     ticketId: "Номер брони",
@@ -735,11 +956,12 @@ const DICT = {
     sheetConfirmBtn: "Подтвердить бронь",
     sheetConfirming: "Подтверждение...",
     navHome: "Главная",
+    navRewards: "Бонусы",
     navBookings: "Мои брони",
-    navFav: "Избранное",
     navProfile: "Профиль",
     dnavHome: "Главная",
     dnavSearch: "Поиск",
+    dnavRewards: "Промокоды",
     dnavBookings: "Мои брони",
     dnavFav: "Избранное",
     dnavProfile: "Профиль",
@@ -758,9 +980,6 @@ const DICT = {
     searchPlaceholder: "Football arena, flower shop, bakery, barber...",
     searchHeader: "Search",
     searchBoxPlaceholder: "What are you looking for?",
-    promoTag: "NEW",
-    promoTitle: "−20% Off First Booking",
-    promoText: "Valid across all partner venues in Kokand",
     secNearby: "Nearby",
     secToday: "Available Today",
     secPopular: "Popular",
@@ -772,6 +991,9 @@ const DICT = {
     myBookings: "My Bookings",
     favorites: "Favorites",
     profile: "Profile",
+    rewards: "Promo Codes",
+    vendorCabinet: "Seller Cabinet",
+    adminPanel: "Admin Panel",
     confirmTitle: "Booking Confirmed!",
     confirmSub: "Your spot is reserved. Please arrive on time",
     ticketId: "Booking ID",
@@ -785,11 +1007,12 @@ const DICT = {
     sheetConfirmBtn: "Confirm Booking",
     sheetConfirming: "Confirming...",
     navHome: "Home",
+    navRewards: "Rewards",
     navBookings: "Bookings",
-    navFav: "Favorites",
     navProfile: "Profile",
     dnavHome: "Home",
     dnavSearch: "Search",
+    dnavRewards: "Promos",
     dnavBookings: "Bookings",
     dnavFav: "Favorites",
     dnavProfile: "Profile",
@@ -894,6 +1117,15 @@ const venues = [
   {id:12, name:'Safia Pastry', cat:'bakery', ic:I.cake, dist:'1.0 km', rating:5.0, price:'120,000 so\'m/tort'},
 ];
 
+// Pending moderation venues queue for Admin review
+let pendingVenues = JSON.parse(localStorage.getItem('gq_pending_venues') || JSON.stringify([
+  {id: 99, name:'Royal Barber Kokand', cat:'barber', ic:I.scissors, dist:'0.6 km', price:'40,000 so\'m', owner:'Usta Alisher', photo:'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=800'},
+  {id: 98, name:'Rose Flowers Boutique', cat:'flowers', ic:I.flower, dist:'1.1 km', price:'60,000 so\'m/guldasta', owner:'Gulnoza', photo:'https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=800'}
+]));
+
+// User Bonus Balance in localStorage
+let bonusBalance = parseInt(localStorage.getItem('gq_bonus_balance') || '35000');
+
 // Favorites state saved in localStorage
 let favoriteIds = JSON.parse(localStorage.getItem('gq_favorites') || '[1,9,10,6]');
 let activeCategoryFilter = 'all';
@@ -903,6 +1135,31 @@ let bookingsData = JSON.parse(localStorage.getItem('gq_bookings') || JSON.string
   {id: 'GQ-48213', name:'Liliya Flowers', ic:I.flower, date:'14-avgust, 15:00', price:'50,000 so\'m', status:'Tasdiqlangan'},
   {id: 'GQ-39102', name:'Sweet House Bakery', ic:I.cake, date:'15-avgust, 12:00', price:'150,000 so\'m', status:'Tasdiqlangan'},
 ]));
+
+// Auto Carousel rotation
+let currentSlide = 0;
+let carouselTimer = setInterval(nextSlide, 4000);
+
+function nextSlide(){
+  currentSlide = (currentSlide + 1) % 4;
+  updateCarousel();
+}
+
+function goToSlide(idx){
+  currentSlide = idx;
+  updateCarousel();
+  clearInterval(carouselTimer);
+  carouselTimer = setInterval(nextSlide, 4000);
+}
+
+function updateCarousel(){
+  const slider = document.getElementById('promoSlider');
+  if(slider){
+    slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+  }
+  const dots = document.querySelectorAll('.carousel-dots .dot');
+  dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+}
 
 function setLanguage(lang){
   currentLang = lang;
@@ -920,6 +1177,8 @@ function setLanguage(lang){
   renderBookings();
   renderFavorites();
   renderProfileMenu();
+  renderVendorCabinet();
+  renderAdminPanel();
 }
 
 function applyTranslations(){
@@ -930,10 +1189,6 @@ function applyTranslations(){
   document.getElementById('txtSearchPlaceholder').placeholder = t.searchPlaceholder;
   document.getElementById('txtSearchHeader').textContent = t.searchHeader;
   document.getElementById('searchInput').placeholder = t.searchBoxPlaceholder;
-
-  document.getElementById('txtPromoTag').textContent = t.promoTag;
-  document.getElementById('txtPromoTitle').textContent = t.promoTitle;
-  document.getElementById('txtPromoText').textContent = t.promoText;
 
   document.getElementById('txtSecNearby').textContent = t.secNearby;
   document.getElementById('txtSecToday').textContent = t.secToday;
@@ -968,15 +1223,16 @@ function applyTranslations(){
   // Top Desktop Nav Translations
   document.getElementById('dnav-home').textContent = t.dnavHome;
   document.getElementById('dnav-search').textContent = t.dnavSearch;
+  document.getElementById('dnav-rewards').textContent = t.dnavRewards;
   document.getElementById('dnav-bookings').textContent = t.dnavBookings;
   document.getElementById('dnav-favorites').textContent = t.dnavFav;
   document.getElementById('dnav-profile').textContent = t.dnavProfile;
 
   // Bottom Nav
   document.getElementById('navHome').innerHTML = `<span class="ic">${I.home}</span>${t.navHome}`;
-  document.getElementById('navBookings').innerHTML = `<span class="ic">${I.calendar}</span>${t.navBookings}`;
+  document.getElementById('navRewards').innerHTML = `<span class="ic">${I.wallet}</span>${t.navRewards}`;
   document.getElementById('navFab').innerHTML = I.plus;
-  document.getElementById('navFav').innerHTML = `<span class="ic">${I.heart}</span>${t.navFav}`;
+  document.getElementById('navBookings').innerHTML = `<span class="ic">${I.calendar}</span>${t.navBookings}`;
   document.getElementById('navProfile').innerHTML = `<span class="ic">${I.user}</span>${t.navProfile}`;
 }
 
@@ -1220,6 +1476,11 @@ function confirmBooking(){
     });
     localStorage.setItem('gq_bookings', JSON.stringify(bookingsData));
 
+    // Award bonus points for booking
+    bonusBalance += 5000;
+    localStorage.setItem('gq_bonus_balance', bonusBalance.toString());
+    updateBonusUI();
+
     document.getElementById('tVenue').textContent = currentVenue.name;
     document.getElementById('tBookingId').textContent = newId;
     document.getElementById('tDate').textContent = selectedDay;
@@ -1229,6 +1490,180 @@ function confirmBooking(){
     goTo('confirm');
     renderBookings();
   }, 1000);
+}
+
+/* ---------------- VENDOR (SOTUVCHI) & ADMIN SYSTEM ---------------- */
+function submitVendorVenue(){
+  const name = document.getElementById('vNameInput').value.trim();
+  const cat = document.getElementById('vCatSelect').value;
+  const price = document.getElementById('vPriceInput').value.trim();
+  const dist = document.getElementById('vDistInput').value.trim();
+  const photo = document.getElementById('vPhotoInput').value.trim();
+
+  if(!name || !price || !dist){
+    alert("Iltimos, barcha majburiy maydonlarni to'ldiring!");
+    return;
+  }
+
+  // ANTI-SOCIAL MEDIA LINK CHECKER (STRICT SOCIAL LINK POLICY)
+  const fullText = (name + " " + dist + " " + photo).toLowerCase();
+  if(fullText.includes("t.me") || fullText.includes("instagram") || fullText.includes("facebook") || fullText.includes("http://t.me") || fullText.includes("https://t.me")){
+    alert("❌ Taqiqlangan harakat!\nSotuvchilarga ijtimoiy tarmoq havolalari (Telegram, Instagram) qo'shish qat'iyan man etiladi. Barcha aloqalar platforma orqali amalga oshirilishi shart!");
+    return;
+  }
+
+  const newVendorItem = {
+    id: Date.now(),
+    name: name,
+    cat: cat,
+    ic: I[cat] || I.star,
+    dist: dist,
+    price: price,
+    owner: 'Firdavsbek (Sotuvchi)',
+    photo: photo || 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800'
+  };
+
+  pendingVenues.unshift(newVendorItem);
+  localStorage.setItem('gq_pending_venues', JSON.stringify(pendingVenues));
+
+  // Reset form inputs
+  document.getElementById('vNameInput').value = '';
+  document.getElementById('vPriceInput').value = '';
+  document.getElementById('vDistInput').value = '';
+  document.getElementById('vPhotoInput').value = '';
+
+  alert("✅ E'lon muvaffaqiyatli topshirildi!\nAdmin (Firdavsbek) tekshiruvidan va moderatsiyasidan o'tgach katologga chiqariladi.");
+  renderVendorCabinet();
+  renderAdminPanel();
+}
+
+function approvePendingVenue(id){
+  const idx = pendingVenues.findIndex(x => x.id === id);
+  if(idx > -1){
+    const item = pendingVenues[idx];
+    pendingVenues.splice(idx, 1);
+    localStorage.setItem('gq_pending_venues', JSON.stringify(pendingVenues));
+
+    // Add to active live venues
+    const newId = venues.length + 1;
+    venues.push({
+      id: newId,
+      name: item.name,
+      cat: item.cat,
+      ic: item.ic,
+      dist: item.dist,
+      rating: 5.0,
+      price: item.price
+    });
+    VENUE_IMAGES[newId] = item.photo;
+
+    alert(`✅ "${item.name}" admin moderatsiyasidan o'tdi va asosiy katalogga qo'shildi!`);
+    renderVendorCabinet();
+    renderAdminPanel();
+    renderHomeRows();
+    filterVenues();
+  }
+}
+
+function rejectPendingVenue(id){
+  const idx = pendingVenues.findIndex(x => x.id === id);
+  if(idx > -1){
+    const item = pendingVenues[idx];
+    pendingVenues.splice(idx, 1);
+    localStorage.setItem('gq_pending_venues', JSON.stringify(pendingVenues));
+    alert(`❌ "${item.name}" rad etildi va moderatsiyadan o'chirilishi tasdiqlandi.`);
+    renderVendorCabinet();
+    renderAdminPanel();
+  }
+}
+
+function renderVendorCabinet(){
+  const container = document.getElementById('vendorVenuesList');
+  if(!container) return;
+  if(pendingVenues.length === 0){
+    container.innerHTML = `<div class="empty-state">Hali moderatsiyada turgan e'lonlaringiz yo'q.</div>`;
+    return;
+  }
+  container.innerHTML = pendingVenues.map(v => `
+    <div class="list-item">
+      <div class="ic-box">${v.ic}</div>
+      <div class="info">
+        <h4>${v.name}</h4>
+        <p>${v.dist} • ${v.price}</p>
+      </div>
+      <span class="badge-tag pending">Moderatsiyada</span>
+    </div>
+  `).join('');
+}
+
+function renderAdminPanel(){
+  const activeCountEl = document.getElementById('cntActiveVenues');
+  const pendingCountEl = document.getElementById('cntPendingVenues');
+  if(activeCountEl) activeCountEl.textContent = `${venues.length} ta`;
+  if(pendingCountEl) pendingCountEl.textContent = `${pendingVenues.length} ta`;
+
+  const container = document.getElementById('adminModerationList');
+  if(!container) return;
+  if(pendingVenues.length === 0){
+    container.innerHTML = `<div class="empty-state">Moderatsiyada hech qanday tekshirilmagan e'lon yo'q. Barcha ariza va joylar ko'rib chiqilgan!</div>`;
+    return;
+  }
+  container.innerHTML = pendingVenues.map(v => `
+    <div class="list-item" style="flex-direction:column; align-items:stretch; gap:8px;">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div class="ic-box">${v.ic}</div>
+        <div class="info">
+          <h4>${v.name}</h4>
+          <p>${v.dist} • ${v.price} • Sotuvchi: <b>${v.owner}</b></p>
+        </div>
+        <span class="badge-tag pending">Kutilmoqda</span>
+      </div>
+      <div style="display:flex; gap:8px; margin-top:6px;">
+        <button class="btn-primary" style="padding:8px; font-size:0.8rem; background:var(--green);" onclick="approvePendingVenue(${v.id})">✓ Tasdiqlash (Approve)</button>
+        <button class="btn-primary" style="padding:8px; font-size:0.8rem; background:#FF5A6E; color:#fff;" onclick="rejectPendingVenue(${v.id})">✕ Rad etish (Reject)</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ---------------- PROMOCODES & LOYALTY ---------------- */
+function updateBonusUI(){
+  const balanceEl = document.getElementById('userBonusBalance');
+  if(balanceEl) balanceEl.textContent = `${bonusBalance.toLocaleString()} so'm`;
+}
+
+function redeemPromoCode(){
+  const input = document.getElementById('promoInputCode');
+  if(!input) return;
+  const code = input.value.trim().toUpperCase();
+  if(!code){
+    alert("Iltimos, promokodni kiriting!");
+    return;
+  }
+
+  if(code === 'GAPLASHIB20'){
+    bonusBalance += 20000;
+    alert("🎉 Tabriklaymiz! GAPLASHIB20 promokodi faollashtirildi va hisobingizga +20,000 so'm bonus qo'shildi!");
+  } else if(code === 'KOKAND50'){
+    bonusBalance += 50000;
+    alert("🎉 Tabriklaymiz! KOKAND50 maxsus promokodi faollashtirildi va +50,000 so'm bonus balansingizga o'tkazildi!");
+  } else if(code === 'GULLAR15'){
+    bonusBalance += 15000;
+    alert("🎉 GULLAR15 promokodi faollashtirildi! +15,000 so'm chegirma bonusi qo'shildi!");
+  } else {
+    alert("❌ Noto'g'ri promokod kiritildi yoki uning muddati o'tgan.");
+    return;
+  }
+
+  localStorage.setItem('gq_bonus_balance', bonusBalance.toString());
+  updateBonusUI();
+  input.value = '';
+}
+
+function applyPromoQuick(code){
+  const input = document.getElementById('promoInputCode');
+  if(input) input.value = code;
+  redeemPromoCode();
 }
 
 function renderBookings(){
@@ -1266,13 +1701,13 @@ function renderFavorites(){
 function renderProfileMenu(){
   const t = DICT[currentLang] || DICT.uz;
   const items = [
+    [I.wallet, t.rewards, ()=>goTo('rewards')],
     [I.calendar, t.myBookings, ()=>goTo('bookings')],
     [I.heart, t.favorites, ()=>goTo('favorites')],
-    [I.wallet, currentLang === 'ru' ? "Способы оплаты" : (currentLang === 'en' ? "Payment Methods" : "To'lov usullari"), ()=>alert("Naqd, Click, Payme & UzCard!")],
-    [I.bell, currentLang === 'ru' ? "Уведомления" : (currentLang === 'en' ? "Notifications" : "Bildirishnomalar"), ()=>alert(currentLang === 'ru' ? "Нет новых уведомлений" : (currentLang === 'en' ? "No new notifications" : "Yangi bildirishnomalar yo'q"))],
+    [I.user, t.vendorCabinet, ()=>goTo('vendor')],
+    [I.settings, t.adminPanel, ()=>goTo('admin')],
     [I.globe, currentLang === 'ru' ? "Язык — Русский" : (currentLang === 'en' ? "Language — English" : "Til — O'zbekcha"), ()=>setLanguage(currentLang === 'uz' ? 'ru' : (currentLang === 'ru' ? 'en' : 'uz'))],
     [I.palette, currentLang === 'ru' ? "Тема" : (currentLang === 'en' ? "Theme" : "Mavzu"), ()=>toggleTheme()],
-    [I.settings, currentLang === 'ru' ? "Настройки" : (currentLang === 'en' ? "Settings" : "Sozlamalar"), ()=>alert("Gaplashib Qo'ydim v1.3.0")]
   ];
   document.getElementById('profileMenu').innerHTML = items.map((it,i)=>`
     <div class="menu-item" style="${i===items.length-1?'border-bottom:none;':''}" onclick="profileActions[${i}]()">
@@ -1327,9 +1762,12 @@ if(localStorage.getItem('gq_theme') === 'dark' || (!localStorage.getItem('gq_the
   document.documentElement.classList.add('dark');
 }
 
-// Init language
+// Init language & UI
 setLanguage(currentLang);
 renderStaticIcons();
+updateBonusUI();
+renderVendorCabinet();
+renderAdminPanel();
 </script>
 </body>
 </html>
